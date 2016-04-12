@@ -10,7 +10,7 @@ script: ./gradlew :app:lint :app:test
 
 android:
     components:
-        - build-tools-23.0.1
+        - build-tools-23.0.3
         - android-23
         - extra-android-support
         - extra-google-google_play_services
