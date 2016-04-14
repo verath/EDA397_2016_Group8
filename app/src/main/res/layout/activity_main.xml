@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="group8.eda397.chalmers.se.pairprogramming.MainActivity">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:text="New Button"
-            android:id="@+id/button"
-            android:layout_column="11" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:text="New Button"
-            android:id="@+id/button2"
-            android:layout_column="11" />
-    </TableRow>
-</TableLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        android:id="@+id/timer_button"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
