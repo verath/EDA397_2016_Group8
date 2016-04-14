@@ -3,7 +3,9 @@ package group8.eda397.chalmers.se.pairprogramming.notes;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
@@ -16,6 +18,10 @@ public class NotesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
+
+        // Setup toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Try to find the notes fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
