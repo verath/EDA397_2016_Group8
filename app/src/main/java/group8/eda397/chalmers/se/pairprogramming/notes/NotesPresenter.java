@@ -16,7 +16,7 @@ public class NotesPresenter implements NotesContract.Presenter {
     private final static List<Note> dummyNotes = new ArrayList<>();
 
     static {
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 25; i++) {
             dummyNotes.add(new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
                     "adipiscing elit. Maecenas velit lectus, convallis non lectus id, " +
                     "aliquet auctor turpis. Quisque luctus."));
