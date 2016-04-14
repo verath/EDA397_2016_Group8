@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
+/**
+ * The activity for displaying notes.
+ */
 public class NotesActivity extends AppCompatActivity {
 
     @Override

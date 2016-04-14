@@ -14,6 +14,10 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
+/**
+ * The implementation of the Notes View interface, i.e. it is a
+ * view for displaying notes.
+ */
 public class NotesFragment extends Fragment implements NotesContract.View {
 
     private NotesContract.Presenter mPresenter;

@@ -11,6 +11,10 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
+/**
+ * A RecyclerView adapter for notes, showing each note as a custom
+ * view.
+ */
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private List<Note> mNotes;

@@ -2,6 +2,9 @@ package group8.eda397.chalmers.se.pairprogramming.notes;
 
 import android.support.annotation.NonNull;
 
+/**
+ * View layer model class for a note.
+ */
 public class Note {
     @NonNull
     private final String mText;

@@ -10,7 +10,7 @@ import group8.eda397.chalmers.se.pairprogramming.BaseView;
 
 public interface NotesContract {
     interface View extends BaseView<Presenter> {
-        void showNotes(@NonNull List<Note> dummyNotes);
+        void showNotes(@NonNull List<Note> notes);
     }
 
     interface Presenter extends BasePresenter {
