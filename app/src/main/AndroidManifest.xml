@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TimerActivity"></activity>
+        <activity android:name=".timer.TimerActivity"></activity>
     </application>
 
 </manifest>
