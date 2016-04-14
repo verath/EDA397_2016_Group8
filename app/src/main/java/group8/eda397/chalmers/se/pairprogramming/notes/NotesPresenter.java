@@ -17,7 +17,9 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     static {
         for (int i = 1; i < 100; i++) {
-            dummyNotes.add(new Note("Note " + i, "Text for note " + i));
+            dummyNotes.add(new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
+                    "adipiscing elit. Maecenas velit lectus, convallis non lectus id, " +
+                    "aliquet auctor turpis. Quisque luctus."));
         }
     }
 
