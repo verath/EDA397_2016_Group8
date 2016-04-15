@@ -58,7 +58,7 @@ public class NotesFragment extends Fragment implements NotesContract.View {
     }
 
     @Override
-    public void setPresenter(NotesContract.Presenter presenter) {
+    public void setPresenter(@NonNull NotesContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
