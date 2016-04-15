@@ -1,6 +1,29 @@
 <resources>
     <string name="app_name">Pair Programming</string>
-
     <string name="title_activity_notes">Notes</string>
     <string name="show_notes">Show Notes</string>
+    <string name="title_activity_note_detail">Note Detail</string>
+
+    <string name="title_add_note">Add Note</string>
+    <string name="title_edit_note">Edit Note</string>
+
+    <string name="menu_note_detail_delete">Delete</string>
+    <string name="menu_note_add_edit_save">Save</string>
+
+    <!-- Add/Edit note activity -->
+    <string name="add_edit_note_title_hint">Title</string>
+    <string name="add_edit_note_text_hint">Note</string>
+    <string name="add_edit_note_empty_error">Both Title and Note can not be empty!</string>
+    <string name="title_activity_backlog">BacklogActivity</string>
+
+    <string name="title_activity_add_backlog">Add backlog item</string>
+    <string name="missing_title">Missing title</string>
+    <string name="missing_description">Missing description</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="backlog">Backlog</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="ready_for_test">Ready for test</string>
+    <string name="done">Done</string>
 </resources>
