@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, NotesActivity.class);
-            startActivity(intent);
+            Intent launchIntent = NotesActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
         }
     };
 }
