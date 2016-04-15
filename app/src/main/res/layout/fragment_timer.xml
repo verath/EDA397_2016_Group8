@@ -10,4 +10,12 @@
         android:text="FragemntTimer"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mTextField"
+        android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>

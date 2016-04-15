@@ -17,7 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".timer.TimerActivity"/>
+        <activity
+            android:name=".timer.TimerActivity"
+            android:label="@string/title_activity_timer"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".notes.NotesActivity"
             android:label="@string/title_activity_notes"

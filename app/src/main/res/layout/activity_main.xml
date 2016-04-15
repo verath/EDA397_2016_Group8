@@ -24,5 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_notes" />
+
+        <Button
+            android:id="@+id/btn_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_timer" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

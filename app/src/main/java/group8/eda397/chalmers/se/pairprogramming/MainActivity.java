@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import group8.eda397.chalmers.se.pairprogramming.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +26,26 @@ public class MainActivity extends AppCompatActivity {
         if (navigateToNotesButton != null) {
             navigateToNotesButton.setOnClickListener(onNavigateToNotes);
         }
+
+        Button navigateToTimerButton = (Button) findViewById(R.id.btn_timer);
+        if (navigateToTimerButton != null) {
+            navigateToTimerButton.setOnClickListener(onNavigateToTimer);
+        }
+
     }
 
     private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, NotesActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    private final View.OnClickListener onNavigateToTimer = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, TimerActivity.class);
             startActivity(intent);
         }
     };
