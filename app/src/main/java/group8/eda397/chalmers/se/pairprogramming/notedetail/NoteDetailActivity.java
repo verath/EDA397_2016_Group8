@@ -1,55 +1,62 @@
 package group8.eda397.chalmers.se.pairprogramming.notedetail;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
+import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 
-public class NoteDetailActivity extends AppCompatActivity {
+public class NoteDetailActivity extends BaseActivity {
+
+    private static final String INTENT_EXTRA_PARAM_NOTE_ID = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_NOTE_ID";
+    private static final String INSTANCE_STATE_PARAM_NOTE_ID = "group8.eda397.chalmers.se.pairprogramming.STATE_PARAM_NOTE_ID";
+
+    private String mNoteId;
+
+    public static Intent getCallingIntent(Context context, String noteId) {
+        Intent callingIntent = new Intent(context, NoteDetailActivity.class);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_NOTE_ID, noteId);
+        return callingIntent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_detail);
 
-        // Setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        // Try to find the fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        NoteDetailFragment noteDetailFragment = (NoteDetailFragment) fragmentManager
-                .findFragmentById(R.id.contentFrame);
-
-        // Create the fragment if it did not exist
-        if (noteDetailFragment == null) {
+        // Setup fragment
+        NoteDetailFragment noteDetailFragment;
+        if (savedInstanceState == null) {
+            mNoteId = getIntent().getStringExtra(INTENT_EXTRA_PARAM_NOTE_ID);
             noteDetailFragment = NoteDetailFragment.newInstance();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.contentFrame, noteDetailFragment);
-            fragmentTransaction.commit();
+            addFragment(R.id.contentFrame, noteDetailFragment);
+        } else {
+            mNoteId = savedInstanceState.getString(INSTANCE_STATE_PARAM_NOTE_ID);
+            noteDetailFragment = (NoteDetailFragment) findFragment(R.id.contentFrame);
         }
+
+        // Setup toolbar
+        setupToolbar();
 
         // Create the presenter
-        new NoteDetailPresenter(noteDetailFragment);
+        new NoteDetailPresenter(mNoteId, noteDetailFragment);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+    protected void setupToolbar() {
+        // We do not want up navigation from this activity
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (outState != null) {
+            outState.putString(INSTANCE_STATE_PARAM_NOTE_ID, mNoteId);
         }
-        return super.onOptionsItemSelected(item);
+        super.onSaveInstanceState(outState);
     }
 }

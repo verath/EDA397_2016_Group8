@@ -4,9 +4,11 @@ import android.support.annotation.NonNull;
 
 public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
+    private final String mNoteId;
     private final NoteDetailContract.View mNoteDetailView;
 
-    public NoteDetailPresenter(@NonNull NoteDetailContract.View noteDetailView) {
+    public NoteDetailPresenter(String noteId, @NonNull NoteDetailContract.View noteDetailView) {
+        mNoteId = noteId;
         mNoteDetailView = noteDetailView;
         mNoteDetailView.setPresenter(this);
     }
