@@ -24,7 +24,6 @@
         <activity
             android:name=".notedetail.NoteDetailActivity"
             android:label="@string/title_activity_note_detail"
-            android:parentActivityName=".notes.NotesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

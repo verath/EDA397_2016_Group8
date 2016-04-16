@@ -46,13 +46,6 @@ public class NoteDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void setupToolbar() {
-        // We do not want up navigation from this activity
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
             outState.putString(INSTANCE_STATE_PARAM_NOTE_ID, mNoteId);
