@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
@@ -42,6 +43,16 @@ public class AddEditNoteActivity extends BaseActivity {
 
         // Setup presenter
         new AddEditNotePresenter(mNoteId, addEditNoteFragment);
+    }
+
+    @Override
+    protected void setupToolbar() {
+        super.setupToolbar();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            int title = (mNoteId == null) ? R.string.title_add_note : R.string.title_edit_note;
+            actionBar.setTitle(title);
+        }
     }
 
     @Override
