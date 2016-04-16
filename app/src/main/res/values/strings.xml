@@ -3,4 +3,5 @@
 
     <string name="title_activity_notes">Notes</string>
     <string name="show_notes">Show Notes</string>
+    <string name="title_activity_note_detail">Note Detail</string>
 </resources>
