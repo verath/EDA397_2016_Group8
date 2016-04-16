@@ -37,4 +37,9 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
             mNoteDetailView.showText(text);
         }
     }
+
+    @Override
+    public void onEditClicked() {
+        mNoteDetailView.showNoteEditView(mNoteId);
+    }
 }

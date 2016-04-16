@@ -14,9 +14,12 @@ public interface NoteDetailContract {
         void hideText();
 
         void showText(String text);
+
+        void showNoteEditView(String noteId);
     }
 
     interface Presenter extends BasePresenter {
+        void onEditClicked();
     }
 
 }
