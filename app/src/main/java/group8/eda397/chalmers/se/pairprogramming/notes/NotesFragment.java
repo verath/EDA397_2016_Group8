@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,8 @@ import group8.eda397.chalmers.se.pairprogramming.notedetail.NoteDetailActivity;
  * view for displaying notes.
  */
 public class NotesFragment extends Fragment implements NotesContract.View {
+
+    private static final int REQUEST_CODE_ADD_NOTE = 1;
 
     private NotesContract.Presenter mPresenter;
     private NotesAdapter mNotesAdapter;
@@ -68,6 +71,15 @@ public class NotesFragment extends Fragment implements NotesContract.View {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_ADD_NOTE) {
+            mPresenter.onAddNoteResult(resultCode);
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void setPresenter(@NonNull NotesContract.Presenter presenter) {
         mPresenter = presenter;
     }
@@ -86,7 +98,7 @@ public class NotesFragment extends Fragment implements NotesContract.View {
     @Override
     public void showAddNoteView() {
         Intent intent = AddEditNoteActivity.getCallingIntent(getContext(), null);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
     }
 
     private View.OnClickListener fabAddNoteClickListener = new View.OnClickListener() {

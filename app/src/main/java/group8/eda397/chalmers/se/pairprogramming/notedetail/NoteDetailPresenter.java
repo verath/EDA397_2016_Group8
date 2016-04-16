@@ -1,5 +1,6 @@
 package group8.eda397.chalmers.se.pairprogramming.notedetail;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import group8.eda397.chalmers.se.pairprogramming.notes.Note;
@@ -45,6 +46,15 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     @Override
     public void onDeleteClicked() {
-        // TODO: Remove
+        // TODO: Remove the note
+        mNoteDetailView.showNotesView();
+    }
+
+    @Override
+    public void onEditNoteResult(int resultCode) {
+        if(resultCode == Activity.RESULT_OK) {
+            // TODO: success message?
+            mNoteDetailView.showNotesView();
+        }
     }
 }

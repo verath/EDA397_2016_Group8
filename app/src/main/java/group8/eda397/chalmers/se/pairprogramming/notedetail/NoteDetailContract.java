@@ -16,12 +16,16 @@ public interface NoteDetailContract {
         void showText(String text);
 
         void showNoteEditView(String noteId);
+
+        void showNotesView();
     }
 
     interface Presenter extends BasePresenter {
         void onEditClicked();
 
         void onDeleteClicked();
+
+        void onEditNoteResult(int resultCode);
     }
 
 }

@@ -18,4 +18,10 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     @Override
     public void start() {
     }
+
+    @Override
+    public void onSaveClicked() {
+        // TODO: save note
+        mView.showNotesView();
+    }
 }

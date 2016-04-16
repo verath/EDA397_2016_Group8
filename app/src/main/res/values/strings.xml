@@ -7,5 +7,7 @@
 
     <string name="title_add_note">Add Note</string>
     <string name="title_edit_note">Edit Note</string>
-    <string name="note_detail_menu_delete">Delete</string>
+
+    <string name="menu_note_detail_delete">Delete</string>
+    <string name="menu_note_add_edit_save">Save</string>
 </resources>

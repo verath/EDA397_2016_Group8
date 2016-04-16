@@ -20,6 +20,8 @@ import group8.eda397.chalmers.se.pairprogramming.addeditnote.AddEditNoteActivity
 
 public class NoteDetailFragment extends Fragment implements NoteDetailContract.View {
 
+    private static final int REQUEST_CODE_EDIT_NOTE = 1;
+
     private NoteDetailContract.Presenter mPresenter;
     private TextView mTitleView;
     private TextView mTextView;
@@ -73,6 +75,15 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_EDIT_NOTE) {
+            mPresenter.onEditNoteResult(resultCode);
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void setPresenter(@NonNull NoteDetailContract.Presenter presenter) {
         mPresenter = presenter;
     }
@@ -102,7 +113,14 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
     @Override
     public void showNoteEditView(String noteId) {
         Intent intent = AddEditNoteActivity.getCallingIntent(getContext(), noteId);
-        startActivity(intent);
+        // We start the activity for result so that we can remove ourselves
+        // if the edit was successful, returning the user to the list of notes
+        startActivityForResult(intent, REQUEST_CODE_EDIT_NOTE);
+    }
+
+    @Override
+    public void showNotesView() {
+        getActivity().finish();
     }
 
     private View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {

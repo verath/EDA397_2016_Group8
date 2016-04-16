@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_delete_note"
-        android:title="@string/menu_note_detail_delete"
+        android:id="@+id/menu_note_save"
+        android:title="@string/menu_note_add_edit_save"
         app:showAsAction="always|withText" />
 </menu>

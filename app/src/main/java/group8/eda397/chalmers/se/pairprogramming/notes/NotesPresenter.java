@@ -1,5 +1,6 @@
 package group8.eda397.chalmers.se.pairprogramming.notes;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -41,5 +42,10 @@ public class NotesPresenter implements NotesContract.Presenter {
     @Override
     public void onAddClicked() {
         mNotesView.showAddNoteView();
+    }
+
+    @Override
+    public void onAddNoteResult(int resultCode) {
+        // TODO: show success message on successful add?
     }
 }

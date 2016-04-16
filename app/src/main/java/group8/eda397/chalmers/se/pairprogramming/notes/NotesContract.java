@@ -21,5 +21,7 @@ public interface NotesContract {
         void onNoteClicked(Note clickedNote);
 
         void onAddClicked();
+
+        void onAddNoteResult(int resultCode);
     }
 }
