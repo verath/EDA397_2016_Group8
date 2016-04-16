@@ -1,5 +1,6 @@
 package group8.eda397.chalmers.se.pairprogramming.notes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.notedetail.NoteDetailActivity;
 
 /**
  * The implementation of the Notes View interface, i.e. it is a
@@ -34,7 +36,7 @@ public class NotesFragment extends Fragment implements NotesContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNotesAdapter = new NotesAdapter(new ArrayList<Note>(0));
+        mNotesAdapter = new NotesAdapter(new ArrayList<Note>(0), onNoteClickListener);
     }
 
     @Override
@@ -67,4 +69,18 @@ public class NotesFragment extends Fragment implements NotesContract.View {
         mNotesAdapter.replaceData(notes);
     }
 
+    @Override
+    public void showNoteDetailView(Note note) {
+        Intent intent = NoteDetailActivity.getCallingIntent(getContext(), note.getId());
+        startActivity(intent);
+    }
+
+    private NotesAdapter.NoteItemClickListener onNoteClickListener = new NotesAdapter.NoteItemClickListener() {
+        @Override
+        public void onNoteClick(Note clickedNote) {
+            if (NotesFragment.this.mPresenter != null && clickedNote != null) {
+                NotesFragment.this.mPresenter.onNoteClicked(clickedNote);
+            }
+        }
+    };
 }

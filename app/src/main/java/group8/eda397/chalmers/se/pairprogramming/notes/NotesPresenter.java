@@ -17,7 +17,7 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     static {
         for (int i = 1; i < 25; i++) {
-            dummyNotes.add(new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
+            dummyNotes.add(new Note(Integer.toString(i), "Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
                     "adipiscing elit. Maecenas velit lectus, convallis non lectus id, " +
                     "aliquet auctor turpis. Quisque luctus."));
         }
@@ -31,5 +31,10 @@ public class NotesPresenter implements NotesContract.Presenter {
     @Override
     public void start() {
         mNotesView.showNotes(dummyNotes);
+    }
+
+    @Override
+    public void onNoteClicked(Note clickedNote) {
+        mNotesView.showNoteDetailView(clickedNote);
     }
 }
