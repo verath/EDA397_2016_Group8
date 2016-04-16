@@ -37,4 +37,9 @@ public class NotesPresenter implements NotesContract.Presenter {
     public void onNoteClicked(Note clickedNote) {
         mNotesView.showNoteDetailView(clickedNote);
     }
+
+    @Override
+    public void onAddClicked() {
+        mNotesView.showAddNoteView();
+    }
 }

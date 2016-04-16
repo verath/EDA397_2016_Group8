@@ -1,6 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.notedetail;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.addeditnote.AddEditNoteActivity;
 
 public class NoteDetailFragment extends Fragment implements NoteDetailContract.View {
 
@@ -75,7 +77,8 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
 
     @Override
     public void showNoteEditView(String noteId) {
-        // TODO: start note add/edit activity
+        Intent intent = AddEditNoteActivity.getCallingIntent(getContext(), noteId);
+        startActivity(intent);
     }
 
     private View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {

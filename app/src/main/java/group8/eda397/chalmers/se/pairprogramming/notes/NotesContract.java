@@ -13,9 +13,13 @@ public interface NotesContract {
         void showNotes(@NonNull List<Note> notes);
 
         void showNoteDetailView(Note note);
+
+        void showAddNoteView();
     }
 
     interface Presenter extends BasePresenter {
         void onNoteClicked(Note clickedNote);
+
+        void onAddClicked();
     }
 }
