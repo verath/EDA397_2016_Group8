@@ -4,7 +4,6 @@ package group8.eda397.chalmers.se.pairprogramming.notedetail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;

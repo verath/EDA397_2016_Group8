@@ -42,4 +42,9 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
     public void onEditClicked() {
         mNoteDetailView.showNoteEditView(mNoteId);
     }
+
+    @Override
+    public void onDeleteClicked() {
+        // TODO: Remove
+    }
 }

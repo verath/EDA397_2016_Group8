@@ -20,6 +20,8 @@ public interface NoteDetailContract {
 
     interface Presenter extends BasePresenter {
         void onEditClicked();
+
+        void onDeleteClicked();
     }
 
 }
