@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.notes;
+package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.content.Context;
 import android.content.Intent;

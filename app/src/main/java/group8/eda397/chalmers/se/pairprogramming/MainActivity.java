@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import group8.eda397.chalmers.se.pairprogramming.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
 
 public class MainActivity extends AppCompatActivity {
 

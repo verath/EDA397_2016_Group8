@@ -1,9 +1,9 @@
-package group8.eda397.chalmers.se.pairprogramming.notedetail;
+package group8.eda397.chalmers.se.pairprogramming.note.notedetail;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import group8.eda397.chalmers.se.pairprogramming.notes.Note;
+import group8.eda397.chalmers.se.pairprogramming.note.notes.Note;
 
 public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 

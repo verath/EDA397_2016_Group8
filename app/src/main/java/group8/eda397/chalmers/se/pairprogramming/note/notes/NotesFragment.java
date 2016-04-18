@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.notes;
+package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
-import group8.eda397.chalmers.se.pairprogramming.addeditnote.AddEditNoteActivity;
-import group8.eda397.chalmers.se.pairprogramming.notedetail.NoteDetailActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.addeditnote.AddEditNoteActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.notedetail.NoteDetailActivity;
 
 /**
  * The implementation of the Notes View interface, i.e. it is a

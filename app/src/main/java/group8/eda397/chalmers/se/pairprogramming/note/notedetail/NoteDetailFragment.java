@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.notedetail;
+package group8.eda397.chalmers.se.pairprogramming.note.notedetail;
 
 
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
-import group8.eda397.chalmers.se.pairprogramming.addeditnote.AddEditNoteActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.addeditnote.AddEditNoteActivity;
 
 public class NoteDetailFragment extends Fragment implements NoteDetailContract.View {
 

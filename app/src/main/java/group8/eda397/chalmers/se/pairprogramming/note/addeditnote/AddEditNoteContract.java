@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.addeditnote;
+package group8.eda397.chalmers.se.pairprogramming.note.addeditnote;
 
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
 import group8.eda397.chalmers.se.pairprogramming.BaseView;
