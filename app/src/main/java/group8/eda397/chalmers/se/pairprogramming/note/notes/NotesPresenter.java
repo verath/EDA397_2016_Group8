@@ -2,10 +2,10 @@ package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.note.Note;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteDataSource;
 
 /**
  * The notes presenter handles the logic for presenting notes, using
@@ -15,24 +15,18 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     private final NotesContract.View mNotesView;
 
-    private final static List<Note> dummyNotes = new ArrayList<>();
+    private final NoteDataSource mNoteDataSource;
 
-    static {
-        for (int i = 1; i < 25; i++) {
-            dummyNotes.add(new Note(Integer.toString(i), "Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
-                    "adipiscing elit. Maecenas velit lectus, convallis non lectus id, " +
-                    "aliquet auctor turpis. Quisque luctus."));
-        }
-    }
-
-    public NotesPresenter(@NonNull NotesContract.View notesView) {
+    public NotesPresenter(@NonNull NoteDataSource noteDataSource, @NonNull NotesContract.View notesView) {
+        mNoteDataSource = noteDataSource;
         mNotesView = notesView;
         mNotesView.setPresenter(this);
     }
 
     @Override
     public void start() {
-        mNotesView.showNotes(dummyNotes);
+        List<Note> notes = mNoteDataSource.getNotes();
+        mNotesView.showNotes(notes);
     }
 
     @Override

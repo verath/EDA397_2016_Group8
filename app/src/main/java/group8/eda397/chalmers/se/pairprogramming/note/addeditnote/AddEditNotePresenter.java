@@ -4,14 +4,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import group8.eda397.chalmers.se.pairprogramming.note.Note;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteDataSource;
 
 public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
 
     private final AddEditNoteContract.View mView;
     @Nullable
     private final String mNoteId;
+    private final NoteDataSource mNoteDataSource;
 
-    public AddEditNotePresenter(@Nullable String noteId, @NonNull AddEditNoteContract.View addEditNoteView) {
+    public AddEditNotePresenter(@NonNull NoteDataSource noteDataSource,
+                                @Nullable String noteId,
+                                @NonNull AddEditNoteContract.View addEditNoteView) {
+        mNoteDataSource = noteDataSource;
         mNoteId = noteId;
         mView = addEditNoteView;
         mView.setPresenter(this);
@@ -20,8 +25,8 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     @Override
     public void start() {
         if (mNoteId != null) {
-            Note dummyNote = new Note(mNoteId, "Title " + mNoteId, "Text " + mNoteId);
-            showNote(dummyNote);
+            Note note = mNoteDataSource.getNote(mNoteId);
+            showNote(note);
         }
     }
 
@@ -35,8 +40,14 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     }
 
     @Override
-    public void onSaveClicked() {
-        // TODO: save note
+    public void onSaveClicked(@NonNull String title, @NonNull String text) {
+        Note note;
+        if (mNoteId == null) {
+            note = new Note(title, text);
+        } else {
+            note = new Note(title, text, mNoteId);
+        }
+        mNoteDataSource.saveNote(note);
         mView.showNotesView();
     }
 }

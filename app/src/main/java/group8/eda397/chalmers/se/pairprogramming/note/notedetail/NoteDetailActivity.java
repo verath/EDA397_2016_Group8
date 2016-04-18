@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteRepository;
 
 public class NoteDetailActivity extends BaseActivity {
 
@@ -41,7 +42,7 @@ public class NoteDetailActivity extends BaseActivity {
         setupToolbar();
 
         // Create the presenter
-        new NoteDetailPresenter(mNoteId, noteDetailFragment);
+        new NoteDetailPresenter(NoteRepository.getInstance(), mNoteId, noteDetailFragment);
     }
 
     @Override

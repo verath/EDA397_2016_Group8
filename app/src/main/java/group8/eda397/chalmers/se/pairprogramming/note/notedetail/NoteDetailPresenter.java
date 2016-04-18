@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import group8.eda397.chalmers.se.pairprogramming.note.Note;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteDataSource;
 
 public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     private final String mNoteId;
     private final NoteDetailContract.View mNoteDetailView;
+    private final NoteDataSource mNoteDataSource;
 
-    public NoteDetailPresenter(String noteId, @NonNull NoteDetailContract.View noteDetailView) {
+    public NoteDetailPresenter(@NonNull NoteDataSource noteDataSource,
+                               String noteId,
+                               @NonNull NoteDetailContract.View noteDetailView) {
+        mNoteDataSource = noteDataSource;
         mNoteId = noteId;
         mNoteDetailView = noteDetailView;
         mNoteDetailView.setPresenter(this);
@@ -18,8 +23,12 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     @Override
     public void start() {
-        Note dummyNote = new Note(mNoteId, "Title " + mNoteId, "Text " + mNoteId);
-        showNote(dummyNote);
+        Note note = mNoteDataSource.getNote(mNoteId);
+        if (note != null) {
+            showNote(note);
+        } else {
+            // TODO: show empty view
+        }
     }
 
     private void showNote(@NonNull Note note) {
@@ -46,13 +55,13 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     @Override
     public void onDeleteClicked() {
-        // TODO: Remove the note
+        mNoteDataSource.deleteNote(mNoteId);
         mNoteDetailView.showNotesView();
     }
 
     @Override
     public void onEditNoteResult(int resultCode) {
-        if(resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             // TODO: success message?
             mNoteDetailView.showNotesView();
         }

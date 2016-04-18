@@ -61,7 +61,8 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_note_save:
-                mPresenter.onSaveClicked();
+                mPresenter.onSaveClicked(mTitleEditText.getText().toString(),
+                        mTextEditText.getText().toString());
                 return true;
         }
         return super.onOptionsItemSelected(item);

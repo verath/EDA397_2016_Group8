@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteRepository;
 
 public class AddEditNoteActivity extends BaseActivity {
 
@@ -42,7 +43,7 @@ public class AddEditNoteActivity extends BaseActivity {
         setupToolbar();
 
         // Setup presenter
-        new AddEditNotePresenter(mNoteId, addEditNoteFragment);
+        new AddEditNotePresenter(NoteRepository.getInstance(), mNoteId, addEditNoteFragment);
     }
 
     @Override
