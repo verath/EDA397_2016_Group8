@@ -2,5 +2,6 @@
     <string name="app_name">Pair Programming</string>
 
     <string name="title_activity_notes">Notes</string>
+    <string name="title_activity_requirements">Requirements</string>
     <string name="show_notes">Show Notes</string>
 </resources>
