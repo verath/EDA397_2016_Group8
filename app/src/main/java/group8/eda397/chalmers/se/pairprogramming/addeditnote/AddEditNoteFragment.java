@@ -11,12 +11,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 public class AddEditNoteFragment extends Fragment implements AddEditNoteContract.View {
 
     private AddEditNoteContract.Presenter mPresenter;
+    private EditText mTitleEditText;
+    private EditText mTextEditText;
+
 
     public static AddEditNoteFragment newInstance() {
         return new AddEditNoteFragment();
@@ -32,6 +36,12 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_edit_note, container, false);
+
+        mTitleEditText = (EditText) view.findViewById(R.id.add_edit_note_title);
+        mTextEditText = (EditText) view.findViewById(R.id.add_edit_note_text);
+
+        // Request focus on the input for "text"
+        mTextEditText.requestFocus();
 
         return view;
     }

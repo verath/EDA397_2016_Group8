@@ -27,7 +27,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".addeditnote.AddEditNoteActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysVisible" />
     </application>
 
 </manifest>
