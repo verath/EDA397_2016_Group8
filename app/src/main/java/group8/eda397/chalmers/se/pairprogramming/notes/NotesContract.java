@@ -12,7 +12,7 @@ public interface NotesContract {
     interface View extends BaseView<Presenter> {
         void showNotes(@NonNull List<Note> notes);
 
-        void showNoteDetailView(Note note);
+        void showNoteDetailView(String noteId);
 
         void showAddNoteView();
     }
