@@ -7,6 +7,10 @@ public interface AddEditNoteContract {
 
     interface View extends BaseView<Presenter> {
         void showNotesView();
+
+        void showTitle(String title);
+
+        void showText(String text);
     }
 
     interface Presenter extends BasePresenter {

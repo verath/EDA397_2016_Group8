@@ -77,4 +77,14 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
     }
+
+    @Override
+    public void showTitle(String title) {
+        mTitleEditText.setText(title);
+    }
+
+    @Override
+    public void showText(String text) {
+        mTextEditText.setText(text);
+    }
 }
