@@ -2,6 +2,8 @@ package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.note.Note;
@@ -26,6 +28,13 @@ public class NotesPresenter implements NotesContract.Presenter {
     @Override
     public void start() {
         List<Note> notes = mNoteDataSource.getNotes();
+        // Sort by id
+        Collections.sort(notes, new Comparator<Note>() {
+            @Override
+            public int compare(Note lhs, Note rhs) {
+                return lhs.getId().compareTo(rhs.getId());
+            }
+        });
         mNotesView.showNotes(notes);
     }
 
