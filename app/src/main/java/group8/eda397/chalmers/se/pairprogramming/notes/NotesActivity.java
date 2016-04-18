@@ -1,58 +1,37 @@
 package group8.eda397.chalmers.se.pairprogramming.notes;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
+import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
  * The activity for displaying notes.
  */
-public class NotesActivity extends AppCompatActivity {
+public class NotesActivity extends BaseActivity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, NotesActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
 
-        // Setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setupToolbar();
 
-        // Try to find the notes fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        NotesFragment notesFragment = (NotesFragment) fragmentManager
-                .findFragmentById(R.id.contentFrame);
-
-        // Create the note fragment if it did not exist
-        if (notesFragment == null) {
+        // Setup fragment
+        NotesFragment notesFragment;
+        if (savedInstanceState == null) {
             notesFragment = NotesFragment.newInstance();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.contentFrame, notesFragment);
-            fragmentTransaction.commit();
+            addFragment(R.id.contentFrame, notesFragment);
+        } else {
+            notesFragment = (NotesFragment) findFragment(R.id.contentFrame);
         }
 
-        // Create the presenter
-        NotesContract.Presenter notesPresenter = new NotesPresenter(notesFragment);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        new NotesPresenter(notesFragment);
     }
 }
