@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.note.Note;
 
 /**
  * A RecyclerView adapter for notes, showing each note as a custom

@@ -7,6 +7,7 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
 import group8.eda397.chalmers.se.pairprogramming.BaseView;
+import group8.eda397.chalmers.se.pairprogramming.note.Note;
 
 public interface NotesContract {
     interface View extends BaseView<Presenter> {

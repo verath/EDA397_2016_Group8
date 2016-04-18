@@ -3,7 +3,7 @@ package group8.eda397.chalmers.se.pairprogramming.note.addeditnote;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import group8.eda397.chalmers.se.pairprogramming.note.notes.Note;
+import group8.eda397.chalmers.se.pairprogramming.note.Note;
 
 public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
 

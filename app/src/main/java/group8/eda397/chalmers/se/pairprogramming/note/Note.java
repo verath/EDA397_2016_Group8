@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.note.notes;
+package group8.eda397.chalmers.se.pairprogramming.note;
 
 import android.support.annotation.NonNull;
 

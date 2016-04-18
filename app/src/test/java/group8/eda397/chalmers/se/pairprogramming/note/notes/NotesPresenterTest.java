@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import group8.eda397.chalmers.se.pairprogramming.note.Note;
+
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.verify;
 
