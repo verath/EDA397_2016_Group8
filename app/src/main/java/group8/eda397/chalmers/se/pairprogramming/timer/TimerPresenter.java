@@ -12,7 +12,7 @@ public class TimerPresenter implements Presenter {
 
 
     private final TimerContract.View mTimerView;
-
+    private CountDownTimer countDownTimer;
     public TimerPresenter(TimerContract.View timerView) {
         mTimerView = timerView;
         mTimerView.setPresenter(this);
@@ -20,7 +20,7 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void startTimer() {
-        new CountDownTimer(30000, 1000) {
+       countDownTimer = new CountDownTimer(300000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 mTimerView.displayRemainingTime(millisUntilFinished);
@@ -35,7 +35,7 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void stopTimer() {
-
+    countDownTimer.cancel();
     }
 
     @Override

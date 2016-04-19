@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
@@ -19,6 +21,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     private TimerContract.Presenter mPresenter;
     private TextView mTimerTime;
     private Button mStart;
+    private boolean timerHasStarted = false;
 
     public static TimerFragment newInstance() {
         return new TimerFragment();
@@ -59,12 +62,21 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
     @Override
     public void displayRemainingTime(long millisUntilFinished) {
-        mTimerTime.setText(Long.toString(millisUntilFinished));
+        String timeparsed = String.format("%02d:%02d",
+
+                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
+
+        mTimerTime.setText(timeparsed);
+
     }
 
     @Override
     public void displayFinished() {
         mTimerTime.setText("Switch");
+        mStart.setText("START");
     }
 
     @Override
@@ -73,7 +85,16 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     private View.OnClickListener onStartButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mPresenter.startTimer();
+            if(!timerHasStarted) {
+                mPresenter.startTimer();
+                timerHasStarted = true;
+                mStart.setText("STOP");
+            } else {
+                mPresenter.stopTimer();
+                timerHasStarted = false;
+                mStart.setText("RESTART");
+
+            }
         }
     };
 }
