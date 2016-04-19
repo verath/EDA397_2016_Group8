@@ -9,4 +9,23 @@ dependencies:
     - /usr/local/android-sdk-linux/build-tools/23.0.3
 test:
   override:
-    - ./gradlew test -PdisablePreDex
+    # Build the code
+    - ./gradlew app:assembleDebug -PdisablePreDex
+
+    # Unit tests
+    - ./gradlew app:test -PdisablePreDex
+
+    # Lint
+    - ./gradlew app:lint
+
+    # Copy test results
+    - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
+
+    # copy lint report
+    - mkdir $CIRCLE_TEST_REPORTS/Lint
+    - mv app/build/outputs/lint-results-debug_files $CIRCLE_TEST_REPORTS/Lint
+    - mv app/build/outputs/lint-results-debug.html $CIRCLE_TEST_REPORTS/Lint/lint-app-results.html
+
+    # Make circleci display the results(?)
+    - mkdir $CIRCLE_TEST_REPORTS/junit
+    - find */build/test-results -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
