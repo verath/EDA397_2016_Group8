@@ -25,7 +25,7 @@ public interface TimerContract {
 
     interface Presenter extends BasePresenter {
 
-        void startTimer();
+        void startTimer(long startTime);
 
         void stopTimer();
     }

@@ -19,8 +19,8 @@ public class TimerPresenter implements Presenter {
     }
 
     @Override
-    public void startTimer() {
-       countDownTimer = new CountDownTimer(300000, 1000) {
+    public void startTimer(long startTime ) {
+       countDownTimer = new CountDownTimer(startTime*60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 mTimerView.displayRemainingTime(millisUntilFinished);

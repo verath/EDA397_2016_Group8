@@ -23,7 +23,15 @@
         android:layout_alignParentBottom="true"
         style="?android:attr/borderlessButtonStyle"
         android:textSize="30sp"
-        android:textColor="#616161" />
+        android:textColor="#616161"
+        android:elegantTextHeight="false" />
+    <NumberPicker
+        android:id="@+id/minute_picker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/start_btn_timer"
+        android:layout_centerHorizontal="true"
+        />
 
 
 </RelativeLayout>
