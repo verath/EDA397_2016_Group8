@@ -17,6 +17,10 @@ public interface TimerContract {
         void setDescription(String description);
 
         boolean isActive();
+
+        void displayRemainingTime(long millisUntilFinished);
+
+        void displayFinished();
     }
 
     interface Presenter extends BasePresenter {
