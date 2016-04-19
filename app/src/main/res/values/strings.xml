@@ -13,5 +13,6 @@
 
     <!-- Add/Edit note activity -->
     <string name="add_edit_note_title_hint">Title</string>
-    <string name="add_edit_note_text_hin">Note</string>
+    <string name="add_edit_note_text_hint">Note</string>
+    <string name="add_edit_note_empty_error">Both Title and Note can not be empty!</string>
 </resources>

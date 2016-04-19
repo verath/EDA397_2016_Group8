@@ -13,6 +13,8 @@ public interface AddEditNoteContract {
         void showTitle(String title);
 
         void showText(String text);
+
+        void showEmptyNoteError();
     }
 
     interface Presenter extends BasePresenter {

@@ -56,4 +56,13 @@ public class Note {
     public String getTitle() {
         return mTitle;
     }
+
+    /**
+     * Tests if the note is empty, i.e. has an empty title and text.
+     *
+     * @return True if empty.
+     */
+    public boolean isEmpty() {
+        return mText.isEmpty() && mTitle.isEmpty();
+    }
 }

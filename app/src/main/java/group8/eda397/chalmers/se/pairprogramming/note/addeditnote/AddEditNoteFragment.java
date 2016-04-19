@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -86,5 +87,10 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     @Override
     public void showText(String text) {
         mTextEditText.setText(text);
+    }
+
+    @Override
+    public void showEmptyNoteError() {
+        Snackbar.make(mTitleEditText, R.string.add_edit_note_empty_error, Snackbar.LENGTH_SHORT).show();
     }
 }

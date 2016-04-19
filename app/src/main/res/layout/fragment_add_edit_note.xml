@@ -26,7 +26,7 @@
         android:layout_marginTop="8dp"
         android:background="@null"
         android:gravity="top"
-        android:hint="@string/add_edit_note_text_hin"
+        android:hint="@string/add_edit_note_text_hint"
         android:inputType="textMultiLine"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

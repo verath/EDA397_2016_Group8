@@ -54,7 +54,12 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
         } else {
             note = new Note(title, text, mNoteId);
         }
-        mNoteDataSource.saveNote(note);
-        mView.showNotesView();
+
+        if (note.isEmpty()) {
+            mView.showEmptyNoteError();
+        } else {
+            mNoteDataSource.saveNote(note);
+            mView.showNotesView();
+        }
     }
 }
