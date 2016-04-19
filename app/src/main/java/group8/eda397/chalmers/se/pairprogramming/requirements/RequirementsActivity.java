@@ -18,10 +18,10 @@ public class RequirementsActivity extends BaseActivity {
         setContentView(R.layout.activity_requirements);
 
         RequirementsFragment requirementsFragment;
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             requirementsFragment = RequirementsFragment.newInstance();
             addFragment(R.id.frameContainer, requirementsFragment);
-        } else{
+        } else {
             requirementsFragment = (RequirementsFragment) findFragment(R.id.frameContainer);
         }
 
@@ -31,4 +31,5 @@ public class RequirementsActivity extends BaseActivity {
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, RequirementsActivity.class);
     }
+
 }

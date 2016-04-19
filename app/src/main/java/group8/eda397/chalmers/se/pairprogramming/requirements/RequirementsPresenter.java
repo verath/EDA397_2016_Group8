@@ -1,15 +1,9 @@
 package group8.eda397.chalmers.se.pairprogramming.requirements;
 
-import android.graphics.pdf.PdfRenderer;
-import android.os.ParcelFileDescriptor;
-
 public class RequirementsPresenter implements RequirementsContract.Presenter {
 
-    RequirementsContract.View fragment;
-
-    private ParcelFileDescriptor mFileDescriptor;
-    private PdfRenderer mPdfRenderer;
-    private PdfRenderer.Page mCurrentPage;
+    private RequirementsContract.View fragment;
+    private Requirement requirement;
 
     public RequirementsPresenter(RequirementsContract.View fragment) {
         this.fragment = fragment;
@@ -18,7 +12,9 @@ public class RequirementsPresenter implements RequirementsContract.Presenter {
 
     @Override
     public void start() {
-        //show first pdf page
+        requirement = new Requirement("sample.pdf");
+        // Only testing for PDF files in assets folder for now.
+        fragment.showPDF(requirement.getFilePath());
     }
 
 }

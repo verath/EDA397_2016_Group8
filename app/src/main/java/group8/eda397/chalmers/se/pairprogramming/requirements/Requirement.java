@@ -10,16 +10,15 @@ import java.io.File;
 public class Requirement {
 
     @NonNull
-    private File pdf;
+    private String filePath;
 
-    public Requirement(@NonNull File file){
-        //TODO: Check that it really is a pdf file (ends with .pdf)?
-        this.pdf = file;
+    public Requirement(@NonNull String filePath) {
+        this.filePath = filePath;
     }
 
     @NonNull
-    public File getFile(){
-        return pdf;
+    public String getFilePath() {
+        return filePath;
     }
 
 }

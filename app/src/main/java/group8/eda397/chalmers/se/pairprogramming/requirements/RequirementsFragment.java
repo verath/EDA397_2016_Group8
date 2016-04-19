@@ -1,6 +1,5 @@
 package group8.eda397.chalmers.se.pairprogramming.requirements;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,18 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+
+import com.joanzapata.pdfview.PDFView;
+
+import java.io.File;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
-public class RequirementsFragment extends Fragment implements RequirementsContract.View, View.OnClickListener {
+public class RequirementsFragment extends Fragment implements RequirementsContract.View {
 
-    RequirementsContract.Presenter presenter;
-
-    ImageView imageView;
-    Button prevBtn;
-    Button nextBtn;
+    private RequirementsContract.Presenter presenter;
+    private PDFView pdfView;
 
     @Override
     public void setPresenter(@NonNull RequirementsContract.Presenter presenter) {
@@ -35,12 +33,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_requiremnts, container, false);
 
-        imageView = (ImageView) view.findViewById(R.id.pdfImage);
-        prevBtn = (Button) view.findViewById(R.id.previous);
-        nextBtn = (Button) view.findViewById(R.id.next);
-
-        prevBtn.setOnClickListener(this);
-        nextBtn.setOnClickListener(this);
+        pdfView = (PDFView) view.findViewById(R.id.pdfView);
 
         return view;
     }
@@ -51,35 +44,32 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
         presenter.start();
     }
 
+    /**
+     * Display the PDF given an asset name (i.e. PDF file name in the assets folder).
+     *
+     * @param assetName
+     */
     @Override
-    public void showPage(int index) {
-
+    public void showPDF(String assetName) {
+        pdfView.fromAsset(assetName)
+                .defaultPage(1)
+                .enableSwipe(true)
+                .showMinimap(true)
+                .load();
     }
 
     /**
-     * Returns the AssetManager for the context to retrieve the PDF file stored in assets folder.
+     * Display the PDF given a file.
      *
-     * @return
+     * @param file
      */
     @Override
-    public AssetManager getAssetManager() {
-        return getContext().getAssets();
+    public void showPDF(File file) {
+        pdfView.fromFile(file)
+                .defaultPage(1)
+                .enableSwipe(true)
+                .showMinimap(true)
+                .load();
     }
 
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.previous: {
-                // Move to the previous page
-                break;
-            }
-            case R.id.next: {
-                // Move to the next page
-                break;
-            }
-        }
-
-    }
 }
