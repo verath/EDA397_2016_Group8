@@ -1,5 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.requirements;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
@@ -14,5 +16,19 @@ public class RequirementsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requirements);
+
+        RequirementsFragment requirementsFragment;
+        if(savedInstanceState == null){
+            requirementsFragment = RequirementsFragment.newInstance();
+            addFragment(R.id.frameContainer, requirementsFragment);
+        } else{
+            requirementsFragment = (RequirementsFragment) findFragment(R.id.frameContainer);
+        }
+
+        new RequirementsPresenter(requirementsFragment);
+    }
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, RequirementsActivity.class);
     }
 }

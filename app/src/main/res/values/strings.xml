@@ -4,4 +4,7 @@
     <string name="title_activity_notes">Notes</string>
     <string name="title_activity_requirements">Requirements</string>
     <string name="show_notes">Show Notes</string>
+    <string name="show_requirements">Show Requirements</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>

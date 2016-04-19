@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import group8.eda397.chalmers.se.pairprogramming.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.requirements.RequirementsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +26,25 @@ public class MainActivity extends AppCompatActivity {
         if (navigateToNotesButton != null) {
             navigateToNotesButton.setOnClickListener(onNavigateToNotes);
         }
+
+        Button requirementsBtn = (Button) findViewById(R.id.btn_requirements);
+        if(requirementsBtn != null){
+            requirementsBtn.setOnClickListener(onShowRequirements);
+        }
     }
 
     private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent launchIntent = NotesActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
+        }
+    };
+
+    private final View.OnClickListener onShowRequirements = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent launchIntent = RequirementsActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };
