@@ -21,7 +21,6 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     private EditText mTitleEditText;
     private EditText mTextEditText;
 
-
     public static AddEditNoteFragment newInstance() {
         return new AddEditNoteFragment();
     }
@@ -40,9 +39,6 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
         mTitleEditText = (EditText) view.findViewById(R.id.add_edit_note_title);
         mTextEditText = (EditText) view.findViewById(R.id.add_edit_note_text);
 
-        // Request focus on the input for "text"
-        mTextEditText.requestFocus();
-
         return view;
     }
 
@@ -55,6 +51,9 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     public void onResume() {
         super.onResume();
         mPresenter.start();
+
+        // Request focus on the input for "text"
+        mTextEditText.requestFocus();
     }
 
     @Override

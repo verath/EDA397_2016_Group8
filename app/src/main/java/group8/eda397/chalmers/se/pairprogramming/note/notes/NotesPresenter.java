@@ -19,7 +19,14 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     private final NoteDataSource mNoteDataSource;
 
-    public NotesPresenter(@NonNull NoteDataSource noteDataSource, @NonNull NotesContract.View notesView) {
+    /**
+     * Creates a new NotesPresenter for displaying notes.
+     *
+     * @param noteDataSource The note data source to use for note data.
+     * @param notesView      The view.
+     */
+    public NotesPresenter(@NonNull NoteDataSource noteDataSource,
+                          @NonNull NotesContract.View notesView) {
         mNoteDataSource = noteDataSource;
         mNotesView = notesView;
         mNotesView.setPresenter(this);
@@ -28,7 +35,8 @@ public class NotesPresenter implements NotesContract.Presenter {
     @Override
     public void start() {
         List<Note> notes = mNoteDataSource.getNotes();
-        // Sort by id
+        // Sort by id, as the list returned is not ordered.
+        // TODO: Sort by a property that is more suited for sorting
         Collections.sort(notes, new Comparator<Note>() {
             @Override
             public int compare(Note lhs, Note rhs) {

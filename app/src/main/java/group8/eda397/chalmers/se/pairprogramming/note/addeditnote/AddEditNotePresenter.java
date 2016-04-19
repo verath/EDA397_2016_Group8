@@ -13,6 +13,13 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     private final String mNoteId;
     private final NoteDataSource mNoteDataSource;
 
+    /**
+     * Creates a new AddEditNotePresenter
+     *
+     * @param noteDataSource  The note data source to use.
+     * @param noteId          The id of the note to edit, or null for creating a new note.
+     * @param addEditNoteView The view.
+     */
     public AddEditNotePresenter(@NonNull NoteDataSource noteDataSource,
                                 @Nullable String noteId,
                                 @NonNull AddEditNoteContract.View addEditNoteView) {
@@ -26,11 +33,11 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     public void start() {
         if (mNoteId != null) {
             Note note = mNoteDataSource.getNote(mNoteId);
-            showNote(note);
+            populateNote(note);
         }
     }
 
-    private void showNote(Note note) {
+    private void populateNote(Note note) {
         if (!note.getTitle().isEmpty()) {
             mView.showTitle(note.getTitle());
         }

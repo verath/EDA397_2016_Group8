@@ -9,11 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The NoteRepository is an implementation of the NoteDataSource.
- * Currently the NoteRepository only uses an in-memory cache.
+ * The NoteRepository is an implementation of the NoteDataSource,
+ * providing access to Note data. Following the google sample, this
+ * class should likely delegate to other sources, depending on the
+ * operation and state of the cache.
+ * <p>
+ * However, for now the NoteRepository uses only an in-memory cache.
  */
 public class NoteRepository implements NoteDataSource {
 
+    // This is (apparently) how one "should" do singletons now,
+    // see https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
     private static class NoteRepositoryHolder {
         public static final NoteRepository instance = new NoteRepository();
     }

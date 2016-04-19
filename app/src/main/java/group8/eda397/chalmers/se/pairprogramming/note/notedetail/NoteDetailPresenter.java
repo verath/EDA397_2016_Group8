@@ -12,8 +12,15 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
     private final NoteDetailContract.View mNoteDetailView;
     private final NoteDataSource mNoteDataSource;
 
+    /**
+     * Creates a new NoteDetailPresenter for the given note, identified by id.
+     *
+     * @param noteDataSource The note data source to use.
+     * @param noteId         The id of the note to display.
+     * @param noteDetailView The view.
+     */
     public NoteDetailPresenter(@NonNull NoteDataSource noteDataSource,
-                               String noteId,
+                               @NonNull String noteId,
                                @NonNull NoteDetailContract.View noteDetailView) {
         mNoteDataSource = noteDataSource;
         mNoteId = noteId;

@@ -36,11 +36,23 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         }
     }
 
+    /**
+     * Creates a new NotesAdapter displaying some list of notes.
+     *
+     * @param notes                 The initial list of notes to display.
+     * @param noteItemClickListener The listener for when a note is clicked.
+     */
     public NotesAdapter(@NonNull List<Note> notes, NoteItemClickListener noteItemClickListener) {
         this.mNotes = notes;
         this.mNoteItemClickListener = noteItemClickListener;
     }
 
+    /**
+     * Replaces the list of notes displayed in the list by a new
+     * list of notes.
+     *
+     * @param notes The new list of notes to be displayed.
+     */
     public void replaceData(@NonNull List<Note> notes) {
         this.mNotes = notes;
         notifyDataSetChanged();
@@ -61,7 +73,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(NotesAdapter.this.mNoteItemClickListener != null) {
+                if (NotesAdapter.this.mNoteItemClickListener != null) {
                     NotesAdapter.this.mNoteItemClickListener.onNoteClick(note);
                 }
             }

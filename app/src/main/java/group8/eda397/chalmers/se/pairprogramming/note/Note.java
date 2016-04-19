@@ -19,7 +19,8 @@ public class Note {
     private final String mTitle;
 
     /**
-     * Creates a new Note from an existing id.
+     * Creates a new Note from an <b>existing</b> id. This is used
+     * if one wants to edit a note.
      *
      * @param title The title of the note.
      * @param text  The text of the note.
@@ -32,7 +33,7 @@ public class Note {
     }
 
     /**
-     * Creates a new Note and generates an id for it.
+     * Creates a new Note. An id is automatically generated.
      *
      * @param title The title of the note.
      * @param text  The text of the note.

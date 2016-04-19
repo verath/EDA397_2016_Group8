@@ -10,6 +10,13 @@ import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.note.NoteRepository;
 
+/**
+ * The activity for adding a new note or editing an
+ * existing note. When adding a new note, this activity is
+ * started without (or with a null) note id. If editing
+ * the activity is instead started with the note id to
+ * edit.
+ */
 public class AddEditNoteActivity extends BaseActivity {
 
     private static final String INTENT_EXTRA_PARAM_NOTE_ID = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_NOTE_ID";

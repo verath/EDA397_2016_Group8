@@ -9,6 +9,10 @@ import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.note.NoteRepository;
 
+/**
+ * The note detail activity. The activity is to be started with
+ * a note id, representing the id of the note to show.
+ */
 public class NoteDetailActivity extends BaseActivity {
 
     private static final String INTENT_EXTRA_PARAM_NOTE_ID = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_NOTE_ID";
