@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,8 @@ import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 public class BacklogFragment extends Fragment implements BacklogContract.View {
 
+    private CollectionPagerAdapter mCollectionPagerAdapter;
+    private ViewPager mViewPager;
     private BacklogContract.Presenter mPresenter;
     private FloatingActionButton mFab;
 
@@ -46,6 +51,9 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_backlog, container, false);
         mFab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
+        mCollectionPagerAdapter = new CollectionPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
+        mViewPager.setAdapter(mCollectionPagerAdapter);
         return view;
     }
 
@@ -80,12 +88,45 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
 
     }
 
+    @Override
     public FloatingActionButton getFab(){
         return mFab;
     }
 
+    @Override
     public void showAddBacklogItemView(){
         Intent intent = AddBacklogActivity.getCallingIntent(getContext());
         startActivityForResult(intent, 0);
+    }
+
+    private class CollectionPagerAdapter extends FragmentStatePagerAdapter {
+
+        private final BacklogSwipeFragment[] mFragments;
+
+        public CollectionPagerAdapter(FragmentManager fm) {
+            super(fm);
+
+            this.mFragments = new BacklogSwipeFragment[BacklogItem.Status.values().length];
+            for (int i = 0; i < mFragments.length; i++) {
+                BacklogSwipeFragment backlogFragment = BacklogSwipeFragment.newInstance();
+                new BacklogSwipePresenter(backlogFragment, BacklogItem.Status.values()[i]);
+                mFragments[i] = backlogFragment;
+            }
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return mFragments[i];
+        }
+
+        @Override
+        public int getCount() {
+            return BacklogItem.Status.values().length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return BacklogItem.Status.values()[position].getName(getContext());
+        }
     }
 }
