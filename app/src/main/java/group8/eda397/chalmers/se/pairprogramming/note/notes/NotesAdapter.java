@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.notes;
+package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.note.Note;
 
 /**
  * A RecyclerView adapter for notes, showing each note as a custom
@@ -18,6 +19,11 @@ import group8.eda397.chalmers.se.pairprogramming.R;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private List<Note> mNotes;
+    private NoteItemClickListener mNoteItemClickListener;
+
+    public interface NoteItemClickListener {
+        void onNoteClick(Note clickedNote);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -30,10 +36,23 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         }
     }
 
-    public NotesAdapter(@NonNull List<Note> notes) {
+    /**
+     * Creates a new NotesAdapter displaying some list of notes.
+     *
+     * @param notes                 The initial list of notes to display.
+     * @param noteItemClickListener The listener for when a note is clicked.
+     */
+    public NotesAdapter(@NonNull List<Note> notes, NoteItemClickListener noteItemClickListener) {
         this.mNotes = notes;
+        this.mNoteItemClickListener = noteItemClickListener;
     }
 
+    /**
+     * Replaces the list of notes displayed in the list by a new
+     * list of notes.
+     *
+     * @param notes The new list of notes to be displayed.
+     */
     public void replaceData(@NonNull List<Note> notes) {
         this.mNotes = notes;
         notifyDataSetChanged();
@@ -48,9 +67,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Note note = mNotes.get(position);
+        final Note note = mNotes.get(position);
         holder.title.setText(note.getTitle());
         holder.text.setText(note.getText());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NotesAdapter.this.mNoteItemClickListener != null) {
+                    NotesAdapter.this.mNoteItemClickListener.onNoteClick(note);
+                }
+            }
+        });
     }
 
     @Override

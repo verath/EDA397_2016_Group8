@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/list_item_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/list_item_horizontal_margin"
+    android:paddingRight="@dimen/list_item_horizontal_margin"
     android:paddingTop="@dimen/list_item_vertical_margin">
 
     <android.support.v7.widget.CardView
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/title"

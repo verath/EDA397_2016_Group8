@@ -7,7 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import group8.eda397.chalmers.se.pairprogramming.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
 import group8.eda397.chalmers.se.pairprogramming.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
             navigateToNotesButton.setOnClickListener(onNavigateToNotes);
         }
 
+        Button navigateToBacklogButton = (Button) findViewById(R.id.show_backlog_button);
+        if (navigateToBacklogButton != null) {
+            navigateToBacklogButton.setOnClickListener(onNavigateToBacklog);
+        }
+
         Button navigateToTimerButton = (Button) findViewById(R.id.btn_timer);
         if (navigateToTimerButton != null) {
             navigateToTimerButton.setOnClickListener(onNavigateToTimer);
@@ -37,8 +43,15 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, NotesActivity.class);
-            startActivity(intent);
+            Intent launchIntent = NotesActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
+        }
+    };
+    private final View.OnClickListener onNavigateToBacklog = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent launchIntent = BacklogActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
         }
     };
 
