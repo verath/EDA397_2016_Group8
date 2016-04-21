@@ -1,7 +1,5 @@
 package group8.eda397.chalmers.se.pairprogramming.timer;
 
-import android.os.CountDownTimer;
-
 import group8.eda397.chalmers.se.pairprogramming.timer.TimerContract.Presenter;
 
 /**
@@ -10,6 +8,7 @@ import group8.eda397.chalmers.se.pairprogramming.timer.TimerContract.Presenter;
 public class TimerPresenter implements Presenter {
 
     private final TimerContract.View mTimerView;
+    private boolean mFinished = true;
 
     public TimerPresenter(TimerContract.View timerView) {
         mTimerView = timerView;
@@ -18,24 +17,52 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void start() {
+        // Disable until TimerService is connected
+        mTimerView.disableTimerInput();
     }
 
     @Override
-    public void startTimer(long startTime) {
-
-    }
-
-    @Override
-    public void stopTimer() {
-
-    }
-
-    @Override
-    public void onTimerUpdate(boolean isFinished, long millisUntilFinished) {
-        if(isFinished) {
-            mTimerView.displayFinished();
-        } else {
+    public void onTimerServiceConnected(boolean finished, long millisUntilFinished) {
+        mFinished = finished;
+        if (!finished) {
             mTimerView.displayRemainingTime(millisUntilFinished);
+            mTimerView.showStopButton();
+        } else {
+            mTimerView.showStartButton();
         }
+        mTimerView.enableTimerInput();
+    }
+
+    @Override
+    public void onTimerTick(long millisUntilFinished) {
+        mTimerView.displayRemainingTime(millisUntilFinished);
+    }
+
+    @Override
+    public void onTimerFinish() {
+        mFinished = true;
+        mTimerView.displayFinished();
+        mTimerView.showStartButton();
+    }
+
+    @Override
+    public void onStartStopButtonClick(long millisInFuture) {
+        if (mFinished) {
+            startTimer(millisInFuture);
+        } else {
+            stopTimer();
+        }
+    }
+
+    private void startTimer(long millisInFuture) {
+        mFinished = false;
+        mTimerView.startTimer(millisInFuture);
+        mTimerView.showStopButton();
+    }
+
+    private void stopTimer() {
+        mFinished = true;
+        mTimerView.stopTimer();
+        mTimerView.showStartButton();
     }
 }

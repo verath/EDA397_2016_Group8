@@ -1,16 +1,15 @@
 package group8.eda397.chalmers.se.pairprogramming.timer;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,25 +22,17 @@ import group8.eda397.chalmers.se.pairprogramming.R;
 /**
  * Created by Vidar on 14/04/16.
  */
-public class TimerFragment extends Fragment implements TimerContract.View {
+public class TimerFragment extends Fragment implements TimerContract.View, TimerService.Listener {
 
-    private LocalBroadcastManager mLocalBroadcastManager;
     private TimerContract.Presenter mPresenter;
+    private TimerService mTimerService;
 
     private TextView mTimerTime;
-    private Button mStart;
-    private NumberPicker minutePicker;
-    private boolean timerHasStarted = false;
-    private long startTime = 1;
+    private NumberPicker mMinutePicker;
+    private Button mStartStopButton;
 
     public static TimerFragment newInstance() {
         return new TimerFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(getContext());
     }
 
     @Nullable
@@ -49,52 +40,46 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
         mTimerTime = (TextView) view.findViewById(R.id.timer_fragment_timer);
-        mStart = (Button) view.findViewById(R.id.start_btn_timer);
-        mStart.setOnClickListener(onStartButtonClick);
-        minutePicker = (NumberPicker) view.findViewById(R.id.minute_picker);
-        minutePicker.setMinValue(1);
-        minutePicker.setMaxValue(10);
-        minutePicker.setWrapSelectorWheel(false);
-        minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
 
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                startTime = minutePicker.getValue();
+        mStartStopButton = (Button) view.findViewById(R.id.start_stop_btn_timer);
+        mStartStopButton.setOnClickListener(onStartStopButtonClick);
 
-            }
-        });
+        mMinutePicker = (NumberPicker) view.findViewById(R.id.minute_picker);
+        mMinutePicker.setMinValue(1);
+        mMinutePicker.setMaxValue(10);
+        mMinutePicker.setWrapSelectorWheel(false);
+
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Explicitly start the TimerService, so that it is not destroyed
+        // when we unbind on onPause.
+        Intent timerServiceIntent = TimerService.getStartingIntent(getContext());
+        getActivity().startService(timerServiceIntent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mPresenter.start();
-        mLocalBroadcastManager.registerReceiver(timerBroadcastReceiver,
-                TimerService.getBroadcastFilter());
+        // Bind to the TimerService
         Intent timerServiceIntent = TimerService.getStartingIntent(getContext());
-        getActivity().startService(timerServiceIntent);
+        getActivity().bindService(timerServiceIntent, mTimerServiceConnection,
+                Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mLocalBroadcastManager.unregisterReceiver(timerBroadcastReceiver);
-    }
-
-    @Override
-    public void showTimer() {
-
-    }
-
-    @Override
-    public void setTitle(String title) {
-
-    }
-
-    @Override
-    public void setDescription(String description) {
-
+        if (mTimerService != null) {
+            // Unbind from the TimerService
+            mTimerService.setListener(null);
+            getActivity().unbindService(mTimerServiceConnection);
+            mTimerService = null;
+        }
     }
 
     @Override
@@ -114,7 +99,42 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     @Override
     public void displayFinished() {
         mTimerTime.setText("Switch");
-        mStart.setText("START");
+    }
+
+    @Override
+    public void disableTimerInput() {
+        mStartStopButton.setEnabled(false);
+        mMinutePicker.setEnabled(false);
+    }
+
+    @Override
+    public void enableTimerInput() {
+        mStartStopButton.setEnabled(true);
+        mMinutePicker.setEnabled(true);
+    }
+
+    @Override
+    public void startTimer(long millisInFuture) {
+        if (mTimerService != null) {
+            mTimerService.startTimer(millisInFuture);
+        }
+    }
+
+    @Override
+    public void stopTimer() {
+        if (mTimerService != null) {
+            mTimerService.cancelTimer();
+        }
+    }
+
+    @Override
+    public void showStartButton() {
+        mStartStopButton.setText("START");
+    }
+
+    @Override
+    public void showStopButton() {
+        mStartStopButton.setText("STOP");
     }
 
     @Override
@@ -122,39 +142,43 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         mPresenter = presenter;
     }
 
-    private View.OnClickListener onStartButtonClick = new View.OnClickListener() {
+    @Override
+    public void onTimerTick(long millisUntilFinished) {
+        mPresenter.onTimerTick(millisUntilFinished);
+    }
+
+    @Override
+    public void onTimerFinish() {
+        mPresenter.onTimerFinish();
+    }
+
+    private View.OnClickListener onStartStopButtonClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-
-            Activity activity = getActivity();
-            if (activity != null) {
-                Log.i("TimerFragment", String.format("Starting timer %d", startTime * 60 * 1000));
-                Intent timerIntent = TimerService.getStartingIntent(getActivity(), startTime * 60 * 1000);
-                activity.startService(timerIntent);
-            }
-
-            /*if (!timerHasStarted) {
-
-                mPresenter.startTimer(startTime);
-                timerHasStarted = true;
-                mStart.setText("STOP");
-
-            } else {
-                mPresenter.stopTimer();
-                timerHasStarted = false;
-                mStart.setText("START");
-
-            }*/
+            int minutes = mMinutePicker.getValue();
+            long millisInFuture = minutes * 60 * 1000;
+            mPresenter.onStartStopButtonClick(millisInFuture);
         }
     };
 
-    private BroadcastReceiver timerBroadcastReceiver = new BroadcastReceiver() {
+    private ServiceConnection mTimerServiceConnection = new ServiceConnection() {
         @Override
-        public void onReceive(Context context, Intent intent) {
-            boolean isFinished = TimerService.parseBroadcastIsFinished(intent);
-            long millisUntilFinished = TimerService.parseBroadcastMillisUntilFinished(intent);
-            mPresenter.onTimerUpdate(isFinished, millisUntilFinished);
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // This is method is called when we have successfully bound to the TimerService.
+            // We check isResumed here, to make sure the listener we attach here will be
+            // removed in onPause.
+            if (isResumed()) {
+                mTimerService = ((TimerService.TimerServiceBinder) service).getTimerService();
+                mPresenter.onTimerServiceConnected(mTimerService.isFinished(),
+                        mTimerService.getMillisUntilFinished());
+                mTimerService.setListener(TimerFragment.this);
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mTimerService = null;
         }
     };
 }

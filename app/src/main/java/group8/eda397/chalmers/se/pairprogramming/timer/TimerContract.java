@@ -10,23 +10,31 @@ public interface TimerContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showTimer();
-
-        void setTitle(String title);
-
-        void setDescription(String description);
-
         void displayRemainingTime(long millisUntilFinished);
 
         void displayFinished();
+
+        void disableTimerInput();
+
+        void enableTimerInput();
+
+        void startTimer(long millisInFuture);
+
+        void stopTimer();
+
+        void showStartButton();
+
+        void showStopButton();
     }
 
     interface Presenter extends BasePresenter {
 
-        void startTimer(long startTime);
+        void onTimerServiceConnected(boolean finished, long millisUntilFinished);
 
-        void stopTimer();
+        void onTimerTick(long millisUntilFinished);
 
-        void onTimerUpdate(boolean isFinished, long millisUntilFinished);
+        void onTimerFinish();
+
+        void onStartStopButtonClick(long millisInFuture);
     }
 }

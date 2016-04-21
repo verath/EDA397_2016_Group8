@@ -3,11 +3,10 @@ package group8.eda397.chalmers.se.pairprogramming.timer;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
+import android.support.annotation.Nullable;
 
 /**
  * A service for running a CountDownTimer that may live for longer than the
@@ -19,112 +18,46 @@ import android.util.Log;
  */
 public class TimerService extends Service {
 
-    private static final String TIMER_BROADCAST =
-            "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST";
+    public interface Listener {
+        void onTimerTick(long millisUntilFinished);
 
-    private static final String TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED =
-            "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED";
-
-    private static final String TIMER_BROADCAST_EXTRA_IS_FINISHED =
-            "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST_EXTRA_IS_FINISHED";
-
-    private static final String INTENT_EXTRA_PARAM_COUNTDOWN_TIME =
-            "group8.eda397.chalmers.se.pairprogramming.timer.INTENT_PARAM_COUNTDOWN_TIME";
-
-    private CountDownTimer mCountDownTimer;
-    private LocalBroadcastManager mLocalBroadcastManager;
-
-    private long mMillisUntilFinished;
-    private boolean mIsFinished;
-
-    /**
-     * Gets an intent for starting the TimerService, and sets its timer for millisInFuture
-     * milliseconds in the future.
-     *
-     * @param context        The context.
-     * @param millisInFuture The number of millis in the future from that the timer is started
-     *                       to that it is finished.
-     * @return The intent to use for starting the service.
-     */
-    public static Intent getStartingIntent(Context context, long millisInFuture) {
-        if (millisInFuture <= 0) {
-            throw new IllegalArgumentException("millisInFuture must be > 0");
-        }
-
-        Intent callingIntent = new Intent(context, TimerService.class);
-        callingIntent.putExtra(INTENT_EXTRA_PARAM_COUNTDOWN_TIME, millisInFuture);
-        return callingIntent;
+        void onTimerFinish();
     }
 
-    /**
-     * Gets an intent for starting the TimerService and making it report
-     * progress of the currently running timer, if any, as a broadcast.
-     *
-     * @param context The context.
-     * @return The intent to use for starting the service.
-     */
     public static Intent getStartingIntent(Context context) {
         return new Intent(context, TimerService.class);
     }
 
-    public static IntentFilter getBroadcastFilter() {
-        return new IntentFilter(TIMER_BROADCAST);
-    }
-
-    public static boolean parseBroadcastIsFinished(Intent intent) {
-        return intent.getBooleanExtra(TIMER_BROADCAST_EXTRA_IS_FINISHED, false);
-    }
-
-    public static long parseBroadcastMillisUntilFinished(Intent intent) {
-        return intent.getLongExtra(TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED, 0);
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
-        mIsFinished = true;
-        mMillisUntilFinished = 0;
-    }
+    private final IBinder mBinder = new TimerServiceBinder();
+    private CountDownTimer mCountDownTimer;
+    private Listener mListener;
+    private long mMillisUntilFinished = 0;
+    private boolean mFinished = true;
 
     @Override
     public IBinder onBind(Intent intent) {
-        // We do not support binding
-        return null;
+        return mBinder;
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("TimerService", "onStartCommand");
-
-        long millisInFuture = -1;
-        if (intent != null) {
-            millisInFuture = intent.getLongExtra(INTENT_EXTRA_PARAM_COUNTDOWN_TIME, -1);
-        }
-
-        if (millisInFuture > 0) {
-            startTimer(millisInFuture);
-        }
-
-        if (!mIsFinished) {
-            sendTimerBroadcast();
-        } else {
-            // We were started, but without a millisInFuture, so stop directly.
-            stopSelf();
-        }
-
-        return super.onStartCommand(intent, flags, startId);
+    public void setListener(@Nullable Listener listener) {
+        mListener = listener;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i("TimerService", "onDestroy");
+    public void startTimer(long millisInFuture) {
+        if (millisInFuture <= 0) {
+            throw new IllegalArgumentException("millisInFuture must be > 0");
+        }
         cancelTimer();
+
+        mFinished = false;
+        mMillisUntilFinished = millisInFuture;
+
+        mCountDownTimer = new CountDownTimerImpl(millisInFuture, 500);
+        mCountDownTimer.start();
     }
 
-    private void cancelTimer() {
-        mIsFinished = true;
+    public void cancelTimer() {
+        mFinished = true;
         mMillisUntilFinished = 0;
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
@@ -132,59 +65,39 @@ public class TimerService extends Service {
         }
     }
 
-    private void startTimer(long millisInFuture) {
-        if (millisInFuture <= 0) {
-            throw new IllegalArgumentException("millisInFuture must be > 0");
+    public long getMillisUntilFinished() {
+        return mMillisUntilFinished;
+    }
+
+    public boolean isFinished() {
+        return mFinished;
+    }
+
+    public class TimerServiceBinder extends Binder {
+        TimerService getTimerService() {
+            return TimerService.this;
         }
-
-        cancelTimer();
-
-        mIsFinished = false;
-        mMillisUntilFinished = millisInFuture;
-
-        mCountDownTimer = new CountDownTimerImpl(millisInFuture, 500);
-        mCountDownTimer.start();
-    }
-
-    private void onTimerTick(long millisUntilFinished) {
-        mMillisUntilFinished = millisUntilFinished;
-        sendTimerBroadcast();
-    }
-
-    private void onTimerFinish() {
-        mIsFinished = true;
-        sendTimerBroadcast();
-        stopSelf();
-    }
-
-    private void sendTimerBroadcast() {
-        Intent intent = new Intent(TIMER_BROADCAST);
-        intent.putExtra(TIMER_BROADCAST_EXTRA_IS_FINISHED, mIsFinished);
-        intent.putExtra(TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED, mMillisUntilFinished);
-        mLocalBroadcastManager.sendBroadcast(intent);
     }
 
     private class CountDownTimerImpl extends CountDownTimer {
-
-        /**
-         * @param millisInFuture    The number of millis in the future from the call
-         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
-         *                          is called.
-         * @param countDownInterval The interval along the way to receive
-         *                          {@link #onTick(long)} callbacks.
-         */
         public CountDownTimerImpl(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
-            onTimerTick(millisUntilFinished);
+            mMillisUntilFinished = millisUntilFinished;
+            if (mListener != null) {
+                mListener.onTimerTick(millisUntilFinished);
+            }
         }
 
         @Override
         public void onFinish() {
-            onTimerFinish();
+            mFinished = true;
+            if (mListener != null) {
+                mListener.onTimerFinish();
+            }
         }
     }
 }
