@@ -19,6 +19,11 @@ import group8.eda397.chalmers.se.pairprogramming.notes.Note;
 public class BacklogSwipeAdapter extends RecyclerView.Adapter<BacklogSwipeAdapter.ViewHolder> {
 
     private List<BacklogItem> mBacklogItems;
+    private final BacklogItemListener mBacklogItemListener;
+
+    public interface BacklogItemListener {
+        void onBacklogItemClick(BacklogItem item);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -31,8 +36,9 @@ public class BacklogSwipeAdapter extends RecyclerView.Adapter<BacklogSwipeAdapte
         }
     }
 
-    public BacklogSwipeAdapter(@NonNull List<BacklogItem> backlogItems) {
+    public BacklogSwipeAdapter(@NonNull List<BacklogItem> backlogItems, BacklogItemListener backlogItemListener) {
         this.mBacklogItems = backlogItems;
+        this.mBacklogItemListener = backlogItemListener;
     }
 
     public void replaceData(@NonNull List<BacklogItem> backlogItems) {
@@ -49,9 +55,17 @@ public class BacklogSwipeAdapter extends RecyclerView.Adapter<BacklogSwipeAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        BacklogItem backlogItem = mBacklogItems.get(position);
+        final BacklogItem backlogItem = mBacklogItems.get(position);
         holder.title.setText(backlogItem.getTitle());
         holder.text.setText(backlogItem.getContent());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBacklogItemListener != null) {
+                    mBacklogItemListener.onBacklogItemClick(backlogItem);
+                }
+            }
+        });
     }
 
     @Override

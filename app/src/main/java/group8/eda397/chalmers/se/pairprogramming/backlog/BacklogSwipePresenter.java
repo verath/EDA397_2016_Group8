@@ -29,4 +29,9 @@ public class BacklogSwipePresenter implements BacklogSwipeContract.Presenter {
         }
         mBacklogView.showItems(mBacklog);
     }
+
+    @Override
+    public void onBacklogItemClick(BacklogItem item) {
+        mBacklogView.showBacklogDetailsView(item);
+    }
 }
