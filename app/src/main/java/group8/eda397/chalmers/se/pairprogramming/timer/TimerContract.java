@@ -1,7 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.timer;
 
-import group8.eda397.chalmers.se.pairprogramming.BaseView;
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
+import group8.eda397.chalmers.se.pairprogramming.BaseView;
 
 /**
  * Created by Vidar on 14/04/16.

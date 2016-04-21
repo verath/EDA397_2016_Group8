@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import java.util.concurrent.TimeUnit;
-
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
@@ -25,7 +23,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     private Button mStart;
     private NumberPicker minutePicker;
     private boolean timerHasStarted = false;
-    private long startTime =1;
+    private long startTime = 1;
 
     public static TimerFragment newInstance() {
         return new TimerFragment();
@@ -82,7 +80,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         long minutes = millisUntilFinished / (60 * 1000);
         long seconds = (millisUntilFinished / 1000) % 60;
         String timeparsed = String.format("%02d:%02d", minutes, seconds);
-        if (millisUntilFinished < 30000){
+        if (millisUntilFinished < 30000) {
             mTimerTime.setTextColor(Color.parseColor("#ff0000"));
         } else {
             mTimerTime.setTextColor(Color.parseColor("#616161"));
@@ -100,13 +98,15 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     }
 
     @Override
-    public void setPresenter(TimerContract.Presenter presenter){ mPresenter = presenter; }
+    public void setPresenter(TimerContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 
     private View.OnClickListener onStartButtonClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            if(!timerHasStarted) {
+            if (!timerHasStarted) {
 
                 mPresenter.startTimer(startTime);
                 timerHasStarted = true;
