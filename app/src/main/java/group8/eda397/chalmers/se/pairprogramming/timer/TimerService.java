@@ -3,6 +3,7 @@ package group8.eda397.chalmers.se.pairprogramming.timer;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -17,26 +18,14 @@ import android.support.v4.content.LocalBroadcastManager;
  */
 public class TimerService extends Service {
 
-    /**
-     * The intent the TimerService will broadcast to for timer ticks and timer finish.
-     */
-    public static final String TIMER_BROADCAST =
+    private static final String TIMER_BROADCAST =
             "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST";
 
-    /**
-     * Used as a long value for TIMER_BROADCAST to represent the time remaining
-     * (in milliseconds).
-     */
-    public static final String TIMER_BROADCAST_EXTRA_TIME_REMAINING =
-            "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST_EXTRA_TIME_REMAINING";
+    private static final String TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED =
+            "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED";
 
-    /**
-     * Used as a boolean value for TIMER_BROADCAST to represent if the timer is
-     * finished.
-     */
-    public static final String TIMER_BROADCAST_EXTRA_IS_FINISHED =
+    private static final String TIMER_BROADCAST_EXTRA_IS_FINISHED =
             "group8.eda397.chalmers.se.pairprogramming.timer.TIMER_BROADCAST_EXTRA_IS_FINISHED";
-
 
     private static final String INTENT_EXTRA_PARAM_COUNTDOWN_TIME =
             "group8.eda397.chalmers.se.pairprogramming.timer.INTENT_PARAM_COUNTDOWN_TIME";
@@ -57,6 +46,18 @@ public class TimerService extends Service {
         Intent callingIntent = new Intent(context, TimerService.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_COUNTDOWN_TIME, millisInFuture);
         return callingIntent;
+    }
+
+    public static IntentFilter getBroadcastFilter() {
+        return new IntentFilter(TIMER_BROADCAST);
+    }
+
+    public static boolean parseBroadcastIsFinished(Intent intent) {
+        return intent.getBooleanExtra(TIMER_BROADCAST_EXTRA_IS_FINISHED, false);
+    }
+
+    public static long parseBroadcastMillisUntilFinished(Intent intent) {
+        return intent.getLongExtra(TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED, 0);
     }
 
     @Override
@@ -102,7 +103,7 @@ public class TimerService extends Service {
     private void sendTimerBroadcast(boolean isFinished, long millisUntilFinished) {
         Intent intent = new Intent(TIMER_BROADCAST);
         intent.putExtra(TIMER_BROADCAST_EXTRA_IS_FINISHED, isFinished);
-        intent.putExtra(TIMER_BROADCAST_EXTRA_TIME_REMAINING, millisUntilFinished);
+        intent.putExtra(TIMER_BROADCAST_EXTRA_MILLIS_UNTIL_FINISHED, millisUntilFinished);
         mLocalBroadcastManager.sendBroadcast(intent);
     }
 
