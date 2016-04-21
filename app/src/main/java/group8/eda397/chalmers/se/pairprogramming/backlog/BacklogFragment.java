@@ -82,11 +82,6 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
 
     }
 
-    @Override
-    public void showAddBacklog() {
-
-    }
-
     public void showAddBacklogItemView() {
         Intent intent = AddBacklogActivity.getCallingIntent(getContext());
         startActivityForResult(intent, 0);

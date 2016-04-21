@@ -15,8 +15,6 @@ public interface BacklogContract {
 
         void showBacklog(List<BacklogItem> items);
 
-        void showAddBacklog();
-
         void showAddBacklogItemView();
     }
 

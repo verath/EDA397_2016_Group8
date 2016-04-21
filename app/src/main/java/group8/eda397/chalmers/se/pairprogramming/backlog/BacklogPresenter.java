@@ -35,7 +35,7 @@ public class BacklogPresenter implements BacklogContract.Presenter {
 
     @Override
     public void onAddClicked() {
-        mBacklogView.showAddBacklog();
+        mBacklogView.showAddBacklogItemView();
     }
 
 }
