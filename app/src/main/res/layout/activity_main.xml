@@ -26,6 +26,12 @@
             android:text="@string/show_notes" />
 
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHOW BACKLOG"
+            android:id="@+id/show_backlog_button" />
+
+        <Button
             android:id="@+id/btn_requirements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

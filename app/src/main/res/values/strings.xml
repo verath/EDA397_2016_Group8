@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">Pair Programming</string>
-
     <string name="title_activity_notes">Notes</string>
     <string name="title_activity_requirements">Requirements</string>
     <string name="show_notes">Show Notes</string>
     <string name="show_requirements">Show Requirements</string>
+    <string name="title_activity_backlog">BacklogActivity</string>
+
+    <string name="title_activity_add_backlog">Add backlog item</string>
+    <string name="missing_title">Missing title</string>
+    <string name="missing_description">Missing description</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="backlog">Backlog</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="ready_for_test">Ready for test</string>
+    <string name="done">Done</string>
 </resources>
