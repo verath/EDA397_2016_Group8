@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // Might want to launch RequirementsSelectorActivity
     private final View.OnClickListener onShowRequirements = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

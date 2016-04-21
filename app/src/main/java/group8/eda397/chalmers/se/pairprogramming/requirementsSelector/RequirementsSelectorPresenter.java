@@ -6,8 +6,9 @@ import java.util.ArrayList;
 /**
  * Created by mysko1 on 2016-04-21.
  */
-public class RequirementsSelectorPresenter {
+public class RequirementsSelectorPresenter implements RequirementsSelectorContract.Presenter {
 
+    RequirementsSelectorContract.View fragment;
 
     private static ArrayList<String> myData = new ArrayList<String>();
     private static File f = new File("/home/mysko1/workspace_android/pdfreader/android-PdfRendererBasic/Application/src/main/assets");
@@ -21,6 +22,16 @@ public class RequirementsSelectorPresenter {
                     files[i].matches(fileName))
                 myData.add(files[i]);
         }
+    }
+
+    public RequirementsSelectorPresenter(RequirementsSelectorContract.View fragment){
+        this.fragment = fragment;
+        fragment.setPresenter(this);
+    }
+
+    @Override
+    public void start() {
+
     }
 
 }

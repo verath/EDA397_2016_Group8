@@ -31,7 +31,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_requiremnts, container, false);
+        View view = inflater.inflate(R.layout.fragment_requirements, container, false);
 
         pdfView = (PDFView) view.findViewById(R.id.pdfView);
 
