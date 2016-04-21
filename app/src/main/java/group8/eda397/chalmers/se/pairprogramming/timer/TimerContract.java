@@ -26,5 +26,7 @@ public interface TimerContract {
         void startTimer(long startTime);
 
         void stopTimer();
+
+        void onTimerUpdate(boolean isFinished, long millisUntilFinished);
     }
 }

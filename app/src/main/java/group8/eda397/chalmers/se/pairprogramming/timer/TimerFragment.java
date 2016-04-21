@@ -1,10 +1,16 @@
 package group8.eda397.chalmers.se.pairprogramming.timer;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +25,9 @@ import group8.eda397.chalmers.se.pairprogramming.R;
  */
 public class TimerFragment extends Fragment implements TimerContract.View {
 
+    private LocalBroadcastManager mLocalBroadcastManager;
     private TimerContract.Presenter mPresenter;
+
     private TextView mTimerTime;
     private Button mStart;
     private NumberPicker minutePicker;
@@ -28,6 +36,12 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
     public static TimerFragment newInstance() {
         return new TimerFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(getContext());
     }
 
     @Nullable
@@ -56,6 +70,16 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     public void onResume() {
         super.onResume();
         mPresenter.start();
+        mLocalBroadcastManager.registerReceiver(timerBroadcastReceiver,
+                TimerService.getBroadcastFilter());
+        Intent timerServiceIntent = TimerService.getStartingIntent(getContext());
+        getActivity().startService(timerServiceIntent);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mLocalBroadcastManager.unregisterReceiver(timerBroadcastReceiver);
     }
 
     @Override
@@ -102,7 +126,15 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
         @Override
         public void onClick(View v) {
-            if (!timerHasStarted) {
+
+            Activity activity = getActivity();
+            if (activity != null) {
+                Log.i("TimerFragment", String.format("Starting timer %d", startTime * 60 * 1000));
+                Intent timerIntent = TimerService.getStartingIntent(getActivity(), startTime * 60 * 1000);
+                activity.startService(timerIntent);
+            }
+
+            /*if (!timerHasStarted) {
 
                 mPresenter.startTimer(startTime);
                 timerHasStarted = true;
@@ -113,7 +145,16 @@ public class TimerFragment extends Fragment implements TimerContract.View {
                 timerHasStarted = false;
                 mStart.setText("START");
 
-            }
+            }*/
+        }
+    };
+
+    private BroadcastReceiver timerBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean isFinished = TimerService.parseBroadcastIsFinished(intent);
+            long millisUntilFinished = TimerService.parseBroadcastMillisUntilFinished(intent);
+            mPresenter.onTimerUpdate(isFinished, millisUntilFinished);
         }
     };
 }

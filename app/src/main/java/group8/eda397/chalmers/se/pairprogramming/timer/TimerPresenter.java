@@ -9,9 +9,7 @@ import group8.eda397.chalmers.se.pairprogramming.timer.TimerContract.Presenter;
  */
 public class TimerPresenter implements Presenter {
 
-
     private final TimerContract.View mTimerView;
-    private CountDownTimer countDownTimer;
 
     public TimerPresenter(TimerContract.View timerView) {
         mTimerView = timerView;
@@ -20,26 +18,24 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void start() {
-
     }
 
     @Override
     public void startTimer(long startTime) {
-        countDownTimer = new CountDownTimer(startTime * 60000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                mTimerView.displayRemainingTime(millisUntilFinished);
-            }
-
-            public void onFinish() {
-                mTimerView.displayFinished();
-            }
-        }.start();
 
     }
 
     @Override
     public void stopTimer() {
-        countDownTimer.cancel();
+
+    }
+
+    @Override
+    public void onTimerUpdate(boolean isFinished, long millisUntilFinished) {
+        if(isFinished) {
+            mTimerView.displayFinished();
+        } else {
+            mTimerView.displayRemainingTime(millisUntilFinished);
+        }
     }
 }
