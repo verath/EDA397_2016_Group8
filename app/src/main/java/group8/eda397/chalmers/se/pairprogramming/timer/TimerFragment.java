@@ -70,13 +70,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     }
 
     @Override
-    public boolean isActive() {
-        return false;
-    }
-
-    @Override
     public void displayRemainingTime(long millisUntilFinished) {
-
         long minutes = millisUntilFinished / (60 * 1000);
         long seconds = (millisUntilFinished / 1000) % 60;
         String timeparsed = String.format("%02d:%02d", minutes, seconds);
@@ -87,8 +81,6 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         }
 
         mTimerTime.setText(timeparsed);
-
-
     }
 
     @Override
