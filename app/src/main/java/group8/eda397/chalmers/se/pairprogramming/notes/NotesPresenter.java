@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * The notes presenter handles the logic for presenting notes, using
  * a notes view for actually displaying the notes.
