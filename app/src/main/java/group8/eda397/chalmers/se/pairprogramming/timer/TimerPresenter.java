@@ -19,6 +19,11 @@ public class TimerPresenter implements Presenter {
     }
 
     @Override
+    public void start() {
+
+    }
+
+    @Override
     public void startTimer(long startTime) {
         countDownTimer = new CountDownTimer(startTime * 60000, 1000) {
 
@@ -36,10 +41,5 @@ public class TimerPresenter implements Presenter {
     @Override
     public void stopTimer() {
         countDownTimer.cancel();
-    }
-
-    @Override
-    public void start() {
-
     }
 }

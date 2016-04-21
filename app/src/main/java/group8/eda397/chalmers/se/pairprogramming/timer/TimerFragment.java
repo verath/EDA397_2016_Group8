@@ -2,6 +2,7 @@ package group8.eda397.chalmers.se.pairprogramming.timer;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -51,7 +52,10 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         return view;
     }
 
-    public TimerFragment() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Override
@@ -90,7 +94,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     }
 
     @Override
-    public void setPresenter(TimerContract.Presenter presenter) {
+    public void setPresenter(@NonNull TimerContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
