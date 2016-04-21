@@ -1,5 +1,6 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,6 @@ public class BacklogActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backlog);
-        setupToolbar();
 
         BacklogFragment backlogFragment;
         if (savedInstanceState == null) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -54,6 +55,10 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         mCollectionPagerAdapter = new CollectionPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         mViewPager.setAdapter(mCollectionPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.toolbar_tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
         return view;
     }
 
