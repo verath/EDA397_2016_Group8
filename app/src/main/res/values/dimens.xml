@@ -5,5 +5,6 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="list_item_vertical_margin">8dp</dimen>
+    <dimen name="list_item_horizontal_margin">6dp</dimen>
+    <dimen name="list_item_vertical_margin">3dp</dimen>
 </resources>
