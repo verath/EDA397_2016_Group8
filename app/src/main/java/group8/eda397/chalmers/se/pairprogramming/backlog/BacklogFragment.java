@@ -21,6 +21,7 @@ import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 public class BacklogFragment extends Fragment implements BacklogContract.View {
 
     private BacklogContract.Presenter mPresenter;
+    private FloatingActionButton mFab;
 
     public BacklogFragment() {
 
@@ -44,15 +45,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_backlog, container, false);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = AddBacklogActivity.getCallingIntent(getContext());
-                startActivityForResult(intent, 0);
-            }
-        });
+        mFab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
         return view;
     }
 
@@ -64,6 +57,12 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         } else {
             Toast.makeText(getContext(), "Creation cancelled", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Override
@@ -79,5 +78,14 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
     @Override
     public void showAddBacklog() {
 
+    }
+
+    public FloatingActionButton getFab(){
+        return mFab;
+    }
+
+    public void showAddBacklogItemView(){
+        Intent intent = AddBacklogActivity.getCallingIntent(getContext());
+        startActivityForResult(intent, 0);
     }
 }

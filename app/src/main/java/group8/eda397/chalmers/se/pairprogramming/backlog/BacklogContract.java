@@ -1,5 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
+import android.support.design.widget.FloatingActionButton;
+
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
@@ -16,6 +18,9 @@ public interface BacklogContract {
         void showBacklog(List<BacklogItem> items);
 
         void showAddBacklog();
+
+        FloatingActionButton getFab();
+        void showAddBacklogItemView();
     }
 
     interface Presenter extends BasePresenter {

@@ -1,5 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog.model;
 
+import android.content.Context;
+
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
@@ -13,11 +15,13 @@ public class BacklogItem {
         READY_FOR_TEST(R.string.ready_for_test),
         DONE(R.string.done);
         int mKey;
-        Status(int key){
+
+        Status(int key) {
             mKey = key;
         }
-        public int getKey(){
-            return mKey;
+
+        public String getName(Context context) {
+            return context.getString(mKey);
         }
     }
 

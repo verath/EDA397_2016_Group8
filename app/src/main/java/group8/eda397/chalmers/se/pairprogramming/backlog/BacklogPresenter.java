@@ -1,8 +1,12 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
+import android.content.Intent;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import group8.eda397.chalmers.se.pairprogramming.backlog.add.AddBacklogActivity;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 /**
@@ -26,6 +30,13 @@ public class BacklogPresenter implements BacklogContract.Presenter {
                     BacklogItem.Status.BACKLOG));
         }
         loadBacklog();
+        mBacklogView.getFab().setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mBacklogView.showAddBacklogItemView();
+            }
+        });
     }
 
     @Override

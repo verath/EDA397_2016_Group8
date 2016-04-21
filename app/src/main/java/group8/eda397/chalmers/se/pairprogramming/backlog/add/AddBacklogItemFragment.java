@@ -60,21 +60,8 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
         View view = inflater.inflate(R.layout.fragment_add_backlog_item, container, false);
 
         mStatusSp = (Spinner) view.findViewById(R.id.backlog_status_spinner);
-        ArrayAdapter<BacklogItem.Status> adapter = new ArrayAdapter<BacklogItem.Status>(getActivity().getApplicationContext(),
-                R.layout.backlog_status_spinner_item, BacklogItem.Status.values()){
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView tw = (TextView) ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item,parent,false);
-                tw.setText(getResources().getString(getItem(position).getKey()));
-                return tw;
-            }
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView tw = (TextView) ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item,parent,false);
-                tw.setText(getResources().getString(getItem(position).getKey()));
-                return tw;
-            }
-        };
+        ArrayAdapter<BacklogItem.Status> adapter = new CustomArrayAdapter(getActivity().getApplicationContext(),
+                R.layout.backlog_status_spinner_item, BacklogItem.Status.values());
         adapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
         mStatusSp.setAdapter(adapter);
 
@@ -96,29 +83,55 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_add_backlog_item,menu);
+        inflater.inflate(R.menu.menu_add_backlog_item, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_backlog_item_add:
-
-                String title = mTitleEt.getText().toString();
-                if (title == null || title.length() == 0) {
-                    mTitleEt.setError(getResources().getString(R.string.missing_title));
-                    return true;
-                }
-                String desc = mDescEt.getText().toString();
-                if (desc == null || desc.length() == 0) {
-                    mDescEt.setError(getResources().getString(R.string.missing_description));
-                    return true;
-                }
-                BacklogItem newItem = new BacklogItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
-                getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
-                return true;
+                return addBacklogItem();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean addBacklogItem() {
+        String title = mTitleEt.getText().toString();
+        if (title == null || title.length() == 0) {
+            mTitleEt.setError(getResources().getString(R.string.missing_title));
+            return true;
+        }
+        String desc = mDescEt.getText().toString();
+        if (desc == null || desc.length() == 0) {
+            mDescEt.setError(getResources().getString(R.string.missing_description));
+            return true;
+        }
+        BacklogItem newItem = new BacklogItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
+        return true;
+    }
+
+    private class CustomArrayAdapter extends ArrayAdapter<BacklogItem.Status> {
+
+        public CustomArrayAdapter(Context context, int resource, BacklogItem.Status[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            TextView tw = (TextView) ((LayoutInflater) getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item, parent, false);
+            tw.setText(getItem(position).getName(getContext()));
+            return tw;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView tw = (TextView) ((LayoutInflater) getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item, parent, false);
+            tw.setText(getItem(position).getName(getContext()));
+            return tw;
+        }
     }
 }
