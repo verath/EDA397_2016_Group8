@@ -15,17 +15,12 @@ public interface BacklogContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showBacklog(List<BacklogItem> items);
-
-        void showAddBacklog();
-
         FloatingActionButton getFab();
+
         void showAddBacklogItemView();
     }
 
     interface Presenter extends BasePresenter {
-
-        void loadBacklog();
 
     }
 }

@@ -79,16 +79,6 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
     }
 
     @Override
-    public void showBacklog(List<BacklogItem> items) {
-
-    }
-
-    @Override
-    public void showAddBacklog() {
-
-    }
-
-    @Override
     public FloatingActionButton getFab(){
         return mFab;
     }

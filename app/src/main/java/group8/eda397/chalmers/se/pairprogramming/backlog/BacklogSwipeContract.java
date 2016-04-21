@@ -15,6 +15,7 @@ public interface BacklogSwipeContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showItems(List<BacklogItem> items);
     }
 
     interface Presenter extends BasePresenter {

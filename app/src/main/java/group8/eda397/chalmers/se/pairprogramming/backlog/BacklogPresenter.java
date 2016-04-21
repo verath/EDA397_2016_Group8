@@ -15,7 +15,6 @@ import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 public class BacklogPresenter implements BacklogContract.Presenter {
 
     private final BacklogContract.View mBacklogView;
-    private final List<BacklogItem> mBacklog = new ArrayList<BacklogItem>();
 
     public BacklogPresenter(BacklogContract.View backlogView) {
         this.mBacklogView = backlogView;
@@ -24,12 +23,6 @@ public class BacklogPresenter implements BacklogContract.Presenter {
 
     @Override
     public void start() {
-        mBacklog.clear();
-        for (int i = 0; i < 20; i++) {
-            mBacklog.add(new BacklogItem("Item " + (i + 1), "Backlog content " + (i + 1),
-                    BacklogItem.Status.BACKLOG));
-        }
-        loadBacklog();
         mBacklogView.getFab().setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -37,11 +30,6 @@ public class BacklogPresenter implements BacklogContract.Presenter {
                 mBacklogView.showAddBacklogItemView();
             }
         });
-    }
-
-    @Override
-    public void loadBacklog() {
-        mBacklogView.showBacklog(mBacklog);
     }
 
 }
