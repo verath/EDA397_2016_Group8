@@ -29,7 +29,7 @@ public class BacklogPresenter implements BacklogContract.Presenter {
         for (BacklogItem.Status status : BacklogItem.Status.values()) {
             List<BacklogItem> items = new ArrayList<>();
             for (int i = 0; i < 20; i++) {
-                items.add(new BacklogItem("Item " + (i + 1) + " " + status, "Content", status));
+                items.add(new BacklogItem("Item " + (i + 1), "Content", status));
             }
             mBacklog.put(status, items);
         }
