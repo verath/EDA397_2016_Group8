@@ -58,16 +58,11 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.toolbar_tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        // Setup the FAB
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mPresenter != null) {
-                    mPresenter.onAddClicked();
-                }
-            }
-        });
+        // Setup the add FAB
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.backlog_add_fab);
+        if (fab != null) {
+            fab.setOnClickListener(fabAddBacklogItemClickListener);
+        }
 
         return view;
     }
@@ -103,6 +98,15 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         Intent intent = AddBacklogActivity.getCallingIntent(getContext());
         startActivityForResult(intent, 0);
     }
+
+    private View.OnClickListener fabAddBacklogItemClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mPresenter != null) {
+                mPresenter.onAddClicked();
+            }
+        }
+    };
 
     private class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
