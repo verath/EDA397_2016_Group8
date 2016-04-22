@@ -11,7 +11,7 @@ public interface DataSource<T> {
 
     boolean save(T item);
 
-    boolean delete(String id);
+    T delete(String id);
 
     List<T> getAll();
 }

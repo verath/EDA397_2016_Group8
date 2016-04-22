@@ -25,14 +25,22 @@ public class BacklogItem {
         }
     }
 
+    private static int sIdCounter = 0;
+    private final String mId;
     private final String mContent;
     private final String mTitle;
     private final Status mStatus;
 
     public BacklogItem(String title, String content, Status status) {
+        this.mId = String.valueOf(sIdCounter);
+        sIdCounter++;
         this.mContent = content;
         this.mTitle = title;
         this.mStatus = status;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getContent() {

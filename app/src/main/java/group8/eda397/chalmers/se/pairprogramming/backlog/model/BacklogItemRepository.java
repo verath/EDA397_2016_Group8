@@ -1,29 +1,76 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by m_cal on 2016-04-21.
  */
-public class BacklogItemRepository implements DataSource<BacklogItem> {
-    
+public class BacklogItemRepository implements BacklogItemDataSource {
+
+    private static BacklogItemRepository sInstance;
+    private final Map<String, BacklogItem> mBacklog = new HashMap<String, BacklogItem>();
+
+    private BacklogItemRepository() {
+        mBacklog.clear();
+
+        for (BacklogItem.Status status : BacklogItem.Status.values()) {
+            for (int i = 0; i < 20; i++) {
+                BacklogItem item = new BacklogItem("Item " + (i + 1), "Content", status);
+                mBacklog.put(item.getId(), item);
+            }
+        }
+    }
+
+    public static BacklogItemRepository getInstance() {
+        if (sInstance == null) {
+            sInstance = new BacklogItemRepository();
+        }
+        return sInstance;
+    }
+
     @Override
     public BacklogItem get(String id) {
-        return null;
+        return mBacklog.get(id);
     }
 
     @Override
     public boolean save(BacklogItem item) {
-        return false;
+        return mBacklog.put(item.getId(), item) != null;
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public BacklogItem delete(String id) {
+        return mBacklog.remove(id);
     }
 
     @Override
     public List<BacklogItem> getAll() {
-        return null;
+        List<BacklogItem> items = new ArrayList<BacklogItem>();
+        Set<String> keys = mBacklog.keySet();
+        Iterator<String> it = keys.iterator();
+        while (it.hasNext()) {
+            BacklogItem item = mBacklog.get(it.next());
+            items.add(item);
+        }
+        return items;
+    }
+
+    @Override
+    public List<BacklogItem> getAll(BacklogItem.Status status) {
+        List<BacklogItem> items = new ArrayList<BacklogItem>();
+        Set<String> keys = mBacklog.keySet();
+        Iterator<String> it = keys.iterator();
+        while (it.hasNext()) {
+            BacklogItem item = mBacklog.get(it.next());
+            if (status == item.getStatus()) {
+                items.add(item);
+            }
+    }
+        return items;
     }
 }
