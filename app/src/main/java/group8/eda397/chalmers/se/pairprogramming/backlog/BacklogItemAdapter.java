@@ -15,7 +15,7 @@ import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 /**
  * Created by m_cal on 2016-04-21.
  */
-public class BacklogSwipeAdapter extends RecyclerView.Adapter<BacklogSwipeAdapter.ViewHolder> {
+public class BacklogItemAdapter extends RecyclerView.Adapter<BacklogItemAdapter.ViewHolder> {
 
     private List<BacklogItem> mBacklogItems;
     private final BacklogItemListener mBacklogItemListener;
@@ -35,7 +35,7 @@ public class BacklogSwipeAdapter extends RecyclerView.Adapter<BacklogSwipeAdapte
         }
     }
 
-    public BacklogSwipeAdapter(@NonNull List<BacklogItem> backlogItems, BacklogItemListener backlogItemListener) {
+    public BacklogItemAdapter(@NonNull List<BacklogItem> backlogItems, BacklogItemListener backlogItemListener) {
         this.mBacklogItems = backlogItems;
         this.mBacklogItemListener = backlogItemListener;
     }

@@ -1,7 +1,9 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
@@ -12,7 +14,7 @@ public class BacklogPresenter implements BacklogContract.Presenter {
 
     private final BacklogContract.View mBacklogView;
 
-    private final List<BacklogItem> mBacklog = new ArrayList<>();
+    private final Map<BacklogItem.Status, List<BacklogItem>> mBacklog = new HashMap<>();
 
 
     public BacklogPresenter(BacklogContract.View backlogView) {
@@ -23,21 +25,29 @@ public class BacklogPresenter implements BacklogContract.Presenter {
     @Override
     public void start() {
         mBacklog.clear();
-        for (int i = 0; i < 20; i++) {
-            mBacklog.add(new BacklogItem("Item " + (i + 1), "Backlog content " + (i + 1),
-                    BacklogItem.Status.BACKLOG));
-        }
-        loadBacklog();
-    }
 
-    @Override
-    public void loadBacklog() {
-        mBacklogView.showBacklog(mBacklog);
+        for (BacklogItem.Status status : BacklogItem.Status.values()) {
+            List<BacklogItem> items = new ArrayList<>();
+            for (int i = 0; i < 20; i++) {
+                items.add(new BacklogItem("Item " + (i + 1) + " " + status, "Content", status));
+            }
+            mBacklog.put(status, items);
+        }
     }
 
     @Override
     public void onAddClicked() {
         mBacklogView.showAddBacklogItemView();
+    }
+
+    @Override
+    public void onSwipeFragmentResume(BacklogItem.Status status) {
+        mBacklogView.showBacklogForStatus(status, mBacklog.get(status));
+    }
+
+    @Override
+    public void onBacklogItemClicked(BacklogItem backlogItem) {
+
     }
 
 }

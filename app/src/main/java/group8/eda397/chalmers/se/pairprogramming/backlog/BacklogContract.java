@@ -13,15 +13,17 @@ public interface BacklogContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showBacklog(List<BacklogItem> items);
+        void showBacklogForStatus(BacklogItem.Status status, List<BacklogItem> items);
 
         void showAddBacklogItemView();
     }
 
     interface Presenter extends BasePresenter {
 
-        void loadBacklog();
-
         void onAddClicked();
+
+        void onSwipeFragmentResume(BacklogItem.Status status);
+
+        void onBacklogItemClicked(BacklogItem backlogItem);
     }
 }
