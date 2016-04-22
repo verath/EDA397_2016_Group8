@@ -1,10 +1,9 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -26,8 +25,8 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
 
     private CollectionPagerAdapter mCollectionPagerAdapter;
     private ViewPager mViewPager;
+
     private BacklogContract.Presenter mPresenter;
-    private FloatingActionButton mFab;
 
     public BacklogFragment() {
 
@@ -51,13 +50,24 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_backlog, container, false);
-        mFab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
+
         mCollectionPagerAdapter = new CollectionPagerAdapter(getActivity().getSupportFragmentManager());
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         mViewPager.setAdapter(mCollectionPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.toolbar_tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        // Setup the FAB
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.backlog_add_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPresenter != null) {
+                    mPresenter.onAddClicked();
+                }
+            }
+        });
 
         return view;
     }
@@ -79,17 +89,17 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
     }
 
     @Override
-    public void setPresenter(BacklogContract.Presenter presenter) {
+    public void setPresenter(@NonNull BacklogContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
     @Override
-    public FloatingActionButton getFab(){
-        return mFab;
+    public void showBacklog(List<BacklogItem> items) {
+
     }
 
     @Override
-    public void showAddBacklogItemView(){
+    public void showAddBacklogItemView() {
         Intent intent = AddBacklogActivity.getCallingIntent(getContext());
         startActivityForResult(intent, 0);
     }

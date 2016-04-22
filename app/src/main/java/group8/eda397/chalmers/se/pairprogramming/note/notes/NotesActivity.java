@@ -1,4 +1,4 @@
-package group8.eda397.chalmers.se.pairprogramming.notes;
+package group8.eda397.chalmers.se.pairprogramming.note.notes;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
+import group8.eda397.chalmers.se.pairprogramming.note.NoteRepository;
 
 /**
  * The activity for displaying notes.
@@ -32,6 +33,6 @@ public class NotesActivity extends BaseActivity {
             notesFragment = (NotesFragment) findFragment(R.id.contentFrame);
         }
 
-        new NotesPresenter(notesFragment);
+        new NotesPresenter(NoteRepository.getInstance(), notesFragment);
     }
 }

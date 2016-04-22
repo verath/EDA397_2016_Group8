@@ -11,7 +11,6 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
-import group8.eda397.chalmers.se.pairprogramming.notes.Note;
 
 /**
  * Created by m_cal on 2016-04-21.

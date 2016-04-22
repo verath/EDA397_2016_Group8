@@ -2,9 +2,8 @@ package group8.eda397.chalmers.se.pairprogramming.backlog.add;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,19 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import group8.eda397.chalmers.se.pairprogramming.R;
-import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogContract;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 public class AddBacklogItemFragment extends Fragment implements AddBacklogContract.View {
@@ -77,7 +68,7 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
     }
 
     @Override
-    public void setPresenter(AddBacklogContract.Presenter presenter) {
+    public void setPresenter(@NonNull AddBacklogContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
