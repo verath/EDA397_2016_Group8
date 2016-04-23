@@ -29,7 +29,7 @@ public interface TimerContract {
 
     interface Presenter extends BasePresenter {
 
-        void onTimerServiceConnected(boolean finished, long millisUntilFinished);
+        void onTimerServiceConnected(int timerState, long millisUntilFinished);
 
         void onTimerTick(long millisUntilFinished);
 

@@ -17,15 +17,24 @@ import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
  * A service for running a CountDownTimer that may live for longer than the
- * TimerActivity. It is started with a countdown, and broadcasts progress
- * via the LocalBroadcastManager.
- * <p/>
- * Note: To change the time being counted down to, start the Service again
- * with the new time.
+ * TimerActivity. To communicate with the TimerService, bind it and use the
+ * {@link TimerServiceBinder}.
  */
 public class TimerService extends Service {
 
-    public static final int TIMER_NOTIFICATION_ID = 1;
+
+    /**
+     * State indicating that the timer is not yet started.
+     */
+    public static final int STATE_TIMER_NOT_STARTED = 0x1;
+    /**
+     * State for when the timer is started, but is not yet finished.
+     */
+    public static final int STATE_TIMER_STARTED = 0x2;
+    /**
+     * State for when the timer was previously started has also finished.
+     */
+    public static final int STATE_TIMER_FINISHED = 0x3;
 
     public interface Listener {
 
@@ -39,6 +48,9 @@ public class TimerService extends Service {
         return new Intent(context, TimerService.class);
     }
 
+    private static final int COUNT_DOWN_INTERVAL = 500;
+    private static final int TIMER_NOTIFICATION_ID = 1;
+
     private final IBinder mBinder = new TimerServiceBinder();
 
     private NotificationManager mNotificationManager;
@@ -47,7 +59,7 @@ public class TimerService extends Service {
 
     private boolean mNotificationShown;
     private long mMillisUntilFinished = 0;
-    private boolean mTimerFinished = true;
+    private int mTimerState = STATE_TIMER_NOT_STARTED;
 
     @Override
     public void onCreate() {
@@ -61,14 +73,14 @@ public class TimerService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
-        if (mTimerFinished) {
-            // No timer running, so stop ourselves
-            stopSelf();
-            return false;
-        } else {
+        if (mTimerState == STATE_TIMER_STARTED) {
             // Timer is running, start ourselves as a foreground service
             moveToForeground();
             return true;
+        } else {
+            // No timer running, so stop ourselves
+            stopSelf();
+            return false;
         }
     }
 
@@ -82,21 +94,19 @@ public class TimerService extends Service {
     }
 
     public void startTimer(long millisInFuture) {
-        if (millisInFuture <= 0) {
-            throw new IllegalArgumentException("millisInFuture must be > 0");
-        }
         cancelTimer();
 
-        mTimerFinished = false;
+        mTimerState = STATE_TIMER_STARTED;
         mMillisUntilFinished = millisInFuture;
 
-        mCountDownTimer = new CountDownTimerImpl(millisInFuture, 500);
+        mCountDownTimer = new CountDownTimerImpl(millisInFuture, COUNT_DOWN_INTERVAL);
         mCountDownTimer.start();
     }
 
     public void cancelTimer() {
-        mTimerFinished = true;
+        mTimerState = STATE_TIMER_NOT_STARTED;
         mMillisUntilFinished = 0;
+
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
             mCountDownTimer = null;
@@ -107,8 +117,8 @@ public class TimerService extends Service {
         return mMillisUntilFinished;
     }
 
-    public boolean isFinished() {
-        return mTimerFinished;
+    public int getTimerState() {
+        return mTimerState;
     }
 
     private void onTimerTick(long millisUntilFinished) {
@@ -120,7 +130,8 @@ public class TimerService extends Service {
     }
 
     private void onTimerFinish() {
-        mTimerFinished = true;
+        mTimerState = STATE_TIMER_FINISHED;
+
         if (mListener != null) {
             mListener.onTimerFinish();
         }
@@ -140,6 +151,11 @@ public class TimerService extends Service {
         startForeground(TIMER_NOTIFICATION_ID, notification);
     }
 
+    private void moveToBackground() {
+        mNotificationShown = false;
+        stopForeground(true);
+    }
+
     private Notification createTimerNotification() {
         PendingIntent contentIntent = createNotificationContentIntent();
         return new NotificationCompat.Builder(this)
@@ -157,11 +173,6 @@ public class TimerService extends Service {
         stackBuilder.addParentStack(TimerActivity.class);
         stackBuilder.addNextIntent(timerIntent);
         return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    private void moveToBackground() {
-        mNotificationShown = false;
-        stopForeground(true);
     }
 
     /**

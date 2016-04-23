@@ -170,8 +170,9 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
             // removed in onPause.
             if (isResumed()) {
                 mTimerService = ((TimerService.TimerServiceBinder) service).getTimerService();
-                mPresenter.onTimerServiceConnected(mTimerService.isFinished(),
-                        mTimerService.getMillisUntilFinished());
+                int timerState = mTimerService.getTimerState();
+                long millisUntilFinished = mTimerService.getMillisUntilFinished();
+                mPresenter.onTimerServiceConnected(timerState, millisUntilFinished);
                 mTimerService.setListener(TimerFragment.this);
             }
         }
