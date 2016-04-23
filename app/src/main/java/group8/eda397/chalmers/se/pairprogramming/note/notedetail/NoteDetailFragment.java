@@ -123,6 +123,11 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
         getActivity().finish();
     }
 
+    @Override
+    public void showMissingNote() {
+        // TODO: show some message saying this note is invalid?
+    }
+
     private View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
