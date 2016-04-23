@@ -33,11 +33,12 @@ public class NotesPresenterTest {
     }
 
     @Test
-    public void showsNotesOnStart() {
+    public void getsNotesFromDataSourceAndShowsInView() {
         // When presenter is started
         mNotesPresenter.start();
 
-        // Then a list of notes is shown
+        // Then repository is queried and notes are shown in the view
+        verify(mNoteDataSource).getNotes();
         verify(mNotesView).showNotes(anyListOf(Note.class));
     }
 
