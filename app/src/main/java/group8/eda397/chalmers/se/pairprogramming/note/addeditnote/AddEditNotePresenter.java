@@ -33,7 +33,11 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     public void start() {
         if (mNoteId != null) {
             Note note = mNoteDataSource.getNote(mNoteId);
-            populateNote(note);
+            if(note == null) {
+                mView.showMissingNote();
+            } else {
+                populateNote(note);
+            }
         }
     }
 
