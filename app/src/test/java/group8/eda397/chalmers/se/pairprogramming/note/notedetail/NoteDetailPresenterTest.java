@@ -14,7 +14,6 @@ import static org.mockito.Mockito.verify;
 
 public class NoteDetailPresenterTest {
 
-
     private static final String TITLE_TEST = "title";
 
     private static final String TEXT_TEST = "text";
@@ -32,15 +31,16 @@ public class NoteDetailPresenterTest {
     @Mock
     private NoteDetailContract.View mNoteDetailView;
 
+    private NoteDetailPresenter mNoteDetailPresenter;
+
     @Test
     public void getsNoteFromDataSourceAndShowsInView() {
         // Given a stubbed note data source and presenter initialized with that id
         given(mNoteDataSource.getNote(NOTE.getId())).willReturn(NOTE);
-        NoteDetailPresenter noteDetailPresenter = new NoteDetailPresenter(
-                mNoteDataSource, NOTE.getId(), mNoteDetailView);
+        mNoteDetailPresenter = new NoteDetailPresenter(mNoteDataSource, NOTE.getId(), mNoteDetailView);
 
         // When the presenter is started
-        noteDetailPresenter.start();
+        mNoteDetailPresenter.start();
 
         // Then title and text is displayed in the view
         verify(mNoteDetailView).showTitle(TITLE_TEST);
@@ -50,11 +50,10 @@ public class NoteDetailPresenterTest {
     @Test
     public void getsUnknownNoteFromDataSourceAndShowsInView() {
         // Given a presenter initialized with an invalid note id
-        NoteDetailPresenter noteDetailPresenter = new NoteDetailPresenter(
-                mNoteDataSource, INVALID_ID, mNoteDetailView);
+        mNoteDetailPresenter = new NoteDetailPresenter(mNoteDataSource, INVALID_ID, mNoteDetailView);
 
         // When the presenter is started
-        noteDetailPresenter.start();
+        mNoteDetailPresenter.start();
 
         // Then a missing note view is shown
         mNoteDetailView.showMissingNote();
@@ -63,11 +62,10 @@ public class NoteDetailPresenterTest {
     @Test
     public void clickOnDelete_deletesNote() {
         // Given a presenter with a stubbed note
-        NoteDetailPresenter noteDetailPresenter = new NoteDetailPresenter(
-                mNoteDataSource, NOTE.getId(), mNoteDetailView);
+        mNoteDetailPresenter = new NoteDetailPresenter(mNoteDataSource, NOTE.getId(), mNoteDetailView);
 
         // When deletion is requested
-        noteDetailPresenter.onDeleteClicked();
+        mNoteDetailPresenter.onDeleteClicked();
 
         // Then the note is deleted from the data source and the view is notified
         verify(mNoteDataSource).deleteNote(NOTE.getId());
@@ -77,11 +75,10 @@ public class NoteDetailPresenterTest {
     @Test
     public void clickOnEdit_showsEditView() {
         // Given a presenter with a stubbed note
-        NoteDetailPresenter noteDetailPresenter = new NoteDetailPresenter(
-                mNoteDataSource, NOTE.getId(), mNoteDetailView);
+        mNoteDetailPresenter = new NoteDetailPresenter(mNoteDataSource, NOTE.getId(), mNoteDetailView);
 
         // When edit button is clicked
-        noteDetailPresenter.onEditClicked();
+        mNoteDetailPresenter.onEditClicked();
 
         // Then the edit view is requested
         verify(mNoteDetailView).showNoteEditView(NOTE.getId());
