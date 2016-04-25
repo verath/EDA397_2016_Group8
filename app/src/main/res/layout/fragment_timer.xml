@@ -8,7 +8,7 @@
         android:id="@+id/timer_fragment_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/minute_picker"
+        android:layout_above="@+id/timer_text"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
@@ -33,5 +33,15 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/start_stop_btn_timer"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/timer_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/minute_picker"
+        android:layout_centerHorizontal="true"
+        android:text="Choose the time in minutes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#616161" />
 
 </RelativeLayout>

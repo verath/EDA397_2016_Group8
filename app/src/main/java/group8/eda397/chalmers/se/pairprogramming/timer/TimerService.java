@@ -6,6 +6,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
@@ -135,13 +138,23 @@ public class TimerService extends Service {
         if (mListener != null) {
             mListener.onTimerFinish();
         }
+
         updateNotification();
+        playTimerFinishedSound();
     }
 
     private void updateNotification() {
         if (mNotificationShown) {
             Notification newNotification = createTimerNotification();
             mNotificationManager.notify(TIMER_NOTIFICATION_ID, newNotification);
+        }
+    }
+
+    private void playTimerFinishedSound() {
+        Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone ringtone = RingtoneManager.getRingtone(this, ringtoneUri);
+        if (ringtone != null) {
+            ringtone.play();
         }
     }
 

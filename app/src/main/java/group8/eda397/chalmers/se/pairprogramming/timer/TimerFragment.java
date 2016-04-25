@@ -46,7 +46,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
 
         mMinutePicker = (NumberPicker) view.findViewById(R.id.minute_picker);
         mMinutePicker.setMinValue(1);
-        mMinutePicker.setMaxValue(10);
+        mMinutePicker.setMaxValue(60);
         mMinutePicker.setWrapSelectorWheel(false);
 
         return view;
