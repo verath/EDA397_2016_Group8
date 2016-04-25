@@ -24,8 +24,8 @@ public class RequirementsActivity extends BaseActivity {
         } else {
             requirementsFragment = (RequirementsFragment) findFragment(R.id.frameContainer);
         }
-
-        new RequirementsPresenter(requirementsFragment);
+        Requirement requirement = new Requirement(getIntent().getStringExtra("fileName"));
+        new RequirementsPresenter(requirementsFragment, requirement);
     }
 
     public static Intent getCallingIntent(Context context) {

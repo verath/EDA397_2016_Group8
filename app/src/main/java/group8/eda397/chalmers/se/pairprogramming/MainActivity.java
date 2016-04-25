@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogActivity;
-import group8.eda397.chalmers.se.pairprogramming.requirements.RequirementsActivity;
 import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.requirementsSelector.RequirementsSelectorActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(launchIntent);
         }
     };
-    // Might want to launch RequirementsSelectorActivity
     private final View.OnClickListener onShowRequirements = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent launchIntent = RequirementsActivity.getCallingIntent(MainActivity.this);
+            Intent launchIntent = RequirementsSelectorActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };

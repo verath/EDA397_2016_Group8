@@ -1,37 +1,37 @@
 package group8.eda397.chalmers.se.pairprogramming.requirementsSelector;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
+import group8.eda397.chalmers.se.pairprogramming.requirements.Requirement;
 
 /**
  * Created by mysko1 on 2016-04-21.
  */
 public class RequirementsSelectorPresenter implements RequirementsSelectorContract.Presenter {
 
-    RequirementsSelectorContract.View fragment;
+    private RequirementsSelectorContract.View fragment;
 
-    private static ArrayList<String> myData = new ArrayList<String>();
-    private static File f = new File("/home/mysko1/workspace_android/pdfreader/android-PdfRendererBasic/Application/src/main/assets");
-    private static String[] files = f.list();
-    private static String fileName;
-    static {
-
-
-        for (int i = 0; i < files.length; i++) {
-            if (fileName == null ||
-                    files[i].matches(fileName))
-                myData.add(files[i]);
-        }
-    }
-
-    public RequirementsSelectorPresenter(RequirementsSelectorContract.View fragment){
+    public RequirementsSelectorPresenter(RequirementsSelectorContract.View fragment) {
         this.fragment = fragment;
         fragment.setPresenter(this);
     }
 
     @Override
     public void start() {
-
+        List<Requirement> requirements = new ArrayList<>();
+        // Only add file extensions with .pdf
+        String[] fileNames = fragment.getFileNames();
+        for (String fileName : fileNames) {
+            if (fileName.endsWith(".pdf")) {
+                requirements.add(new Requirement(fileName));
+            }
+        }
+        fragment.showRequirements(requirements);
     }
 
+    @Override
+    public void onRequirementClicked(Requirement requirement) {
+        fragment.displayRequirement(requirement);
+    }
 }

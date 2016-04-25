@@ -15,14 +15,16 @@ public class RequirementsSelectorActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requirements);
+        setContentView(R.layout.activity_reqselector);
+
+        setupToolbar();
 
         RequirementsSelectorFragment reqSelectorFragment;
         if (savedInstanceState == null) {
             reqSelectorFragment = RequirementsSelectorFragment.newInstance();
-            addFragment(R.id.frameContainer, reqSelectorFragment);
+            addFragment(R.id.selectorContentFrame, reqSelectorFragment);
         } else {
-            reqSelectorFragment = (RequirementsSelectorFragment) findFragment(R.id.frameSelectorContainer);
+            reqSelectorFragment = (RequirementsSelectorFragment) findFragment(R.id.selectorContentFrame);
         }
 
         new RequirementsSelectorPresenter(reqSelectorFragment);
