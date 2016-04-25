@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogActivity;
-import group8.eda397.chalmers.se.pairprogramming.notes.NotesActivity;
 import group8.eda397.chalmers.se.pairprogramming.requirements.RequirementsActivity;
+import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
             navigateToNotesButton.setOnClickListener(onNavigateToNotes);
         }
         Button navigateToBacklogButton = (Button) findViewById(R.id.show_backlog_button);
-        if(navigateToBacklogButton != null) {
+        if (navigateToBacklogButton != null) {
             navigateToBacklogButton.setOnClickListener(onNavigateToBacklog);
         }
         Button requirementsBtn = (Button) findViewById(R.id.btn_requirements);
-        if(requirementsBtn != null) {
+        if (requirementsBtn != null) {
             requirementsBtn.setOnClickListener(onShowRequirements);
         }
     }
