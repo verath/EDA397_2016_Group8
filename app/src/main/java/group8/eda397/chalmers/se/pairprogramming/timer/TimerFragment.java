@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,7 +47,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
 
         mMinutePicker = (NumberPicker) view.findViewById(R.id.minute_picker);
         mMinutePicker.setMinValue(1);
-        mMinutePicker.setMaxValue(10);
+        mMinutePicker.setMaxValue(60);
         mMinutePicker.setWrapSelectorWheel(false);
 
         return view;
@@ -97,9 +98,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
     }
 
     @Override
-    public void displayFinished() {
-        mTimerTime.setText("Switch");
-    }
+    public void displayFinished() { mTimerTime.setText("Switch"); }
 
     @Override
     public void disableTimerInput() {

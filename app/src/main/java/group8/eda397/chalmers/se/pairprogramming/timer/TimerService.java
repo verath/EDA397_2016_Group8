@@ -3,9 +3,13 @@ package group8.eda397.chalmers.se.pairprogramming.timer;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 
 /**
@@ -95,6 +99,13 @@ public class TimerService extends Service {
         @Override
         public void onFinish() {
             mFinished = true;
+            try {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (mListener != null) {
                 mListener.onTimerFinish();
             }
