@@ -34,7 +34,7 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
         if (note != null) {
             showNote(note);
         } else {
-            // TODO: show empty view
+            mNoteDetailView.showMissingNote();
         }
     }
 

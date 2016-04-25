@@ -93,4 +93,9 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     public void showEmptyNoteError() {
         Snackbar.make(mTitleEditText, R.string.add_edit_note_empty_error, Snackbar.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showMissingNote() {
+        // TODO: show missing note error
+    }
 }

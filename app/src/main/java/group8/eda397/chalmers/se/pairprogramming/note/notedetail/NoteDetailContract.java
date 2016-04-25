@@ -18,6 +18,8 @@ public interface NoteDetailContract {
         void showNoteEditView(String noteId);
 
         void showNotesView();
+
+        void showMissingNote();
     }
 
     interface Presenter extends BasePresenter {
