@@ -30,5 +30,11 @@
             android:layout_height="wrap_content"
             android:text="SHOW BACKLOG"
             android:id="@+id/show_backlog_button" />
+
+        <Button
+            android:id="@+id/btn_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_timer" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

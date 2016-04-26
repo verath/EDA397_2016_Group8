@@ -77,8 +77,9 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
         switch (item.getItemId()) {
             case R.id.menu_backlog_item_add:
                 return addBacklogItem();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean addBacklogItem() {

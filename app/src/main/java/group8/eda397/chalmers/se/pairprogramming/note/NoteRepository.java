@@ -13,7 +13,7 @@ import java.util.Map;
  * providing access to Note data. Following the google sample, this
  * class should likely delegate to other sources, depending on the
  * operation and state of the cache.
- * <p>
+ * <p/>
  * However, for now the NoteRepository uses only an in-memory cache.
  */
 public class NoteRepository implements NoteDataSource {
@@ -36,9 +36,9 @@ public class NoteRepository implements NoteDataSource {
 
     static {
         for (int i = 1; i <= 10; i++) {
-            Note note = new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur " +
-                    "adipiscing elit. Maecenas velit lectus, convallis non lectus id, " +
-                    "aliquet auctor turpis. Quisque luctus.");
+            Note note = new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur "
+                    + "adipiscing elit. Maecenas velit lectus, convallis non lectus id, "
+                    + "aliquet auctor turpis. Quisque luctus.");
 
             mDummyNotes.put(note.getId(), note);
         }

@@ -43,9 +43,22 @@
             android:name=".backlog.add.AddBacklogActivity"
             android:label="@string/title_activity_add_backlog"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".backlog.details.BacklogDetailActivity"
             android:label="@string/title_activity_details_backlog"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!-- Timer -->
+        <activity
+            android:name=".timer.TimerActivity"
+            android:label="@string/title_activity_timer"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".timer.TimerService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -64,8 +64,9 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
                 mPresenter.onSaveClicked(mTitleEditText.getText().toString(),
                         mTextEditText.getText().toString());
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,5 +93,10 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
     @Override
     public void showEmptyNoteError() {
         Snackbar.make(mTitleEditText, R.string.add_edit_note_empty_error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showMissingNote() {
+        // TODO: show missing note error
     }
 }

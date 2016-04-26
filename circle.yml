@@ -1,3 +1,8 @@
+machine:
+  environment:
+    # To get better gradle output
+    TERM: "dumb"
+
 dependencies:
   pre:
     - chmod +x ./gradlew
@@ -9,23 +14,22 @@ dependencies:
     - /usr/local/android-sdk-linux/build-tools/23.0.3
 test:
   override:
-    # Build the code
-    - ./gradlew app:assembleDebug -PdisablePreDex
+    # Clean and do a build (build, test, checkstyle, ...)
+    - ./gradlew clean build -PdisablePreDex
 
-    # Unit tests
-    - ./gradlew app:test -PdisablePreDex
+    # Copy unit test results
+    - mkdir $CIRCLE_TEST_REPORTS/AppUnitTests
+    - mv app/build/reports/tests/* $CIRCLE_TEST_REPORTS/AppUnitTests
 
-    # Lint
-    - ./gradlew app:lint
-
-    # Copy test results
-    - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
-
-    # copy lint report
+    # Copy lint report
     - mkdir $CIRCLE_TEST_REPORTS/Lint
     - mv app/build/outputs/lint-results-debug_files $CIRCLE_TEST_REPORTS/Lint
     - mv app/build/outputs/lint-results-debug.html $CIRCLE_TEST_REPORTS/Lint/lint-app-results.html
 
-    # Make circleci display the results(?)
+    # Copy checkstyle reports
+    - mkdir $CIRCLE_TEST_REPORTS/Checkstyle
+    - mv app/build/reports/checkstyle/* $CIRCLE_TEST_REPORTS/Checkstyle/
+
+    # Copy junit reports, so circleci can display the results
     - mkdir $CIRCLE_TEST_REPORTS/junit
-    - find */build/test-results -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - find */build/test-results/debug -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
