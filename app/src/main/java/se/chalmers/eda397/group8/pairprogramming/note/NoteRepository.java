@@ -46,23 +46,24 @@ public class NoteRepository implements NoteDataSource {
 
     @NonNull
     @Override
-    public List<Note> getNotes() {
+    public List<Note> getAll() {
         return new ArrayList<>(mDummyNotes.values());
     }
 
     @Nullable
     @Override
-    public Note getNote(@NonNull String noteId) {
+    public Note get(@NonNull String noteId) {
         return mDummyNotes.get(noteId);
     }
 
     @Override
-    public void saveNote(@NonNull Note note) {
+    public boolean save(@NonNull Note note) {
         mDummyNotes.put(note.getId(), note);
+        return true;
     }
 
     @Override
-    public void deleteNote(@NonNull String noteId) {
-        mDummyNotes.remove(noteId);
+    public Note delete(@NonNull String noteId) {
+        return mDummyNotes.remove(noteId);
     }
 }

@@ -30,7 +30,7 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     @Override
     public void start() {
-        Note note = mNoteDataSource.getNote(mNoteId);
+        Note note = mNoteDataSource.get(mNoteId);
         if (note != null) {
             showNote(note);
         } else {
@@ -62,7 +62,7 @@ public class NoteDetailPresenter implements NoteDetailContract.Presenter {
 
     @Override
     public void onDeleteClicked() {
-        mNoteDataSource.deleteNote(mNoteId);
+        mNoteDataSource.delete(mNoteId);
         mNoteDetailView.showNotesView();
     }
 

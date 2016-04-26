@@ -39,7 +39,7 @@ public class AddEditNotePresenterTest {
     @Test
     public void populatesFieldsFromDataSourceWhenEditingNote() {
         // Given a mocked note and a presenter created for that note
-        given(mNoteDataSource.getNote(NOTE.getId())).willReturn(NOTE);
+        given(mNoteDataSource.get(NOTE.getId())).willReturn(NOTE);
         mAddEditNotePresenter = new AddEditNotePresenter(mNoteDataSource, NOTE.getId(),
                 mAddEditNoteView);
 
@@ -73,7 +73,7 @@ public class AddEditNotePresenterTest {
         mAddEditNotePresenter.onSaveClicked(TITLE_TEST_SAVE, TEXT_TEST_SAVE);
 
         // Then a new note is saved to the data source, and the view notified
-        verify(mNoteDataSource).saveNote(any(Note.class));
+        verify(mNoteDataSource).save(any(Note.class));
         verify(mAddEditNoteView).showNotesView();
     }
 
@@ -87,7 +87,7 @@ public class AddEditNotePresenterTest {
         mAddEditNotePresenter.onSaveClicked(TITLE_TEST_SAVE, TEXT_TEST_SAVE);
 
         // Then the existing note is saved, and the view notified
-        verify(mNoteDataSource).saveNote(any(Note.class));
+        verify(mNoteDataSource).save(any(Note.class));
         verify(mAddEditNoteView).showNotesView();
     }
 

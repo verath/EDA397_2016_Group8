@@ -36,7 +36,7 @@ public class NoteDetailPresenterTest {
     @Test
     public void getsNoteFromDataSourceAndShowsInView() {
         // Given a stubbed note data source and presenter initialized with that id
-        given(mNoteDataSource.getNote(NOTE.getId())).willReturn(NOTE);
+        given(mNoteDataSource.get(NOTE.getId())).willReturn(NOTE);
         mNoteDetailPresenter = new NoteDetailPresenter(mNoteDataSource, NOTE.getId(), mNoteDetailView);
 
         // When the presenter is started
@@ -68,7 +68,7 @@ public class NoteDetailPresenterTest {
         mNoteDetailPresenter.onDeleteClicked();
 
         // Then the note is deleted from the data source and the view is notified
-        verify(mNoteDataSource).deleteNote(NOTE.getId());
+        verify(mNoteDataSource).delete(NOTE.getId());
         verify(mNoteDetailView).showNotesView();
     }
 

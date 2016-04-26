@@ -32,7 +32,7 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
     @Override
     public void start() {
         if (mNoteId != null) {
-            Note note = mNoteDataSource.getNote(mNoteId);
+            Note note = mNoteDataSource.get(mNoteId);
             if (note == null) {
                 mView.showMissingNote();
             } else {
@@ -62,7 +62,7 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter {
         if (note.isEmpty()) {
             mView.showEmptyNoteError();
         } else {
-            mNoteDataSource.saveNote(note);
+            mNoteDataSource.save(note);
             mView.showNotesView();
         }
     }

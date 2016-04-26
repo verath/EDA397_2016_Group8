@@ -38,7 +38,7 @@ public class NotesPresenterTest {
         mNotesPresenter.start();
 
         // Then repository is queried and notes are shown in the view
-        verify(mNoteDataSource).getNotes();
+        verify(mNoteDataSource).getAll();
         verify(mNotesView).showNotes(anyListOf(Note.class));
     }
 

@@ -34,7 +34,7 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     @Override
     public void start() {
-        List<Note> notes = mNoteDataSource.getNotes();
+        List<Note> notes = mNoteDataSource.getAll();
         // Sort by id, as the list returned is not ordered.
         // TODO: Sort by a property that is more suited for sorting
         Collections.sort(notes, new Comparator<Note>() {
