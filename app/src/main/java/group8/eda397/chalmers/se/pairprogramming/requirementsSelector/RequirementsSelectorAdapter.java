@@ -12,6 +12,10 @@ import java.util.List;
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.requirements.Requirement;
 
+/**
+ * A RecyclerView adapter for requirements, showing each note as a custom
+ * view.
+ */
 public class RequirementsSelectorAdapter extends RecyclerView.Adapter<RequirementsSelectorAdapter.ViewHolder> {
 
     private List<Requirement> requirements;
@@ -21,6 +25,12 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
         void onRequirementClick(Requirement requirement);
     }
 
+    /**
+     * Creates a new RequirementsSelectorAdapter displaying pdf files in a the assets folder.
+     *
+     * @param requirements                 The initial list of requirement files to display (empty when called).
+     * @param requirementItemClickListener The listener for when a requirement is clicked.
+     */
     public RequirementsSelectorAdapter(@NonNull List<Requirement> requirements, RequirementItemClickListener requirementItemClickListener) {
         this.requirements = requirements;
         this.requirementItemClickListener = requirementItemClickListener;
@@ -47,6 +57,12 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
         });
     }
 
+    /**
+     * Replaces the list of requirements displayed in the list by a new
+     * list of requirements.
+     *
+     * @param requirements The new list of requirements to be displayed.
+     */
     public void replaceData(@NonNull List<Requirement> requirements) {
         this.requirements = requirements;
         notifyDataSetChanged();

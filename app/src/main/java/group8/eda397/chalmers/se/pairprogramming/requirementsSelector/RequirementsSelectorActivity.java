@@ -8,7 +8,7 @@ import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
- * Created by mysko1 on 2016-04-21.
+ * Activity for selecting Requirements.
  */
 public class RequirementsSelectorActivity extends BaseActivity {
 
