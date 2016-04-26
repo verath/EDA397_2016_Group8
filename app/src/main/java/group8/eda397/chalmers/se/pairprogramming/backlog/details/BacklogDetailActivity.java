@@ -44,9 +44,9 @@ public class BacklogDetailActivity extends BaseActivity {
         super.onSaveInstanceState(outState);
     }
 
-    public static Intent getCallingIntent(Context context, BacklogItem item) {
+    public static Intent getCallingIntent(Context context, String itemId) {
         Intent intent = new Intent(context, BacklogDetailActivity.class);
-        intent.putExtra(ARG_ITEM_ID, item.getId());
+        intent.putExtra(ARG_ITEM_ID, itemId);
         return intent;
     }
 }

@@ -7,9 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogContract;
+import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,5 +59,21 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     @Override
     public void showBacklog() {
 
+    }
+
+    @Override
+    public void showBacklogItem(BacklogItem backlogItem) {
+        TextView title = (TextView) getView().findViewById(R.id.backlog_detail_title);
+        if (title != null) {
+            title.setText(backlogItem.getTitle());
+        }
+        TextView status = (TextView) getView().findViewById(R.id.backlog_detail_status);
+        if (status != null) {
+            status.setText(backlogItem.getStatus().getName(getContext()));
+        }
+        TextView text = (TextView) getView().findViewById(R.id.backlog_detail_text);
+        if (text != null) {
+            text.setText(backlogItem.getContent());
+        }
     }
 }

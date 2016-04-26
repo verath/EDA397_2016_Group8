@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
 import group8.eda397.chalmers.se.pairprogramming.BaseView;
+import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 public interface BacklogDetailContract {
 
@@ -20,6 +21,13 @@ public interface BacklogDetailContract {
          * Navigates back to the backlog.
          */
         void showBacklog();
+
+        /**
+         * Shows the specified item
+         *
+         * @param backlogItem the backlog item to be displayed
+         */
+        void showBacklogItem(BacklogItem backlogItem);
     }
 
     interface Presenter extends BasePresenter {

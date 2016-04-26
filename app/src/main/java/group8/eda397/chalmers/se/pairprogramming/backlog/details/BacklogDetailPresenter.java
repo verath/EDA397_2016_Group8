@@ -21,6 +21,8 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
 
     @Override
     public void start() {
+        mDetailView.showBacklogItem(mDataSource.get(mBacklogItemId));
+
 
     }
 
