@@ -28,7 +28,6 @@ public class BacklogDetailsPresenterTest {
     @Mock
     private BacklogDetailContract.View mBacklogDetailView;
 
-    @Mock
     private BacklogDetailPresenter mBacklogDetailPresenter;
 
     private final BacklogItem ITEM = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG);

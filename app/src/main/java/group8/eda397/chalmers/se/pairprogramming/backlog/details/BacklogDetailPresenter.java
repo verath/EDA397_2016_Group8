@@ -33,9 +33,4 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
     public void onEditItemClicked() {
 
     }
-
-    @Override
-    public void onEditItemResult(int result) {
-
-    }
 }

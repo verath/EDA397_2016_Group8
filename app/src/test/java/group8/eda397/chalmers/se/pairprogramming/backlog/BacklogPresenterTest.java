@@ -25,7 +25,6 @@ public class BacklogPresenterTest {
     @Mock
     private BacklogContract.View mBacklogView;
 
-    @Mock
     private BacklogPresenter mBacklogPresenter;
 
     @Before
