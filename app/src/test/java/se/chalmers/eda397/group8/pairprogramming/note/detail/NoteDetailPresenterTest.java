@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.note.notedetail;
+package se.chalmers.eda397.group8.pairprogramming.note.detail;
 
 import org.junit.Rule;
 import org.junit.Test;

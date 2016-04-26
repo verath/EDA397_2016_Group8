@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="se.chalmers.eda397.group8.pairprogramming.note.notedetail.NoteDetailActivity">
+    tools:context="se.chalmers.eda397.group8.pairprogramming.note.detail.NoteDetailActivity">
 
     <include layout="@layout/appbar_toolbar" />
 

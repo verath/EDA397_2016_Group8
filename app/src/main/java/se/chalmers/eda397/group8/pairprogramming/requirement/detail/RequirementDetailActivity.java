@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirement.requirementdetail;
+package se.chalmers.eda397.group8.pairprogramming.requirement.detail;
 
 import android.content.Context;
 import android.content.Intent;

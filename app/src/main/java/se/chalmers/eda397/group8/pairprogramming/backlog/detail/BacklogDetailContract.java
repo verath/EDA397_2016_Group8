@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.backlog.details;
+package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
 import se.chalmers.eda397.group8.pairprogramming.BasePresenter;
 import se.chalmers.eda397.group8.pairprogramming.BaseView;

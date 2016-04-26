@@ -22,7 +22,7 @@
 
         <!-- Requirements -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.requirement.requirementdetail.RequirementDetailActivity"
+            android:name="se.chalmers.eda397.group8.pairprogramming.requirement.detail.RequirementDetailActivity"
             android:label="@string/title_activity_requirements"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -37,11 +37,11 @@
             android:label="@string/title_activity_notes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.note.notedetail.NoteDetailActivity"
+            android:name="se.chalmers.eda397.group8.pairprogramming.note.detail.NoteDetailActivity"
             android:label="@string/title_activity_note_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.note.addeditnote.AddEditNoteActivity"
+            android:name="se.chalmers.eda397.group8.pairprogramming.note.addedit.AddEditNoteActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
 
@@ -55,7 +55,7 @@
             android:label="@string/title_activity_add_backlog"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name="se.chalmers.eda397.group8.pairprogramming.backlog.details.BacklogDetailActivity"
+        <activity android:name="se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity"
             android:label="@string/title_activity_details_backlog"
             android:theme="@style/AppTheme.NoActionBar"/>
 

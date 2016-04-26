@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.backlog.details;
+package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
 
 import android.os.Bundle;

@@ -17,8 +17,8 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.note.Note;
-import se.chalmers.eda397.group8.pairprogramming.note.addeditnote.AddEditNoteActivity;
-import se.chalmers.eda397.group8.pairprogramming.note.notedetail.NoteDetailActivity;
+import se.chalmers.eda397.group8.pairprogramming.note.addedit.AddEditNoteActivity;
+import se.chalmers.eda397.group8.pairprogramming.note.detail.NoteDetailActivity;
 
 /**
  * The implementation of the Notes View interface, i.e. it is a

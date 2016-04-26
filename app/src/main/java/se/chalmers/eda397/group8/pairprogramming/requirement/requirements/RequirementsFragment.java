@@ -17,7 +17,7 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.requirement.Requirement;
-import se.chalmers.eda397.group8.pairprogramming.requirement.requirementdetail.RequirementDetailActivity;
+import se.chalmers.eda397.group8.pairprogramming.requirement.detail.RequirementDetailActivity;
 
 /**
  * Created by mysko1 on 2016-04-21.
