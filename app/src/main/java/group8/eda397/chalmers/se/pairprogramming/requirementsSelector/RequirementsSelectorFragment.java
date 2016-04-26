@@ -63,9 +63,7 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
 
     @Override
     public void displayRequirement(Requirement requirement) {
-        Intent intent = RequirementsActivity.getCallingIntent(getContext());
-        // TODO: Find better solution, maybe put/pass the Requirement object?
-        intent.putExtra("fileName", requirement.getFilePath());
+        Intent intent = RequirementsActivity.getCallingIntent(getContext(), requirement);
         startActivity(intent);
     }
 
