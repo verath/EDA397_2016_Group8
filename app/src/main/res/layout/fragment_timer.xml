@@ -27,7 +27,7 @@
         android:textColor="#616161"
         android:textSize="30sp" />
 
-    <group8.eda397.chalmers.se.pairprogramming.timer.NumberPicker
+    <se.chalmers.eda397.group8.pairprogramming.timer.NumberPicker
         android:id="@+id/minute_picker"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

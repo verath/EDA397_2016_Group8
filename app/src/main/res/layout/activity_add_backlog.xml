@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".backlog.add.AddBacklogActivity">
+    tools:context="se.chalmers.eda397.group8.pairprogramming.backlog.add.AddBacklogActivity">
 
     <include layout="@layout/appbar_toolbar" />
 
