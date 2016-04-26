@@ -129,6 +129,11 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
         mPresenter.onBacklogItemClicked(backlogItem);
     }
 
+    @Override
+    public void showBacklogItemDetails(String backlogItemId) {
+
+    }
+
     private int backlogStatusToTabIndex(BacklogItem.Status status) {
         for (int i = 0; i < TAB_STATUSES.length; i++) {
             if (status == TAB_STATUSES[i]) {

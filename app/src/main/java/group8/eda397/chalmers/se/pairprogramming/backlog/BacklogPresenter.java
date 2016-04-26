@@ -40,7 +40,7 @@ public class BacklogPresenter implements BacklogContract.Presenter {
 
     @Override
     public void onBacklogItemClicked(BacklogItem backlogItem) {
-
+        mBacklogView.showBacklogItemDetails(backlogItem.getId());
     }
 
 }

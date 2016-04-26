@@ -13,6 +13,8 @@ public interface BacklogContract {
         void showBacklogForStatus(BacklogItem.Status status, List<BacklogItem> items);
 
         void showAddBacklogItemView();
+
+        void showBacklogItemDetails(String backlogItemId);
     }
 
     interface Presenter extends BasePresenter {
