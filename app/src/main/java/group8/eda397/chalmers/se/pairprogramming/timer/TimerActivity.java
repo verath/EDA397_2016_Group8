@@ -1,11 +1,17 @@
 package group8.eda397.chalmers.se.pairprogramming.timer;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 public class TimerActivity extends BaseActivity {
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, TimerActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

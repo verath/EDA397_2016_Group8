@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener onNavigateToTimer = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, TimerActivity.class);
-            startActivity(intent);
+            Intent launchIntent = TimerActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
         }
     };
 }

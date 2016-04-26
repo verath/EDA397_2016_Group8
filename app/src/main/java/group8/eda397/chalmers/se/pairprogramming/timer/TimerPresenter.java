@@ -7,8 +7,12 @@ import group8.eda397.chalmers.se.pairprogramming.timer.TimerContract.Presenter;
  */
 public class TimerPresenter implements Presenter {
 
+    private static final int STATE_TIMER_NOT_STARTED = 0x1;
+    private static final int STATE_TIMER_STARTED = 0x2;
+    private static final int STATE_TIMER_FINISHED = 0x3;
+
     private final TimerContract.View mTimerView;
-    private boolean mFinished = true;
+    private int mState;
 
     public TimerPresenter(TimerContract.View timerView) {
         mTimerView = timerView;
@@ -17,19 +21,25 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void start() {
+        mState = STATE_TIMER_NOT_STARTED;
         // Disable until TimerService is connected
         mTimerView.disableTimerInput();
     }
 
     @Override
-    public void onTimerServiceConnected(boolean finished, long millisUntilFinished) {
-        mFinished = finished;
-        if (!finished) {
-            mTimerView.displayRemainingTime(millisUntilFinished);
-            mTimerView.showStopButton();
-        } else {
-            mTimerView.showStartButton();
+    public void onTimerServiceConnected(int timerState, long millisUntilFinished) {
+        // Sync state with the TimerService.
+        switch (timerState) {
+            case TimerService.STATE_TIMER_STARTED:
+                mState = STATE_TIMER_STARTED;
+                showTimerStarted(millisUntilFinished);
+                break;
+            case TimerService.STATE_TIMER_FINISHED:
+                mState = STATE_TIMER_FINISHED;
+                showTimerFinished();
+                break;
         }
+
         mTimerView.enableTimerInput();
     }
 
@@ -40,14 +50,13 @@ public class TimerPresenter implements Presenter {
 
     @Override
     public void onTimerFinish() {
-        mFinished = true;
-        mTimerView.displayFinished();
-        mTimerView.showStartButton();
+        mState = STATE_TIMER_FINISHED;
+        showTimerFinished();
     }
 
     @Override
     public void onStartStopButtonClick(long millisInFuture) {
-        if (mFinished) {
+        if (mState != STATE_TIMER_STARTED) {
             startTimer(millisInFuture);
         } else {
             stopTimer();
@@ -55,14 +64,24 @@ public class TimerPresenter implements Presenter {
     }
 
     private void startTimer(long millisInFuture) {
-        mFinished = false;
+        mState = STATE_TIMER_STARTED;
         mTimerView.startTimer(millisInFuture);
-        mTimerView.showStopButton();
+        showTimerStarted(millisInFuture);
     }
 
     private void stopTimer() {
-        mFinished = true;
+        mState = STATE_TIMER_NOT_STARTED;
         mTimerView.stopTimer();
+        mTimerView.showStartButton();
+    }
+
+    private void showTimerStarted(long millisInFuture) {
+        mTimerView.showStopButton();
+        mTimerView.displayRemainingTime(millisInFuture);
+    }
+
+    private void showTimerFinished() {
+        mTimerView.displayFinished();
         mTimerView.showStartButton();
     }
 }
