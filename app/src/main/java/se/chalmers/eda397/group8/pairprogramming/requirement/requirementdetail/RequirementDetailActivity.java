@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirements;
+package se.chalmers.eda397.group8.pairprogramming.requirement.requirementdetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,11 +6,12 @@ import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
+import se.chalmers.eda397.group8.pairprogramming.requirement.Requirement;
 
 /**
  * The activity for viewing requirements.
  */
-public class RequirementsActivity extends BaseActivity {
+public class RequirementDetailActivity extends BaseActivity {
 
     private final static String INTENT_EXTRA_PARAM_FILE_NAME = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_FILE_NAME";
     private Requirement mRequirement;
@@ -18,22 +19,22 @@ public class RequirementsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requirements);
+        setContentView(R.layout.activity_requirement_detail);
 
-        RequirementsFragment requirementsFragment;
+        RequirementDetailFragment detailFragment;
         if (savedInstanceState == null) {
             mRequirement = new Requirement(getIntent().getStringExtra(INTENT_EXTRA_PARAM_FILE_NAME));
-            requirementsFragment = RequirementsFragment.newInstance();
-            addFragment(R.id.frameContainer, requirementsFragment);
+            detailFragment = RequirementDetailFragment.newInstance();
+            addFragment(R.id.frameContainer, detailFragment);
         } else {
             mRequirement = new Requirement(savedInstanceState.getString(INTENT_EXTRA_PARAM_FILE_NAME));
-            requirementsFragment = (RequirementsFragment) findFragment(R.id.frameContainer);
+            detailFragment = (RequirementDetailFragment) findFragment(R.id.frameContainer);
         }
-        new RequirementsPresenter(requirementsFragment, mRequirement);
+        new RequirementDetailPresenter(detailFragment, mRequirement);
     }
 
     public static Intent getCallingIntent(Context context, Requirement requirement) {
-        Intent intent = new Intent(context, RequirementsActivity.class);
+        Intent intent = new Intent(context, RequirementDetailActivity.class);
         intent.putExtra(INTENT_EXTRA_PARAM_FILE_NAME, requirement.getFilePath());
         return intent;
     }

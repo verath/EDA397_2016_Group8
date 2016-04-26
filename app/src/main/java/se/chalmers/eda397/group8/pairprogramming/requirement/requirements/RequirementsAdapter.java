@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirementsSelector;
+package se.chalmers.eda397.group8.pairprogramming.requirement.requirements;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +10,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
+import se.chalmers.eda397.group8.pairprogramming.requirement.Requirement;
 
 /**
  * A RecyclerView adapter for requirements, showing each note as a custom
  * view.
  */
-public class RequirementsSelectorAdapter extends RecyclerView.Adapter<RequirementsSelectorAdapter.ViewHolder> {
+public class RequirementsAdapter extends RecyclerView.Adapter<RequirementsAdapter.ViewHolder> {
 
     private List<Requirement> mRequirements;
     private final RequirementItemClickListener mRequirementItemClickListener;
@@ -26,12 +26,12 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
     }
 
     /**
-     * Creates a new RequirementsSelectorAdapter displaying pdf files in a the assets folder.
+     * Creates a new RequirementsAdapter displaying pdf files in a the assets folder.
      *
      * @param requirements                 The initial list of requirement files to display (empty when called).
      * @param requirementItemClickListener The listener for when a requirement is clicked.
      */
-    public RequirementsSelectorAdapter(@NonNull List<Requirement> requirements, RequirementItemClickListener requirementItemClickListener) {
+    public RequirementsAdapter(@NonNull List<Requirement> requirements, RequirementItemClickListener requirementItemClickListener) {
         mRequirements = requirements;
         mRequirementItemClickListener = requirementItemClickListener;
     }
@@ -50,8 +50,8 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (RequirementsSelectorAdapter.this.mRequirementItemClickListener != null) {
-                    RequirementsSelectorAdapter.this.mRequirementItemClickListener.onRequirementClick(requirement);
+                if (RequirementsAdapter.this.mRequirementItemClickListener != null) {
+                    RequirementsAdapter.this.mRequirementItemClickListener.onRequirementClick(requirement);
                 }
             }
         });

@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirementsSelector;
+package se.chalmers.eda397.group8.pairprogramming.requirement.requirements;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,31 +16,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
-import se.chalmers.eda397.group8.pairprogramming.requirements.RequirementsActivity;
+import se.chalmers.eda397.group8.pairprogramming.requirement.Requirement;
+import se.chalmers.eda397.group8.pairprogramming.requirement.requirementdetail.RequirementDetailActivity;
 
 /**
  * Created by mysko1 on 2016-04-21.
  */
-public class RequirementsSelectorFragment extends Fragment implements RequirementsSelectorContract.View {
+public class RequirementsFragment extends Fragment implements RequirementsContract.View {
 
-    private RequirementsSelectorContract.Presenter mPresenter;
-    private RequirementsSelectorAdapter mAdapter;
+    private RequirementsContract.Presenter mPresenter;
+    private RequirementsAdapter mAdapter;
 
-    public static RequirementsSelectorFragment newInstance() {
-        return new RequirementsSelectorFragment();
+    public static RequirementsFragment newInstance() {
+        return new RequirementsFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new RequirementsSelectorAdapter(new ArrayList<Requirement>(), mOnRequirementClickListener);
+        mAdapter = new RequirementsAdapter(new ArrayList<Requirement>(), mOnRequirementClickListener);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_reqselector, container, false);
+        View view = inflater.inflate(R.layout.fragment_requirements, container, false);
 
         // Setup the recycler view
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.requirements_list);
@@ -63,7 +63,7 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
 
     @Override
     public void displayRequirement(Requirement requirement) {
-        Intent intent = RequirementsActivity.getCallingIntent(getContext(), requirement);
+        Intent intent = RequirementDetailActivity.getCallingIntent(getContext(), requirement);
         startActivity(intent);
     }
 
@@ -79,16 +79,16 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
     }
 
     @Override
-    public void setPresenter(@NonNull RequirementsSelectorContract.Presenter presenter) {
+    public void setPresenter(@NonNull RequirementsContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
-    private final RequirementsSelectorAdapter.RequirementItemClickListener mOnRequirementClickListener =
-            new RequirementsSelectorAdapter.RequirementItemClickListener() {
+    private final RequirementsAdapter.RequirementItemClickListener mOnRequirementClickListener =
+            new RequirementsAdapter.RequirementItemClickListener() {
                 @Override
                 public void onRequirementClick(Requirement requirement) {
-                    if (RequirementsSelectorFragment.this.mPresenter != null && requirement != null) {
-                        RequirementsSelectorFragment.this.mPresenter.onRequirementClicked(requirement);
+                    if (RequirementsFragment.this.mPresenter != null && requirement != null) {
+                        RequirementsFragment.this.mPresenter.onRequirementClicked(requirement);
                     }
                 }
 

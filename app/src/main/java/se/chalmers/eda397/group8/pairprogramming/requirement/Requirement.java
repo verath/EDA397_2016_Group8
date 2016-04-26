@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirements;
+package se.chalmers.eda397.group8.pairprogramming.requirement;
 
 import android.support.annotation.NonNull;
 
