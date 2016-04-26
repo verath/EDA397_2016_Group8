@@ -16,14 +16,16 @@
     <string name="add_edit_note_title_hint">Title</string>
     <string name="add_edit_note_text_hint">Note</string>
     <string name="add_edit_note_empty_error">Both Title and Note can not be empty!</string>
-    <string name="title_activity_backlog">BacklogActivity</string>
 
+    <string name="title_activity_backlog">BacklogActivity</string>
     <string name="title_activity_add_backlog">Add backlog item</string>
+    <string name="title_activity_details_backlog">Item Details</string>
     <string name="missing_title">Missing title</string>
     <string name="missing_description">Missing description</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
     <string name="backlog">Backlog</string>
     <string name="ongoing">Ongoing</string>
     <string name="ready_for_test">Ready for test</string>

@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".backlog.BacklogActivity">
+    tools:context="group8.eda397.chalmers.se.pairprogramming.backlog.details.BacklogDetailActivity">
 
-    <include layout="@layout/tabbed_toolbar" />
-
+    <include layout="@layout/appbar_toolbar" />
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/contentFrame"
         android:layout_width="match_parent"
@@ -16,11 +14,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/backlog_add_fab"
+        android:id="@+id/fab_edit_backlog_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_white_24dp" />
+        android:src="@drawable/ic_edit_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
