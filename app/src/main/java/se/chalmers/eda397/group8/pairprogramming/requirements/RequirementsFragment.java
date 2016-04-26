@@ -16,12 +16,12 @@ import group8.eda397.chalmers.se.pairprogramming.R;
 
 public class RequirementsFragment extends Fragment implements RequirementsContract.View {
 
-    private RequirementsContract.Presenter presenter;
-    private PDFView pdfView;
+    private RequirementsContract.Presenter mPresenter;
+    private PDFView mPdfView;
 
     @Override
     public void setPresenter(@NonNull RequirementsContract.Presenter presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
     }
 
     public static RequirementsFragment newInstance() {
@@ -33,7 +33,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_requirements, container, false);
 
-        pdfView = (PDFView) view.findViewById(R.id.pdfView);
+        mPdfView = (PDFView) view.findViewById(R.id.pdfView);
 
         return view;
     }
@@ -41,7 +41,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        mPresenter.start();
     }
 
     /**
@@ -51,7 +51,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
      */
     @Override
     public void showPDF(String assetName) {
-        pdfView.fromAsset(assetName)
+        mPdfView.fromAsset(assetName)
                 .defaultPage(1)
                 .enableSwipe(true)
                 .showMinimap(true)
@@ -65,7 +65,7 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
      */
     @Override
     public void showPDF(File file) {
-        pdfView.fromFile(file)
+        mPdfView.fromFile(file)
                 .defaultPage(1)
                 .enableSwipe(true)
                 .showMinimap(true)

@@ -24,8 +24,8 @@ import se.chalmers.eda397.group8.pairprogramming.requirements.RequirementsActivi
  */
 public class RequirementsSelectorFragment extends Fragment implements RequirementsSelectorContract.View {
 
-    private RequirementsSelectorContract.Presenter presenter;
-    private RequirementsSelectorAdapter adapter;
+    private RequirementsSelectorContract.Presenter mPresenter;
+    private RequirementsSelectorAdapter mAdapter;
 
     public static RequirementsSelectorFragment newInstance() {
         return new RequirementsSelectorFragment();
@@ -34,7 +34,7 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new RequirementsSelectorAdapter(new ArrayList<Requirement>(), onRequirementClickListener);
+        mAdapter = new RequirementsSelectorAdapter(new ArrayList<Requirement>(), mOnRequirementClickListener);
     }
 
     @Nullable
@@ -46,7 +46,7 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.requirements_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -54,11 +54,11 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
+        mPresenter.start();
     }
 
     public void showRequirements(List<Requirement> requirements) {
-        adapter.replaceData(requirements);
+        mAdapter.replaceData(requirements);
     }
 
     @Override
@@ -80,15 +80,15 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
 
     @Override
     public void setPresenter(@NonNull RequirementsSelectorContract.Presenter presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
     }
 
-    private final RequirementsSelectorAdapter.RequirementItemClickListener onRequirementClickListener =
+    private final RequirementsSelectorAdapter.RequirementItemClickListener mOnRequirementClickListener =
             new RequirementsSelectorAdapter.RequirementItemClickListener() {
                 @Override
                 public void onRequirementClick(Requirement requirement) {
-                    if (RequirementsSelectorFragment.this.presenter != null && requirement != null) {
-                        RequirementsSelectorFragment.this.presenter.onRequirementClicked(requirement);
+                    if (RequirementsSelectorFragment.this.mPresenter != null && requirement != null) {
+                        RequirementsSelectorFragment.this.mPresenter.onRequirementClicked(requirement);
                     }
                 }
 

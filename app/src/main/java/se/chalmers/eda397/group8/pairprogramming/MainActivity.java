@@ -27,41 +27,41 @@ public class MainActivity extends AppCompatActivity {
         // Setup navigation buttons
         Button navigateToNotesButton = (Button) findViewById(R.id.btn_notes);
         if (navigateToNotesButton != null) {
-            navigateToNotesButton.setOnClickListener(onNavigateToNotes);
+            navigateToNotesButton.setOnClickListener(mOnNavigateToNotes);
         }
 
         Button navigateToBacklogButton = (Button) findViewById(R.id.show_backlog_button);
         if (navigateToBacklogButton != null) {
-            navigateToBacklogButton.setOnClickListener(onNavigateToBacklog);
+            navigateToBacklogButton.setOnClickListener(mOnNavigateToBacklog);
         }
 
         Button requirementsBtn = (Button) findViewById(R.id.btn_requirements);
         if (requirementsBtn != null) {
-            requirementsBtn.setOnClickListener(onShowRequirements);
+            requirementsBtn.setOnClickListener(mOnShowRequirements);
         }
 
         Button navigateToTimerButton = (Button) findViewById(R.id.btn_timer);
         if (navigateToTimerButton != null) {
-            navigateToTimerButton.setOnClickListener(onNavigateToTimer);
+            navigateToTimerButton.setOnClickListener(mOnNavigateToTimer);
         }
 
     }
 
-    private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
+    private final View.OnClickListener mOnNavigateToNotes = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent launchIntent = NotesActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };
-    private final View.OnClickListener onNavigateToBacklog = new View.OnClickListener() {
+    private final View.OnClickListener mOnNavigateToBacklog = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent launchIntent = BacklogActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };
-    private final View.OnClickListener onShowRequirements = new View.OnClickListener() {
+    private final View.OnClickListener mOnShowRequirements = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent launchIntent = RequirementsSelectorActivity.getCallingIntent(MainActivity.this);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener onNavigateToTimer = new View.OnClickListener() {
+    private final View.OnClickListener mOnNavigateToTimer = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent launchIntent = TimerActivity.getCallingIntent(MainActivity.this);

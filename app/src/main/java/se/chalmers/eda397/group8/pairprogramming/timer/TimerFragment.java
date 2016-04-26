@@ -42,7 +42,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
         mTimerTime = (TextView) view.findViewById(R.id.timer_fragment_timer);
 
         mStartStopButton = (Button) view.findViewById(R.id.start_stop_btn_timer);
-        mStartStopButton.setOnClickListener(onStartStopButtonClick);
+        mStartStopButton.setOnClickListener(mOnStartStopButtonClick);
 
         mMinutePicker = (NumberPicker) view.findViewById(R.id.minute_picker);
         mMinutePicker.setMinValue(1);
@@ -152,7 +152,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
         mPresenter.onTimerFinish();
     }
 
-    private final View.OnClickListener onStartStopButtonClick = new View.OnClickListener() {
+    private final View.OnClickListener mOnStartStopButtonClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {

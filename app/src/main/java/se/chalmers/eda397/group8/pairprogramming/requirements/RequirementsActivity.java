@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 
 /**
  * The activity for viewing requirements.
@@ -13,7 +13,7 @@ import group8.eda397.chalmers.se.pairprogramming.R;
 public class RequirementsActivity extends BaseActivity {
 
     private final static String INTENT_EXTRA_PARAM_FILE_NAME = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_FILE_NAME";
-    private Requirement requirement;
+    private Requirement mRequirement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +22,14 @@ public class RequirementsActivity extends BaseActivity {
 
         RequirementsFragment requirementsFragment;
         if (savedInstanceState == null) {
-            requirement = new Requirement(getIntent().getStringExtra(INTENT_EXTRA_PARAM_FILE_NAME));
+            mRequirement = new Requirement(getIntent().getStringExtra(INTENT_EXTRA_PARAM_FILE_NAME));
             requirementsFragment = RequirementsFragment.newInstance();
             addFragment(R.id.frameContainer, requirementsFragment);
         } else {
-            requirement = new Requirement(savedInstanceState.getString(INTENT_EXTRA_PARAM_FILE_NAME));
+            mRequirement = new Requirement(savedInstanceState.getString(INTENT_EXTRA_PARAM_FILE_NAME));
             requirementsFragment = (RequirementsFragment) findFragment(R.id.frameContainer);
         }
-        new RequirementsPresenter(requirementsFragment, requirement);
+        new RequirementsPresenter(requirementsFragment, mRequirement);
     }
 
     public static Intent getCallingIntent(Context context, Requirement requirement) {
@@ -41,7 +41,7 @@ public class RequirementsActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putString(INTENT_EXTRA_PARAM_FILE_NAME, requirement.getFilePath());
+            outState.putString(INTENT_EXTRA_PARAM_FILE_NAME, mRequirement.getFilePath());
         }
         super.onSaveInstanceState(outState);
     }

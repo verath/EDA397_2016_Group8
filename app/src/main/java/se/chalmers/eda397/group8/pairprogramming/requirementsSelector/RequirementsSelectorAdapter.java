@@ -18,8 +18,8 @@ import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
  */
 public class RequirementsSelectorAdapter extends RecyclerView.Adapter<RequirementsSelectorAdapter.ViewHolder> {
 
-    private List<Requirement> requirements;
-    private final RequirementItemClickListener requirementItemClickListener;
+    private List<Requirement> mRequirements;
+    private final RequirementItemClickListener mRequirementItemClickListener;
 
     public interface RequirementItemClickListener {
         void onRequirementClick(Requirement requirement);
@@ -32,8 +32,8 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
      * @param requirementItemClickListener The listener for when a requirement is clicked.
      */
     public RequirementsSelectorAdapter(@NonNull List<Requirement> requirements, RequirementItemClickListener requirementItemClickListener) {
-        this.requirements = requirements;
-        this.requirementItemClickListener = requirementItemClickListener;
+        mRequirements = requirements;
+        mRequirementItemClickListener = requirementItemClickListener;
     }
 
     @Override
@@ -45,13 +45,13 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Requirement requirement = requirements.get(position);
+        final Requirement requirement = mRequirements.get(position);
         holder.fileName.setText(requirement.getFilePath());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (RequirementsSelectorAdapter.this.requirementItemClickListener != null) {
-                    RequirementsSelectorAdapter.this.requirementItemClickListener.onRequirementClick(requirement);
+                if (RequirementsSelectorAdapter.this.mRequirementItemClickListener != null) {
+                    RequirementsSelectorAdapter.this.mRequirementItemClickListener.onRequirementClick(requirement);
                 }
             }
         });
@@ -64,13 +64,13 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
      * @param requirements The new list of requirements to be displayed.
      */
     public void replaceData(@NonNull List<Requirement> requirements) {
-        this.requirements = requirements;
+        mRequirements = requirements;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return requirements.size();
+        return mRequirements.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

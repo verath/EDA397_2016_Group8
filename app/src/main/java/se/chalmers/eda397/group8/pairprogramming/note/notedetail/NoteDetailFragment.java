@@ -47,7 +47,7 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
         // Setup the floating action button
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_note);
         if (fab != null) {
-            fab.setOnClickListener(fabEditNoteClickListener);
+            fab.setOnClickListener(mFabEditNoteClickListener);
         }
 
         return view;
@@ -129,7 +129,7 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
         // TODO: show some message saying this note is invalid?
     }
 
-    private final View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mFabEditNoteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             mPresenter.onEditClicked();

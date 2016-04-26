@@ -41,7 +41,7 @@ public class NotesFragment extends Fragment implements NotesContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNotesAdapter = new NotesAdapter(new ArrayList<Note>(0), onNoteClickListener);
+        mNotesAdapter = new NotesAdapter(new ArrayList<Note>(0), mOnNoteClickListener);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class NotesFragment extends Fragment implements NotesContract.View {
         // Setup the add FAB
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_note);
         if (fab != null) {
-            fab.setOnClickListener(fabAddNoteClickListener);
+            fab.setOnClickListener(mFabAddNoteClickListener);
         }
 
         return view;
@@ -101,14 +101,14 @@ public class NotesFragment extends Fragment implements NotesContract.View {
         startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
     }
 
-    private final View.OnClickListener fabAddNoteClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mFabAddNoteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             NotesFragment.this.mPresenter.onAddClicked();
         }
     };
 
-    private final NotesAdapter.NoteItemClickListener onNoteClickListener = new NotesAdapter.NoteItemClickListener() {
+    private final NotesAdapter.NoteItemClickListener mOnNoteClickListener = new NotesAdapter.NoteItemClickListener() {
         @Override
         public void onNoteClick(Note clickedNote) {
             if (NotesFragment.this.mPresenter != null && clickedNote != null) {

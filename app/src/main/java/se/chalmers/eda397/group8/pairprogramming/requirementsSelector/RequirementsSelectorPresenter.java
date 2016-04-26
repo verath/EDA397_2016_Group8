@@ -10,28 +10,28 @@ import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
  */
 public class RequirementsSelectorPresenter implements RequirementsSelectorContract.Presenter {
 
-    private final RequirementsSelectorContract.View fragment;
+    private final RequirementsSelectorContract.View mView;
 
-    public RequirementsSelectorPresenter(RequirementsSelectorContract.View fragment) {
-        this.fragment = fragment;
-        fragment.setPresenter(this);
+    public RequirementsSelectorPresenter(RequirementsSelectorContract.View view) {
+        this.mView = view;
+        view.setPresenter(this);
     }
 
     @Override
     public void start() {
         List<Requirement> requirements = new ArrayList<>();
         // Only add file extensions with .pdf
-        String[] fileNames = fragment.getFileNames();
+        String[] fileNames = mView.getFileNames();
         for (String fileName : fileNames) {
             if (fileName.endsWith(".pdf")) {
                 requirements.add(new Requirement(fileName));
             }
         }
-        fragment.showRequirements(requirements);
+        mView.showRequirements(requirements);
     }
 
     @Override
     public void onRequirementClicked(Requirement requirement) {
-        fragment.displayRequirement(requirement);
+        mView.displayRequirement(requirement);
     }
 }
