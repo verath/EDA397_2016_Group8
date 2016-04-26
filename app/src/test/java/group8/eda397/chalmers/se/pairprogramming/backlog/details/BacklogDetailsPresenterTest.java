@@ -1,6 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog.details;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -58,7 +59,7 @@ public class BacklogDetailsPresenterTest {
     }
 
     @Test
-    public void clickEdit_displayEditItemView() {
+    @Ignore public void clickEdit_displayEditItemView() {
         // When the edit button is clicked:
         mBacklogDetailPresenter.onEditItemClicked();
 
