@@ -43,7 +43,9 @@
             android:name=".backlog.add.AddBacklogActivity"
             android:label="@string/title_activity_add_backlog"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".backlog.details.BacklogDetailActivity" />
+        <activity android:name=".backlog.details.BacklogDetailActivity"
+            android:label="Item Detail"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
