@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="group8.eda397.chalmers.se.pairprogramming.backlog.details.BacklogDetailActivity">
+    tools:context=".backlog.details.BacklogDetailActivity">
 
     <include layout="@layout/appbar_toolbar" />
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
