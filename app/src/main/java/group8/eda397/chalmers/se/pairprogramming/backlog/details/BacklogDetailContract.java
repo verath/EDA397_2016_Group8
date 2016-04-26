@@ -9,9 +9,17 @@ public interface BacklogDetailContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showEditView(String backlogItemId);
+
+        void showBacklog();
     }
 
     interface Presenter extends BasePresenter {
 
+        void onDeleteItemClicked();
+
+        void onEditItemClicked();
+
+        void onEditItemResult(int result);
     }
 }

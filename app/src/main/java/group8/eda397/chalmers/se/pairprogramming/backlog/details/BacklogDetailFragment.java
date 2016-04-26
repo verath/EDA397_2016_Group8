@@ -46,4 +46,14 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         super.onResume();
         mPresenter.start();
     }
+
+    @Override
+    public void showEditView(String backlogItemId) {
+
+    }
+
+    @Override
+    public void showBacklog() {
+
+    }
 }

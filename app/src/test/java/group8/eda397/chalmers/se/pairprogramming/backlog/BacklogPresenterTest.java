@@ -29,7 +29,7 @@ public class BacklogPresenterTest {
     private BacklogPresenter mBacklogPresenter;
 
     @Before
-    public void setupNotesPresenter() {
+    public void setupDetailPresenter() {
         mBacklogPresenter = new BacklogPresenter(mBacklogView, mBacklogDataSource);
     }
 
