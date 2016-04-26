@@ -13,7 +13,8 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:paddingRight="10dip"
-        android:textSize="80dp" />
+        android:paddingLeft="10dip"
+        android:textSize="80sp" />
 
     <Button
         android:id="@+id/start_stop_btn_timer"

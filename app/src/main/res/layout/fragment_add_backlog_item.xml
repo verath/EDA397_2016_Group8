@@ -29,6 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Status"
         android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:id="@+id/textView" />
 
     <Spinner
