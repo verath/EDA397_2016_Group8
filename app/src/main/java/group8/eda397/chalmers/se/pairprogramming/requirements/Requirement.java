@@ -2,8 +2,6 @@ package group8.eda397.chalmers.se.pairprogramming.requirements;
 
 import android.support.annotation.NonNull;
 
-import java.io.File;
-
 /**
  * Model class for requirement.
  */

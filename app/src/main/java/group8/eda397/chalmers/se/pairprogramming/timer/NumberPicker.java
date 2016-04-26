@@ -34,7 +34,7 @@ public class NumberPicker extends android.widget.NumberPicker {
     }
 
     private void updateView(View view) {
-        if(view instanceof EditText){
+        if (view instanceof EditText) {
             ((EditText) view).setTextSize(25);
             ((EditText) view).setTextColor(Color.parseColor("#616161"));
         }

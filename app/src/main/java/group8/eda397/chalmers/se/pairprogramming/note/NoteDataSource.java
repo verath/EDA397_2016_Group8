@@ -7,11 +7,11 @@ import java.util.List;
 
 /**
  * Entry point for accessing and manipulating note data.
- * <p>
+ * <p/>
  * Currently methods block the caller until completed. Should be extended
  * to use callbacks (or some other method) if a data source is added
  * that blocking is not acceptable for (basically anything but in-memory).
- * <p>
+ * <p/>
  * See https://github.com/googlesamples/android-architecture/tree/todo-mvp/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/data/source
  */
 public interface NoteDataSource {

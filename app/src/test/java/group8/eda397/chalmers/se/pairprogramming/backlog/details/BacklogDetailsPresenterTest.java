@@ -8,14 +8,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogContract;
-import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogPresenter;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemDataSource;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.verify;
 
 public class BacklogDetailsPresenterTest {
@@ -59,7 +55,8 @@ public class BacklogDetailsPresenterTest {
     }
 
     @Test
-    @Ignore public void clickEdit_displayEditItemView() {
+    @Ignore
+    public void clickEdit_displayEditItemView() {
         // When the edit button is clicked:
         mBacklogDetailPresenter.onEditItemClicked();
 

@@ -21,7 +21,6 @@ import java.util.List;
 import group8.eda397.chalmers.se.pairprogramming.R;
 import group8.eda397.chalmers.se.pairprogramming.backlog.add.AddBacklogActivity;
 import group8.eda397.chalmers.se.pairprogramming.backlog.details.BacklogDetailActivity;
-import group8.eda397.chalmers.se.pairprogramming.backlog.details.BacklogDetailFragment;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 public class BacklogFragment extends Fragment implements BacklogContract.View, BacklogSwipeFragment.Listener {

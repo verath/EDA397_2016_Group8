@@ -1,13 +1,7 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemDataSource;
-import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemRepository;
 
 /**
  * Created by m_cal on 2016-04-14.

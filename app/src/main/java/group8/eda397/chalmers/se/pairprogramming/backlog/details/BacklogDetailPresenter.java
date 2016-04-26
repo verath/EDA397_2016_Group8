@@ -1,8 +1,5 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog.details;
 
-import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogContract;
-import group8.eda397.chalmers.se.pairprogramming.backlog.add.AddBacklogContract;
-import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemDataSource;
 
 public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {

@@ -13,10 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import group8.eda397.chalmers.se.pairprogramming.R;
-import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogContract;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
 /**
@@ -69,7 +66,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_backlog_item_delete:
                 mPresenter.onDeleteItemClicked();
 

@@ -1,7 +1,5 @@
 package group8.eda397.chalmers.se.pairprogramming.backlog.details;
 
-import android.support.design.widget.FloatingActionButton;
-
 import group8.eda397.chalmers.se.pairprogramming.BasePresenter;
 import group8.eda397.chalmers.se.pairprogramming.BaseView;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;

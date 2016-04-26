@@ -72,7 +72,7 @@ public class BacklogItemRepository implements BacklogItemDataSource {
             if (status == item.getStatus()) {
                 items.add(item);
             }
-    }
+        }
         return items;
     }
 }

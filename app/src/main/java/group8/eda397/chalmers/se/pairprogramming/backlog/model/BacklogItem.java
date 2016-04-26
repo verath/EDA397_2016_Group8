@@ -43,9 +43,9 @@ public class BacklogItem {
     /**
      * Creates a new item with the specified title, content and status.
      *
-     * @param title the title of the item
+     * @param title   the title of the item
      * @param content the content of the item
-     * @param status the status of the item
+     * @param status  the status of the item
      */
     public BacklogItem(String title, String content, Status status) {
         this.mId = String.valueOf(sIdCounter);

@@ -2,15 +2,10 @@ package group8.eda397.chalmers.se.pairprogramming.backlog.details;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
-import group8.eda397.chalmers.se.pairprogramming.backlog.add.AddBacklogItemFragment;
-import group8.eda397.chalmers.se.pairprogramming.backlog.add.AddBacklogPresenter;
-import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
-import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemDataSource;
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItemRepository;
 
 public class BacklogDetailActivity extends BaseActivity {

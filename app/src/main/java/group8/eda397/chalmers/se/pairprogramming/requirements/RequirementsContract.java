@@ -9,6 +9,7 @@ public interface RequirementsContract {
 
     interface View extends BaseView<Presenter> {
         void showPDF(String assetName);
+
         void showPDF(File file);
     }
 
