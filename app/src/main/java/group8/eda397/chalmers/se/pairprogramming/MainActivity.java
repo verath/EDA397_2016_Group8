@@ -10,6 +10,7 @@ import android.widget.Button;
 import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogActivity;
 import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
 import group8.eda397.chalmers.se.pairprogramming.requirementsSelector.RequirementsSelectorActivity;
+import group8.eda397.chalmers.se.pairprogramming.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,14 +28,22 @@ public class MainActivity extends AppCompatActivity {
         if (navigateToNotesButton != null) {
             navigateToNotesButton.setOnClickListener(onNavigateToNotes);
         }
+
         Button navigateToBacklogButton = (Button) findViewById(R.id.show_backlog_button);
         if (navigateToBacklogButton != null) {
             navigateToBacklogButton.setOnClickListener(onNavigateToBacklog);
         }
+
         Button requirementsBtn = (Button) findViewById(R.id.btn_requirements);
         if (requirementsBtn != null) {
             requirementsBtn.setOnClickListener(onShowRequirements);
         }
+
+        Button navigateToTimerButton = (Button) findViewById(R.id.btn_timer);
+        if (navigateToTimerButton != null) {
+            navigateToTimerButton.setOnClickListener(onNavigateToTimer);
+        }
+
     }
 
     private final View.OnClickListener onNavigateToNotes = new View.OnClickListener() {
@@ -55,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent launchIntent = RequirementsSelectorActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
+        }
+    };
+
+    private final View.OnClickListener onNavigateToTimer = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent launchIntent = TimerActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };

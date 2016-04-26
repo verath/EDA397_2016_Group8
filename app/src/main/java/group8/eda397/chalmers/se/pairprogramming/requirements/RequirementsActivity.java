@@ -38,4 +38,11 @@ public class RequirementsActivity extends BaseActivity {
         return intent;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (outState != null) {
+            outState.putString(INTENT_EXTRA_PARAM_FILE_NAME, requirement.getFilePath());
+        }
+        super.onSaveInstanceState(outState);
+    }
 }
