@@ -38,6 +38,8 @@ public class TimerPresenter implements Presenter {
                 mState = STATE_TIMER_FINISHED;
                 showTimerFinished();
                 break;
+            default:
+                mState = STATE_TIMER_NOT_STARTED;
         }
 
         mTimerView.enableTimerInput();
