@@ -13,7 +13,7 @@ import java.util.Set;
 public class BacklogItemRepository implements BacklogItemDataSource {
 
     private static BacklogItemRepository sInstance;
-    private final Map<String, BacklogItem> mBacklog = new HashMap<String, BacklogItem>();
+    private final Map<String, BacklogItem> mBacklog = new HashMap<>();
 
     private BacklogItemRepository() {
         mBacklog.clear();
@@ -52,7 +52,7 @@ public class BacklogItemRepository implements BacklogItemDataSource {
 
     @Override
     public List<BacklogItem> getAll() {
-        List<BacklogItem> items = new ArrayList<BacklogItem>();
+        List<BacklogItem> items = new ArrayList<>();
         Set<String> keys = mBacklog.keySet();
         Iterator<String> it = keys.iterator();
         while (it.hasNext()) {
@@ -64,7 +64,7 @@ public class BacklogItemRepository implements BacklogItemDataSource {
 
     @Override
     public List<BacklogItem> getAll(BacklogItem.Status status) {
-        List<BacklogItem> items = new ArrayList<BacklogItem>();
+        List<BacklogItem> items = new ArrayList<>();
         Set<String> keys = mBacklog.keySet();
         Iterator<String> it = keys.iterator();
         while (it.hasNext()) {

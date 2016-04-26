@@ -8,7 +8,7 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 public class AddBacklogPresenter implements AddBacklogContract.Presenter {
 
     private final AddBacklogContract.View mBacklogView;
-    private final List<BacklogItem> mBacklog = new ArrayList<BacklogItem>();
+    private final List<BacklogItem> mBacklog = new ArrayList<>();
 
     public AddBacklogPresenter(AddBacklogContract.View backlogView) {
         this.mBacklogView = backlogView;
