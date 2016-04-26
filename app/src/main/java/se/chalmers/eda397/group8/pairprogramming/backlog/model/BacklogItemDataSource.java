@@ -2,6 +2,8 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
 import java.util.List;
 
+import se.chalmers.eda397.group8.pairprogramming.data.DataSource;
+
 /**
  * Interface for handling backlog data.
  */

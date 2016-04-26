@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.backlog.model;
+package se.chalmers.eda397.group8.pairprogramming.data;
 
 import java.util.List;
 
