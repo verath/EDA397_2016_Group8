@@ -101,14 +101,14 @@ public class NotesFragment extends Fragment implements NotesContract.View {
         startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
     }
 
-    private View.OnClickListener fabAddNoteClickListener = new View.OnClickListener() {
+    private final View.OnClickListener fabAddNoteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             NotesFragment.this.mPresenter.onAddClicked();
         }
     };
 
-    private NotesAdapter.NoteItemClickListener onNoteClickListener = new NotesAdapter.NoteItemClickListener() {
+    private final NotesAdapter.NoteItemClickListener onNoteClickListener = new NotesAdapter.NoteItemClickListener() {
         @Override
         public void onNoteClick(Note clickedNote) {
             if (NotesFragment.this.mPresenter != null && clickedNote != null) {

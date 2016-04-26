@@ -32,7 +32,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
             BacklogItem.Status.DONE
     };
 
-    private BacklogSwipeFragment[] mTabFragments = new BacklogSwipeFragment[TAB_STATUSES.length];
+    private final BacklogSwipeFragment[] mTabFragments = new BacklogSwipeFragment[TAB_STATUSES.length];
 
     private CollectionPagerAdapter mCollectionPagerAdapter;
 

@@ -2,8 +2,8 @@ package se.chalmers.eda397.group8.pairprogramming.requirements;
 
 public class RequirementsPresenter implements RequirementsContract.Presenter {
 
-    private RequirementsContract.View fragment;
-    private Requirement requirement;
+    private final RequirementsContract.View fragment;
+    private final Requirement requirement;
 
     public RequirementsPresenter(RequirementsContract.View fragment, Requirement requirement) {
         this.fragment = fragment;

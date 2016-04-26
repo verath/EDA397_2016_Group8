@@ -83,7 +83,7 @@ public class RequirementsSelectorFragment extends Fragment implements Requiremen
         this.presenter = presenter;
     }
 
-    private RequirementsSelectorAdapter.RequirementItemClickListener onRequirementClickListener =
+    private final RequirementsSelectorAdapter.RequirementItemClickListener onRequirementClickListener =
             new RequirementsSelectorAdapter.RequirementItemClickListener() {
                 @Override
                 public void onRequirementClick(Requirement requirement) {

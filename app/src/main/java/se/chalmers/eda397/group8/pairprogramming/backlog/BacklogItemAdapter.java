@@ -25,8 +25,8 @@ public class BacklogItemAdapter extends RecyclerView.Adapter<BacklogItemAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public TextView text;
+        public final TextView title;
+        public final TextView text;
 
         public ViewHolder(View view) {
             super(view);

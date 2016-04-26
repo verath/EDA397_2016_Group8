@@ -129,7 +129,7 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
         // TODO: show some message saying this note is invalid?
     }
 
-    private View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {
+    private final View.OnClickListener fabEditNoteClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             mPresenter.onEditClicked();

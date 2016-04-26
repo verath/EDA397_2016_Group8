@@ -17,7 +17,7 @@ public class BacklogItem {
         ONGOING(R.string.ongoing),
         READY_FOR_TEST(R.string.ready_for_test),
         DONE(R.string.done);
-        int mKey;
+        private final int mKey;
 
         Status(int key) {
             mKey = key;

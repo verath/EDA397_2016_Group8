@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 public class Requirement {
 
     @NonNull
-    private String filePath;
+    private final String filePath;
 
     public Requirement(@NonNull String filePath) {
         this.filePath = filePath;

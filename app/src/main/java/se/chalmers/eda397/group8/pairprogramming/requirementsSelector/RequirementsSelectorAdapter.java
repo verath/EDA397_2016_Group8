@@ -19,7 +19,7 @@ import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
 public class RequirementsSelectorAdapter extends RecyclerView.Adapter<RequirementsSelectorAdapter.ViewHolder> {
 
     private List<Requirement> requirements;
-    private RequirementItemClickListener requirementItemClickListener;
+    private final RequirementItemClickListener requirementItemClickListener;
 
     public interface RequirementItemClickListener {
         void onRequirementClick(Requirement requirement);
@@ -74,7 +74,7 @@ public class RequirementsSelectorAdapter extends RecyclerView.Adapter<Requiremen
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView fileName;
+        public final TextView fileName;
 
         public ViewHolder(View view) {
             super(view);

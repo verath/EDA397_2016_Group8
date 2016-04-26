@@ -152,7 +152,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
         mPresenter.onTimerFinish();
     }
 
-    private View.OnClickListener onStartStopButtonClick = new View.OnClickListener() {
+    private final View.OnClickListener onStartStopButtonClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -162,7 +162,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
         }
     };
 
-    private ServiceConnection mTimerServiceConnection = new ServiceConnection() {
+    private final ServiceConnection mTimerServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             // This is method is called when we have successfully bound to the TimerService.

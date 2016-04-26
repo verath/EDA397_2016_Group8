@@ -10,7 +10,7 @@ import se.chalmers.eda397.group8.pairprogramming.requirements.Requirement;
  */
 public class RequirementsSelectorPresenter implements RequirementsSelectorContract.Presenter {
 
-    private RequirementsSelectorContract.View fragment;
+    private final RequirementsSelectorContract.View fragment;
 
     public RequirementsSelectorPresenter(RequirementsSelectorContract.View fragment) {
         this.fragment = fragment;

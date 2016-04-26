@@ -19,15 +19,15 @@ import se.chalmers.eda397.group8.pairprogramming.note.Note;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private List<Note> mNotes;
-    private NoteItemClickListener mNoteItemClickListener;
+    private final NoteItemClickListener mNoteItemClickListener;
 
     public interface NoteItemClickListener {
         void onNoteClick(Note clickedNote);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public TextView text;
+        public final TextView title;
+        public final TextView text;
 
         public ViewHolder(View view) {
             super(view);
