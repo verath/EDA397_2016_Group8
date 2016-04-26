@@ -7,6 +7,7 @@ import android.os.Bundle;
 import group8.eda397.chalmers.se.pairprogramming.BaseActivity;
 import group8.eda397.chalmers.se.pairprogramming.R;
 
+
 public class AddBacklogActivity extends BaseActivity {
 
     @Override
@@ -21,7 +22,9 @@ public class AddBacklogActivity extends BaseActivity {
         } else {
             backlogFragment = (AddBacklogItemFragment) findFragment(R.id.contentFrame);
         }
+
         setupToolbar();
+
         new AddBacklogPresenter(backlogFragment);
     }
 

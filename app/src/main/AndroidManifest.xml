@@ -55,6 +55,10 @@
             android:label="@string/title_activity_add_backlog"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".backlog.details.BacklogDetailActivity"
+            android:label="@string/title_activity_details_backlog"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <!-- Timer -->
         <activity
             android:name=".timer.TimerActivity"
