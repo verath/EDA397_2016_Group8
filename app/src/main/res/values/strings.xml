@@ -30,4 +30,7 @@
     <string name="ongoing">Ongoing</string>
     <string name="ready_for_test">Ready for test</string>
     <string name="done">Done</string>
+
+    <string name="title_activity_requirements">Requirements</string>
+    <string name="show_requirements">Show Requirements</string>
 </resources>

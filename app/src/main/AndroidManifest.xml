@@ -20,6 +20,17 @@
             </intent-filter>
         </activity>
 
+        <!-- Requirements -->
+        <activity
+            android:name=".requirements.RequirementsActivity"
+            android:label="@string/title_activity_requirements"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".requirementsSelector.RequirementsSelectorActivity"
+            android:label="@string/title_activity_requirements"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!-- Notes -->
         <activity
             android:name=".note.notes.NotesActivity"

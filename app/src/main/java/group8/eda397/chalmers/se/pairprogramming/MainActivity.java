@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import group8.eda397.chalmers.se.pairprogramming.backlog.BacklogActivity;
 import group8.eda397.chalmers.se.pairprogramming.note.notes.NotesActivity;
+import group8.eda397.chalmers.se.pairprogramming.requirementsSelector.RequirementsSelectorActivity;
 import group8.eda397.chalmers.se.pairprogramming.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
             navigateToBacklogButton.setOnClickListener(onNavigateToBacklog);
         }
 
+        Button requirementsBtn = (Button) findViewById(R.id.btn_requirements);
+        if (requirementsBtn != null) {
+            requirementsBtn.setOnClickListener(onShowRequirements);
+        }
+
         Button navigateToTimerButton = (Button) findViewById(R.id.btn_timer);
         if (navigateToTimerButton != null) {
             navigateToTimerButton.setOnClickListener(onNavigateToTimer);
@@ -51,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent launchIntent = BacklogActivity.getCallingIntent(MainActivity.this);
+            startActivity(launchIntent);
+        }
+    };
+    private final View.OnClickListener onShowRequirements = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent launchIntent = RequirementsSelectorActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };
