@@ -5,9 +5,6 @@ import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.backlog.model.BacklogItem;
 
-/**
- * Created by m_cal on 2016-04-14.
- */
 public class AddBacklogPresenter implements AddBacklogContract.Presenter {
 
     private final AddBacklogContract.View mBacklogView;
@@ -28,7 +25,7 @@ public class AddBacklogPresenter implements AddBacklogContract.Presenter {
     }
 
     @Override
-    public void addBacklogItem(BacklogItem item) {
+    public void onAddBacklogItem(BacklogItem item) {
 
     }
 }

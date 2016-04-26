@@ -63,11 +63,6 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
     }
 
     @Override
-    public void goBack() {
-
-    }
-
-    @Override
     public void setPresenter(@NonNull AddBacklogContract.Presenter presenter) {
         mPresenter = presenter;
     }
@@ -98,6 +93,7 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
             return true;
         }
         BacklogItem newItem = new BacklogItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
+        mPresenter.onAddBacklogItem(newItem);
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
         return true;

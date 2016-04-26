@@ -23,7 +23,6 @@ public class BacklogSwipeFragment extends Fragment {
 
     private static final String ARGS_BACKLOG_STATUS = "group8.eda397.chalmers.se.pairprogramming.ARGS_BACKLOG_STATUS";
 
-
     public interface Listener {
 
         void onSwipeFragmentResume(BacklogItem.Status status);

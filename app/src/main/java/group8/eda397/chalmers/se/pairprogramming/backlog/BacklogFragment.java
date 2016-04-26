@@ -38,7 +38,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
     private BacklogContract.Presenter mPresenter;
 
     public BacklogFragment() {
-
+        // Required empty public constructor
     }
 
     /**
@@ -78,7 +78,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
         // Setup the add FAB
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.backlog_add_fab);
         if (fab != null) {
-            fab.setOnClickListener(fabAddBacklogItemClickListener);
+            fab.setOnClickListener(mFabAddBacklogItemClickListener);
         }
 
         return view;
@@ -139,7 +139,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
     }
 
 
-    private View.OnClickListener fabAddBacklogItemClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mFabAddBacklogItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (mPresenter != null) {
