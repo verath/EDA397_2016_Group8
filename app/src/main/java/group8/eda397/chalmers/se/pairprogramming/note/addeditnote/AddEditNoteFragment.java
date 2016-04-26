@@ -64,8 +64,9 @@ public class AddEditNoteFragment extends Fragment implements AddEditNoteContract
                 mPresenter.onSaveClicked(mTitleEditText.getText().toString(),
                         mTextEditText.getText().toString());
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

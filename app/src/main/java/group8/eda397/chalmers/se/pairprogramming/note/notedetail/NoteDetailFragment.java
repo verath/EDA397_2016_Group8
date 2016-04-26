@@ -70,8 +70,9 @@ public class NoteDetailFragment extends Fragment implements NoteDetailContract.V
             case R.id.menu_delete_note:
                 mPresenter.onDeleteClicked();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
