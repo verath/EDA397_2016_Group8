@@ -57,7 +57,7 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
         mStatusSp.setAdapter(adapter);
 
         mTitleEt = (EditText) view.findViewById(R.id.backlog_title_textfield);
-        mDescEt = (EditText) view.findViewById(R.id.backlog_description_textfield);
+        mDescEt = (EditText) view.findViewById(R.id.backlog_description_text_field);
 
         return view;
     }

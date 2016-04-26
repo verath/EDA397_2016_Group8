@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/backlog_description_textfield"
+        android:id="@+id/backlog_description_text_field"
         android:hint="@string/description" />
 
     <TextView

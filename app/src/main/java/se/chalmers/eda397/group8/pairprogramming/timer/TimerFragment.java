@@ -86,14 +86,14 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
     public void displayRemainingTime(long millisUntilFinished) {
         long minutes = millisUntilFinished / (60 * 1000);
         long seconds = (millisUntilFinished / 1000) % 60;
-        String timeparsed = String.format("%02d:%02d", minutes, seconds);
+        String parsedTime = String.format("%02d:%02d", minutes, seconds);
         if (millisUntilFinished < 30000) {
             mTimerTime.setTextColor(Color.parseColor("#ff0000"));
         } else {
             mTimerTime.setTextColor(Color.parseColor("#616161"));
         }
 
-        mTimerTime.setText(timeparsed);
+        mTimerTime.setText(parsedTime);
     }
 
     @Override

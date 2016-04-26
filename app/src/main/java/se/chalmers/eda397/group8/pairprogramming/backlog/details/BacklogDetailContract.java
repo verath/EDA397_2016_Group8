@@ -36,7 +36,7 @@ public interface BacklogDetailContract {
         void onDeleteItemClicked();
 
         /**
-         * When edit is clidked.
+         * When edit is clicked.
          */
         void onEditItemClicked();
     }

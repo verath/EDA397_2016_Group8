@@ -11,10 +11,10 @@ public class BacklogPresenter implements BacklogContract.Presenter {
     private final BacklogContract.View mBacklogView;
     private final BacklogItemDataSource mDataSource;
 
-    public BacklogPresenter(BacklogContract.View backlogView, BacklogItemDataSource datasource) {
+    public BacklogPresenter(BacklogContract.View backlogView, BacklogItemDataSource dataSource) {
         this.mBacklogView = backlogView;
         mBacklogView.setPresenter(this);
-        mDataSource = datasource;
+        mDataSource = dataSource;
     }
 
     @Override

@@ -10,7 +10,7 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemReposi
 
 public class BacklogDetailActivity extends BaseActivity {
 
-    private static final String ARG_ITEM_ID = "itemid";
+    private static final String ARG_ITEM_ID = "item_id";
     private String mItemId;
 
     @Override
