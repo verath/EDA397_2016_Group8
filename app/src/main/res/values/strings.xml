@@ -33,4 +33,11 @@
 
     <string name="title_activity_requirements">Requirements</string>
     <string name="show_requirements">Show Requirements</string>
+    <string name="timer_start_button_text">Start</string>
+    <string name="add_backlog_status_label">Status</string>
+    <string name="show_backlog">SHOW BACKLOG</string>
+    <string name="timer_help_text">Choose the time in minutes</string>
+    <string name="timer_switch_text">Switch</string>
+    <string name="timer_button_start">START</string>
+    <string name="timer_button_stop">STOP</string>
 </resources>

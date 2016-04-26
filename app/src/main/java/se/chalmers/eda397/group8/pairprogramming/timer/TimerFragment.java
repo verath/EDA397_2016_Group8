@@ -100,7 +100,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
 
     @Override
     public void displayFinished() {
-        mTimerTime.setText("Switch");
+        mTimerTime.setText(R.string.timer_switch_text);
     }
 
     @Override
@@ -131,12 +131,12 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
 
     @Override
     public void showStartButton() {
-        mStartStopButton.setText("START");
+        mStartStopButton.setText(R.string.timer_button_start);
     }
 
     @Override
     public void showStopButton() {
-        mStartStopButton.setText("STOP");
+        mStartStopButton.setText(R.string.timer_button_stop);
     }
 
     @Override

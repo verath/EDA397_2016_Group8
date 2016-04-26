@@ -29,7 +29,7 @@
             android:id="@+id/show_backlog_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SHOW BACKLOG" />
+            android:text="@string/show_backlog" />
 
         <Button
             android:id="@+id/btn_requirements"

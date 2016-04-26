@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
         android:elegantTextHeight="false"
-        android:text="Start"
+        android:text="@string/timer_button_start"
         android:textColor="#616161"
         android:textSize="30sp" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/minute_picker"
         android:layout_centerHorizontal="true"
-        android:text="Choose the time in minutes"
+        android:text="@string/timer_help_text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#616161" />
 
