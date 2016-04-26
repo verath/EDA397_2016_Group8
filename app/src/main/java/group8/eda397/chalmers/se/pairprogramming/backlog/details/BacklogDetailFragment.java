@@ -3,8 +3,12 @@ package group8.eda397.chalmers.se.pairprogramming.backlog.details;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -34,6 +38,12 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -52,13 +62,30 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_delete_backlog_item, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_backlog_item_delete:
+                mPresenter.onDeleteItemClicked();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void showEditView(String backlogItemId) {
 
     }
 
     @Override
     public void showBacklog() {
-
+        getActivity().finish();
     }
 
     @Override

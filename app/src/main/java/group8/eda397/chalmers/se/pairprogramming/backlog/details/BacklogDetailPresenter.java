@@ -28,7 +28,8 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
 
     @Override
     public void onDeleteItemClicked() {
-
+        mDataSource.delete(mBacklogItemId);
+        mDetailView.showBacklog();
     }
 
     @Override
