@@ -182,5 +182,6 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
             mTimerService = null;
         }
     };
+
 }
 

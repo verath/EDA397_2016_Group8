@@ -171,9 +171,12 @@ public class TimerService extends Service {
 
     private Notification createTimerNotification() {
         PendingIntent contentIntent = createNotificationContentIntent();
+        long minutes = mMillisUntilFinished / (60 * 1000);
+        long seconds = (mMillisUntilFinished / 1000) % 60;
+        String timeparsed = String.format("%02d:%02d", minutes, seconds);
         return new NotificationCompat.Builder(this)
-                .setContentTitle("Timer")
-                .setContentText(String.format("%d", mMillisUntilFinished))
+                .setContentTitle("Pair Programming Timer")
+                .setContentText(timeparsed)
                 .setSmallIcon(R.drawable.ic_add_white_24dp)
                 .setContentIntent(contentIntent)
                 .build();
