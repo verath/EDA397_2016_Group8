@@ -16,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import java.util.Locale;
+
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
@@ -173,7 +175,7 @@ public class TimerService extends Service {
         PendingIntent contentIntent = createNotificationContentIntent();
         long minutes = mMillisUntilFinished / (60 * 1000);
         long seconds = (mMillisUntilFinished / 1000) % 60;
-        String parsedTime = String.format("%02d:%02d", minutes, seconds);
+        String parsedTime = String.format(Locale.ENGLISH, "%02d:%02d", minutes, seconds);
         return new NotificationCompat.Builder(this)
                 .setContentTitle("Pair Programming Timer")
                 .setContentText(parsedTime)

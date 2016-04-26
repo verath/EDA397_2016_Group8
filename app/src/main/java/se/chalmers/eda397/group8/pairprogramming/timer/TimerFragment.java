@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import group8.eda397.chalmers.se.pairprogramming.R;
 
 /**
@@ -86,7 +88,7 @@ public class TimerFragment extends Fragment implements TimerContract.View, Timer
     public void displayRemainingTime(long millisUntilFinished) {
         long minutes = millisUntilFinished / (60 * 1000);
         long seconds = (millisUntilFinished / 1000) % 60;
-        String parsedTime = String.format("%02d:%02d", minutes, seconds);
+        String parsedTime = String.format(Locale.ENGLISH, "%02d:%02d", minutes, seconds);
         if (millisUntilFinished < 30000) {
             mTimerTime.setTextColor(Color.parseColor("#ff0000"));
         } else {
