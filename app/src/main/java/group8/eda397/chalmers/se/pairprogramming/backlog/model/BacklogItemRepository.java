@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by m_cal on 2016-04-21.
+ * Repository of backlog items.
  */
 public class BacklogItemRepository implements BacklogItemDataSource {
 
@@ -18,6 +18,8 @@ public class BacklogItemRepository implements BacklogItemDataSource {
     private BacklogItemRepository() {
         mBacklog.clear();
 
+        // TODO: populate with real data
+        // Populate repository with dummy data:
         for (BacklogItem.Status status : BacklogItem.Status.values()) {
             for (int i = 0; i < 20; i++) {
                 BacklogItem item = new BacklogItem("Item " + (i + 1), "Content", status);
