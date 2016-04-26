@@ -69,10 +69,10 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         switch (item.getItemId()) {
             case R.id.menu_backlog_item_delete:
                 mPresenter.onDeleteItemClicked();
-
-                break;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
