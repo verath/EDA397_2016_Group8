@@ -9,10 +9,20 @@ public interface AddEditBacklogContract {
     interface View extends BaseView<Presenter> {
 
         void showBacklog();
+
+        void showTitleEmptyError();
+
+        void showContentEmptyError();
+
+        void showTitle(String title);
+
+        void showContent(String content);
+
+        void showStatus(BacklogItem.Status status);
     }
 
     interface Presenter extends BasePresenter {
 
-        void onAddBacklogItem(BacklogItem item);
+        void onSaveItem(String title, String content, BacklogItem.Status status);
     }
 }

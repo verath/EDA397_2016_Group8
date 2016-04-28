@@ -1,5 +1,6 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 
@@ -18,12 +19,36 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void start() {
+        if (mItemId != null) {
+            populateFields();
+        }
+    }
 
+    private void populateFields() {
+        BacklogItem item = mDataSource.get(mItemId);
+        mBacklogView.showTitle(item.getTitle());
+        mBacklogView.showContent(item.getContent());
+        mBacklogView.showStatus(item.getStatus());
     }
 
     @Override
-    public void onAddBacklogItem(BacklogItem item) {
-        mDataSource.save(item);
+    public void onSaveItem(String title, String content, BacklogItem.Status status) {
+        if (title == null || title.length() == 0) {
+            mBacklogView.showTitleEmptyError();
+            return;
+        }
+        if (content == null || content.length() == 0) {
+            mBacklogView.showContentEmptyError();
+            return;
+        }
 
+        BacklogItem item;
+        if (mItemId != null) {
+            item = new BacklogItem(mItemId, title, content, status);
+        } else {
+            item = new BacklogItem(title, content, status);
+        }
+        mDataSource.save(item);
+        mBacklogView.showBacklog();
     }
 }

@@ -26,6 +26,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private EditText mTitleEt;
     private EditText mDescEt;
     private Spinner mStatusSp;
+    private ArrayAdapter<BacklogItem.Status> mStatusAdapter;
 
     public AddEditBacklogItemFragment() {
         // Required empty public constructor
@@ -51,15 +52,21 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         View view = inflater.inflate(R.layout.fragment_add_backlog_item, container, false);
 
         mStatusSp = (Spinner) view.findViewById(R.id.backlog_status_spinner);
-        ArrayAdapter<BacklogItem.Status> adapter = new CustomArrayAdapter(getActivity().getApplicationContext(),
+        mStatusAdapter = new CustomArrayAdapter(getActivity().getApplicationContext(),
                 R.layout.backlog_status_spinner_item, BacklogItem.Status.values());
-        adapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
-        mStatusSp.setAdapter(adapter);
+        mStatusAdapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
+        mStatusSp.setAdapter(mStatusAdapter);
 
         mTitleEt = (EditText) view.findViewById(R.id.backlog_title_textfield);
         mDescEt = (EditText) view.findViewById(R.id.backlog_description_text_field);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Override
@@ -88,19 +95,35 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         getActivity().finish();
     }
 
+    @Override
+    public void showTitleEmptyError() {
+        mTitleEt.setError(getResources().getString(R.string.missing_title));
+    }
+
+    @Override
+    public void showContentEmptyError() {
+        mDescEt.setError(getResources().getString(R.string.missing_description));
+    }
+
+    @Override
+    public void showTitle(String title) {
+        mTitleEt.setText(title);
+    }
+
+    @Override
+    public void showContent(String content) {
+        mDescEt.setText(content);
+    }
+
+    @Override
+    public void showStatus(BacklogItem.Status status) {
+        mStatusSp.setSelection(mStatusAdapter.getPosition(status));
+    }
+
     private boolean addBacklogItem() {
         String title = mTitleEt.getText().toString();
-        if (title == null || title.length() == 0) {
-            mTitleEt.setError(getResources().getString(R.string.missing_title));
-            return true;
-        }
         String desc = mDescEt.getText().toString();
-        if (desc == null || desc.length() == 0) {
-            mDescEt.setError(getResources().getString(R.string.missing_description));
-            return true;
-        }
-        BacklogItem newItem = new BacklogItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
-        mPresenter.onAddBacklogItem(newItem);
+        mPresenter.onSaveItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
         return true;
     }
 
