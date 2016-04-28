@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -21,15 +20,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/backlog_description_textfield"
+        android:id="@+id/backlog_description_text_field"
         android:hint="@string/description" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Status"
+        android:text="@string/add_backlog_status_label"
         android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:id="@+id/textView" />
 
     <Spinner

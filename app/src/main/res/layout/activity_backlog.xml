@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".backlog.BacklogActivity">
+    tools:context="se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity">
 
     <include layout="@layout/tabbed_toolbar" />
 
@@ -13,7 +13,7 @@
         android:id="@+id/contentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/backlog_add_fab"
