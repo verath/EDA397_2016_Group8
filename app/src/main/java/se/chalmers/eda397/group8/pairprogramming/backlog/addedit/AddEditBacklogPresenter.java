@@ -9,11 +9,14 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
     private final AddEditBacklogContract.View mBacklogView;
     private final BacklogItemDataSource mDataSource;
     private final String mItemId;
+    private final BacklogItem.Status mDefaultStatus;
 
-    public AddEditBacklogPresenter(AddEditBacklogContract.View backlogView, String itemId, BacklogItemDataSource dataSource) {
+    public AddEditBacklogPresenter(AddEditBacklogContract.View backlogView, String itemId,
+                                   BacklogItem.Status defaultStatus, BacklogItemDataSource dataSource) {
         this.mBacklogView = backlogView;
         this.mDataSource = dataSource;
         this.mItemId = itemId;
+        this.mDefaultStatus = defaultStatus;
         mBacklogView.setPresenter(this);
     }
 
@@ -21,6 +24,8 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
     public void start() {
         if (mItemId != null) {
             populateFields();
+        } else if (mDefaultStatus != null) {
+            mBacklogView.showStatus(mDefaultStatus);
         }
     }
 
