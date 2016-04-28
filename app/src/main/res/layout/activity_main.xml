@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="group8.eda397.chalmers.se.pairprogramming.MainActivity">
+    tools:context="se.chalmers.eda397.group8.pairprogramming.MainActivity">
 
     <include layout="@layout/appbar_toolbar" />
 
@@ -24,5 +24,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_notes" />
+
+        <Button
+            android:id="@+id/show_backlog_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_backlog" />
+
+        <Button
+            android:id="@+id/btn_requirements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_requirements" />
+
+        <Button
+            android:id="@+id/btn_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_timer" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

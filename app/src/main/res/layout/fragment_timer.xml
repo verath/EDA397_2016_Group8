@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/timer_fragment_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer_text"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:paddingRight="10dip"
+        android:paddingLeft="10dip"
+        android:textSize="80sp" />
+
+    <Button
+        android:id="@+id/start_stop_btn_timer"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:elegantTextHeight="false"
+        android:text="@string/timer_button_start"
+        android:textColor="#616161"
+        android:textSize="30sp" />
+
+    <se.chalmers.eda397.group8.pairprogramming.timer.NumberPicker
+        android:id="@+id/minute_picker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/start_stop_btn_timer"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/timer_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/minute_picker"
+        android:layout_centerHorizontal="true"
+        android:text="@string/timer_help_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#616161" />
+
+</RelativeLayout>
