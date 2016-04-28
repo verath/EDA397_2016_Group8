@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.backlog.add.AddBacklogActivity;
+import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 
@@ -116,7 +116,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
     @Override
     public void showAddBacklogItemView() {
-        Intent intent = AddBacklogActivity.getCallingIntent(getContext());
+        Intent intent = AddEditBacklogActivity.getCallingIntent(getContext(), null);
         startActivityForResult(intent, 0);
     }
 

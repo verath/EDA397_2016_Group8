@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.backlog.add;
+package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,19 +20,19 @@ import android.widget.TextView;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 
-public class AddBacklogItemFragment extends Fragment implements AddBacklogContract.View {
+public class AddEditBacklogItemFragment extends Fragment implements AddEditBacklogContract.View {
 
-    private AddBacklogContract.Presenter mPresenter;
+    private AddEditBacklogContract.Presenter mPresenter;
     private EditText mTitleEt;
     private EditText mDescEt;
     private Spinner mStatusSp;
 
-    public AddBacklogItemFragment() {
+    public AddEditBacklogItemFragment() {
         // Required empty public constructor
     }
 
-    public static AddBacklogItemFragment newInstance() {
-        AddBacklogItemFragment fragment = new AddBacklogItemFragment();
+    public static AddEditBacklogItemFragment newInstance() {
+        AddEditBacklogItemFragment fragment = new AddEditBacklogItemFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -63,7 +63,7 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
     }
 
     @Override
-    public void setPresenter(@NonNull AddBacklogContract.Presenter presenter) {
+    public void setPresenter(@NonNull AddEditBacklogContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -82,6 +82,12 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
         }
     }
 
+    @Override
+    public void showBacklog() {
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
+    }
+
     private boolean addBacklogItem() {
         String title = mTitleEt.getText().toString();
         if (title == null || title.length() == 0) {
@@ -95,8 +101,6 @@ public class AddBacklogItemFragment extends Fragment implements AddBacklogContra
         }
         BacklogItem newItem = new BacklogItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
         mPresenter.onAddBacklogItem(newItem);
-        getActivity().setResult(Activity.RESULT_OK);
-        getActivity().finish();
         return true;
     }
 
