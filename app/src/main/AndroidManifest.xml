@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="group8.eda397.chalmers.se.pairprogramming">
+    package="se.chalmers.eda397.group8.pairprogramming">
 
     <application
         android:allowBackup="true"
