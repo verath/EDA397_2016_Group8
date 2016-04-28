@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirement.requirements;
+package se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,31 +16,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.requirement.Requirement;
-import se.chalmers.eda397.group8.pairprogramming.requirement.detail.RequirementDetailActivity;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity;
 
 /**
  * Created by mysko1 on 2016-04-21.
  */
-public class RequirementsFragment extends Fragment implements RequirementsContract.View {
+public class ReqSpecsFragment extends Fragment implements ReqSpecsContract.View {
 
-    private RequirementsContract.Presenter mPresenter;
-    private RequirementsAdapter mAdapter;
+    private ReqSpecsContract.Presenter mPresenter;
+    private ReqSpecsAdapter mAdapter;
 
-    public static RequirementsFragment newInstance() {
-        return new RequirementsFragment();
+    public static ReqSpecsFragment newInstance() {
+        return new ReqSpecsFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new RequirementsAdapter(new ArrayList<Requirement>(), mOnRequirementClickListener);
+        mAdapter = new ReqSpecsAdapter(new ArrayList<RequirementSpecification>(), mOnRequirementClickListener);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_requirements, container, false);
+        View view = inflater.inflate(R.layout.fragment_req_specs, container, false);
 
         // Setup the recycler view
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.requirements_list);
@@ -57,13 +57,13 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
         mPresenter.start();
     }
 
-    public void showRequirements(List<Requirement> requirements) {
-        mAdapter.replaceData(requirements);
+    public void showRequirements(List<RequirementSpecification> requirementSpecifications) {
+        mAdapter.replaceData(requirementSpecifications);
     }
 
     @Override
-    public void displayRequirement(Requirement requirement) {
-        Intent intent = RequirementDetailActivity.getCallingIntent(getContext(), requirement);
+    public void displayRequirement(RequirementSpecification requirementSpecification) {
+        Intent intent = ReqSpecDetailActivity.getCallingIntent(getContext(), requirementSpecification);
         startActivity(intent);
     }
 
@@ -79,16 +79,16 @@ public class RequirementsFragment extends Fragment implements RequirementsContra
     }
 
     @Override
-    public void setPresenter(@NonNull RequirementsContract.Presenter presenter) {
+    public void setPresenter(@NonNull ReqSpecsContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
-    private final RequirementsAdapter.RequirementItemClickListener mOnRequirementClickListener =
-            new RequirementsAdapter.RequirementItemClickListener() {
+    private final ReqSpecsAdapter.RequirementItemClickListener mOnRequirementClickListener =
+            new ReqSpecsAdapter.RequirementItemClickListener() {
                 @Override
-                public void onRequirementClick(Requirement requirement) {
-                    if (RequirementsFragment.this.mPresenter != null && requirement != null) {
-                        RequirementsFragment.this.mPresenter.onRequirementClicked(requirement);
+                public void onRequirementClick(RequirementSpecification requirementSpecification) {
+                    if (ReqSpecsFragment.this.mPresenter != null && requirementSpecification != null) {
+                        ReqSpecsFragment.this.mPresenter.onRequirementClicked(requirementSpecification);
                     }
                 }
 

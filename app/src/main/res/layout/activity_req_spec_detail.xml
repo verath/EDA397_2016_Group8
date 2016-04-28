@@ -4,6 +4,6 @@
     android:id="@+id/frameContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="se.chalmers.eda397.group8.pairprogramming.requirement.detail.RequirementDetailActivity">
+    tools:context="se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity">
 
 </FrameLayout>

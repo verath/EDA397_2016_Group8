@@ -10,7 +10,7 @@ import android.widget.Button;
 import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.note.notes.NotesActivity;
-import se.chalmers.eda397.group8.pairprogramming.requirement.requirements.RequirementsActivity;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs.ReqSpecsActivity;
 import se.chalmers.eda397.group8.pairprogramming.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener mOnShowRequirements = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent launchIntent = RequirementsActivity.getCallingIntent(MainActivity.this);
+            Intent launchIntent = ReqSpecsActivity.getCallingIntent(MainActivity.this);
             startActivity(launchIntent);
         }
     };

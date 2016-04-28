@@ -20,11 +20,11 @@
 
         <!-- Requirements -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.requirement.detail.RequirementDetailActivity"
-            android:label="@string/title_activity_requirements" />
+            android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity"
+            android:label="@string/title_activity_req_specs" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.requirement.requirements.RequirementsActivity"
-            android:label="@string/title_activity_requirements" />
+            android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.requirementSpecifications.RequirementsActivity"
+            android:label="@string/title_activity_req_specs" />
 
         <!-- Notes -->
         <activity

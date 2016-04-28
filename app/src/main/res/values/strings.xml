@@ -45,7 +45,7 @@
     <!-- Backlog item detail -->
     <string name="title_activity_details_backlog">Item Details</string>
 
-    <!-- Requirements -->
-    <string name="title_activity_requirements">Requirements</string>
+    <!-- ReqSpec -->
+    <string name="title_activity_req_specs">Requirements</string>
 
 </resources>

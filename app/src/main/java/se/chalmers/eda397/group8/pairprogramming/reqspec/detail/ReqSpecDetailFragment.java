@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.requirement.detail;
+package se.chalmers.eda397.group8.pairprogramming.reqspec.detail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,24 +14,24 @@ import java.io.File;
 
 import group8.eda397.chalmers.se.pairprogramming.R;
 
-public class RequirementDetailFragment extends Fragment implements RequirementDetailContract.View {
+public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailContract.View {
 
-    private RequirementDetailContract.Presenter mPresenter;
+    private ReqSpecDetailContract.Presenter mPresenter;
     private PDFView mPdfView;
 
     @Override
-    public void setPresenter(@NonNull RequirementDetailContract.Presenter presenter) {
+    public void setPresenter(@NonNull ReqSpecDetailContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
-    public static RequirementDetailFragment newInstance() {
-        return new RequirementDetailFragment();
+    public static ReqSpecDetailFragment newInstance() {
+        return new ReqSpecDetailFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_requirement_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_req_spec_detail, container, false);
 
         mPdfView = (PDFView) view.findViewById(R.id.pdfView);
 
