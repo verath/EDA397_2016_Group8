@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.add.AddBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;

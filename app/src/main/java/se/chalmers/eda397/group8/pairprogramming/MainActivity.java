@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.note.notes.NotesActivity;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs.ReqSpecsActivity;

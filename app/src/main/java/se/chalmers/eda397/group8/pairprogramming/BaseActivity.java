@@ -7,8 +7,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
-
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setupToolbar() {

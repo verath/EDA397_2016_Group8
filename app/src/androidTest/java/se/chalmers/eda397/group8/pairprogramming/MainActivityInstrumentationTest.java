@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.MainActivity;
 import se.chalmers.eda397.group8.pairprogramming.note.notes.NotesActivity;
 

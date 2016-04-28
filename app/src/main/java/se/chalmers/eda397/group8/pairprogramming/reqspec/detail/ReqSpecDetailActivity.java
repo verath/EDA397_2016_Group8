@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 
 /**

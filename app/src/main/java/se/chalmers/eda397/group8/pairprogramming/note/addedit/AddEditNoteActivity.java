@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.note.NoteRepository;
 
 /**

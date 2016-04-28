@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 
 /**
  * Created by Vidar on 14/04/16.

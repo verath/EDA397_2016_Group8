@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 
 public class AddBacklogItemFragment extends Fragment implements AddBacklogContract.View {

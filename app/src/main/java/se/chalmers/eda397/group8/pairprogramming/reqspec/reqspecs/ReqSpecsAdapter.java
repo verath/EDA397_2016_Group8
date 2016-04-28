@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 
 /**
@@ -28,7 +28,7 @@ public class ReqSpecsAdapter extends RecyclerView.Adapter<ReqSpecsAdapter.ViewHo
     /**
      * Creates a new ReqSpecsAdapter displaying pdf files in a the assets folder.
      *
-     * @param requirementSpecifications                 The initial list of requirement files to display (empty when called).
+     * @param requirementSpecifications    The initial list of requirement files to display (empty when called).
      * @param requirementItemClickListener The listener for when a requirement is clicked.
      */
     public ReqSpecsAdapter(@NonNull List<RequirementSpecification> requirementSpecifications, RequirementItemClickListener requirementItemClickListener) {

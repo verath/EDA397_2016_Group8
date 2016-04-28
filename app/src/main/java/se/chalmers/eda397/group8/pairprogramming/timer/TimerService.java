@@ -18,7 +18,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Locale;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 
 /**
  * A service for running a CountDownTimer that may live for longer than the

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity;
 

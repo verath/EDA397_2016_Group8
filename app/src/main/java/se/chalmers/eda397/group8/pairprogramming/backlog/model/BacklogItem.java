@@ -2,7 +2,7 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
 import android.content.Context;
 
-import group8.eda397.chalmers.se.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.R;
 
 /**
  * Model of a backlog item.
