@@ -42,7 +42,7 @@
             android:name="se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity"
             android:label="@string/title_activity_backlog" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.backlog.add.AddBacklogActivity"
+            android:name=".backlog.addedit.AddEditBacklogActivity"
             android:label="@string/title_activity_add_backlog" />
         <activity
             android:name="se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity"
