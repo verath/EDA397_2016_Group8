@@ -1,6 +1,5 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
-import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 
