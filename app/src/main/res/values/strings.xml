@@ -47,5 +47,6 @@
 
     <!-- ReqSpec -->
     <string name="title_activity_req_specs">Requirements</string>
+    <string name="backlog_item_does_not_exist">Item does not exist!</string>
 
 </resources>

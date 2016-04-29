@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
@@ -101,11 +102,6 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     }
 
     @Override
-    public void showContentEmptyError() {
-        mDescEt.setError(getResources().getString(R.string.missing_description));
-    }
-
-    @Override
     public void showTitle(String title) {
         mTitleEt.setText(title);
     }
@@ -118,6 +114,13 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     @Override
     public void showStatus(BacklogItem.Status status) {
         mStatusSp.setSelection(mStatusAdapter.getPosition(status));
+    }
+
+    @Override
+    public void showMissingBacklogItem() {
+        // TODO: Show some view here instead?
+        Toast.makeText(getContext(), R.string.backlog_item_does_not_exist, Toast.LENGTH_LONG).show();
+        getActivity().finish();
     }
 
     private boolean addBacklogItem() {

@@ -1,5 +1,7 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
+import android.support.annotation.NonNull;
+
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 
@@ -22,27 +24,28 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
     @Override
     public void start() {
         if (mItemId != null) {
-            populateFields();
+            BacklogItem item = mDataSource.get(mItemId);
+            if (item == null) {
+                mBacklogView.showMissingBacklogItem();
+            } else {
+                populateFields(item);
+            }
         } else if (mDefaultStatus != null) {
             mBacklogView.showStatus(mDefaultStatus);
         }
     }
 
-    private void populateFields() {
-        BacklogItem item = mDataSource.get(mItemId);
+    private void populateFields(BacklogItem item) {
         mBacklogView.showTitle(item.getTitle());
         mBacklogView.showContent(item.getContent());
         mBacklogView.showStatus(item.getStatus());
     }
 
     @Override
-    public void onSaveItem(String title, String content, BacklogItem.Status status) {
-        if (title == null || title.length() == 0) {
+    public void onSaveItem(@NonNull String title, @NonNull String content,
+                           @NonNull BacklogItem.Status status) {
+        if (title.isEmpty()) {
             mBacklogView.showTitleEmptyError();
-            return;
-        }
-        if (content == null || content.length() == 0) {
-            mBacklogView.showContentEmptyError();
             return;
         }
 
