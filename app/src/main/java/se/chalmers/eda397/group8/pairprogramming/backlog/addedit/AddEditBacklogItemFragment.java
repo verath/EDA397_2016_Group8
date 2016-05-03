@@ -18,10 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 
 public class AddEditBacklogItemFragment extends Fragment implements AddEditBacklogContract.View {
@@ -47,6 +47,8 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        mStatusAdapter = new StatusArrayAdapter(getContext(), new ArrayList<BacklogStatus>());
     }
 
     @Override
@@ -56,7 +58,6 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         View view = inflater.inflate(R.layout.fragment_add_backlog_item, container, false);
 
         mStatusSp = (Spinner) view.findViewById(R.id.backlog_status_spinner);
-        mStatusAdapter = new StatusArrayAdapter( );
         mStatusAdapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
         mStatusSp.setAdapter(mStatusAdapter);
 
@@ -114,7 +115,13 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     }
 
     @Override
-    public void showStatus(BacklogItem.Status status) {
+    public void showStatuses(List<BacklogStatus> statuses) {
+        mStatusAdapter.clear();
+        mStatusAdapter.addAll(statuses);
+    }
+
+    @Override
+    public void showSelectedStatus(BacklogStatus status) {
         mStatusSp.setSelection(mStatusAdapter.getPosition(status));
     }
 

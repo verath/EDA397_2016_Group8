@@ -39,7 +39,7 @@ public class BacklogPresenterTest {
 
         // Then view should display backlog and fetch the items to display:
         verify(mBacklogView).showBacklogForStatus(any(BacklogItem.Status.class), anyListOf(BacklogItem.class));
-        verify(mBacklogDataSource).getAll(any(BacklogItem.Status.class));
+        verify(mBacklogDataSource).getAllByStatus(any(BacklogItem.Status.class));
     }
 
     @Test

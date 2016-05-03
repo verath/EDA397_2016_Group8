@@ -2,6 +2,8 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
@@ -28,6 +30,8 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void start() {
+        List<BacklogStatus> statuses = mStatusDataSource.getAll();
+        mBacklogView.showStatuses(statuses);
         if (mItemId != null) {
             BacklogItem item = mItemDataSource.get(mItemId);
             if (item == null) {
@@ -38,7 +42,7 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
         } else if (mDefaultStatusId != null) {
             BacklogStatus status = mStatusDataSource.get(mDefaultStatusId);
             if (status != null) {
-                mBacklogView.showStatus(status);
+                mBacklogView.showSelectedStatus(status);
             }
         }
     }
@@ -48,7 +52,7 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
         mBacklogView.showContent(item.getContent());
         BacklogStatus status = mStatusDataSource.get(item.getStatusId());
         if (status != null) {
-            mBacklogView.showStatus(status);
+            mBacklogView.showSelectedStatus(status);
         }
     }
 
