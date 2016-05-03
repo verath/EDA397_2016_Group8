@@ -42,7 +42,8 @@ public class BacklogItemRepository implements BacklogItemDataSource {
 
     @Override
     public boolean save(BacklogItem item) {
-        return mBacklog.put(item.getId(), item) != null;
+        mBacklog.put(item.getId(), item);
+        return true;
     }
 
     @Override
