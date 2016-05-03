@@ -23,4 +23,9 @@ public class BacklogStatus {
     public String getId() {
         return mId;
     }
+
+    @Override
+    public String toString() {
+        return mName;
+    }
 }
