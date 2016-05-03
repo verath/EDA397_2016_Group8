@@ -2,9 +2,11 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import se.chalmers.eda397.group8.pairprogramming.BasePresenter;
 import se.chalmers.eda397.group8.pairprogramming.BaseView;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 
 public interface AddEditBacklogContract {
 
@@ -18,7 +20,9 @@ public interface AddEditBacklogContract {
 
         void showContent(String content);
 
-        void showStatus(BacklogItem.Status status);
+        void showStatuses(List<BacklogStatus> statuses);
+
+        void showSelectedStatus(BacklogStatus status);
 
         void showMissingBacklogItem();
     }
@@ -26,6 +30,6 @@ public interface AddEditBacklogContract {
     interface Presenter extends BasePresenter {
 
         void onSaveItem(@NonNull String title, @NonNull String content,
-                        @NonNull BacklogItem.Status status);
+                        @NonNull String statusId);
     }
 }

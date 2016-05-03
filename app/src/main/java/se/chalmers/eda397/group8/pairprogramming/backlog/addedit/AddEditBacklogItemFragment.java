@@ -18,8 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 
 public class AddEditBacklogItemFragment extends Fragment implements AddEditBacklogContract.View {
 
@@ -27,7 +30,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private EditText mTitleEt;
     private EditText mDescEt;
     private Spinner mStatusSp;
-    private ArrayAdapter<BacklogItem.Status> mStatusAdapter;
+    private ArrayAdapter<BacklogStatus> mStatusAdapter;
 
     public AddEditBacklogItemFragment() {
         // Required empty public constructor
@@ -53,8 +56,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         View view = inflater.inflate(R.layout.fragment_add_backlog_item, container, false);
 
         mStatusSp = (Spinner) view.findViewById(R.id.backlog_status_spinner);
-        mStatusAdapter = new CustomArrayAdapter(getActivity().getApplicationContext(),
-                R.layout.backlog_status_spinner_item, BacklogItem.Status.values());
+        mStatusAdapter = new StatusArrayAdapter( );
         mStatusAdapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
         mStatusSp.setAdapter(mStatusAdapter);
 
@@ -126,29 +128,34 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private boolean addBacklogItem() {
         String title = mTitleEt.getText().toString();
         String desc = mDescEt.getText().toString();
-        mPresenter.onSaveItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem());
+        String statusId = ((BacklogStatus) mStatusSp.getSelectedItem()).getId();
+        mPresenter.onSaveItem(title, desc, statusId);
         return true;
     }
 
-    private class CustomArrayAdapter extends ArrayAdapter<BacklogItem.Status> {
+    private class StatusArrayAdapter extends ArrayAdapter<BacklogStatus> {
 
-        public CustomArrayAdapter(Context context, int resource, BacklogItem.Status[] objects) {
-            super(context, resource, objects);
+        private final LayoutInflater mInflater;
+
+        public StatusArrayAdapter(Context context, List<BacklogStatus> statuses) {
+            super(context, 0, statuses);
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            TextView tw = (TextView) ((LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item, parent, false);
-            tw.setText(getItem(position).getName(getContext()));
-            return tw;
+            return getView(position, convertView, parent);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            TextView tw = (TextView) ((LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.backlog_status_spinner_item, parent, false);
-            tw.setText(getItem(position).getName(getContext()));
+            TextView tw;
+            if (convertView == null || !(convertView instanceof TextView)) {
+                tw = (TextView) mInflater.inflate(R.layout.backlog_status_spinner_item, parent, false);
+            } else {
+                tw = (TextView) convertView;
+            }
+            tw.setText(getItem(position).getName());
             return tw;
         }
     }
