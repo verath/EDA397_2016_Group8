@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.backlog.add.AddBacklogActivity;
+import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 
@@ -37,6 +37,8 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
     private CollectionPagerAdapter mCollectionPagerAdapter;
 
     private BacklogContract.Presenter mPresenter;
+
+    private int mSelectedPageIndex;
 
     public BacklogFragment() {
         // Required empty public constructor
@@ -71,6 +73,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
         // Setup the view pager
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
         viewPager.setAdapter(mCollectionPagerAdapter);
+        viewPager.addOnPageChangeListener(mPageListener);
 
         // Setup the tabs in the actionbar, connected to the view pager
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.toolbar_tabs);
@@ -116,7 +119,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
     @Override
     public void showAddBacklogItemView() {
-        Intent intent = AddBacklogActivity.getCallingIntent(getContext());
+        Intent intent = AddEditBacklogActivity.getCallingIntent(getContext(), TAB_STATUSES[mSelectedPageIndex]);
         startActivityForResult(intent, 0);
     }
 
@@ -196,4 +199,12 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
             return status.getName(getContext());
         }
     }
+
+    private final ViewPager.OnPageChangeListener mPageListener = new ViewPager.SimpleOnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            mSelectedPageIndex = position;
+        }
+    };
 }

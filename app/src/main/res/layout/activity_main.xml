@@ -21,26 +21,34 @@
 
         <Button
             android:id="@+id/btn_notes"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/show_notes" />
+            android:text="@string/show_notes"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/AppTheme.MenuButton"/>
 
         <Button
             android:id="@+id/show_backlog_button"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/show_backlog" />
+            android:text="@string/show_backlog"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/AppTheme.MenuButton"/>
 
         <Button
             android:id="@+id/btn_requirements"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/show_requirements" />
+            android:text="@string/show_requirements"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/AppTheme.MenuButton"/>
 
         <Button
             android:id="@+id/btn_timer"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/show_timer" />
+            android:text="@string/show_timer"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            style="@style/AppTheme.MenuButton"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
