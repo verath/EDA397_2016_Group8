@@ -48,8 +48,20 @@ public class BacklogItem {
      * @param status  the status of the item
      */
     public BacklogItem(String title, String content, Status status) {
-        this.mId = String.valueOf(sIdCounter);
+        this(String.valueOf(sIdCounter), title, content, status);
         sIdCounter++;
+    }
+
+    /**
+     * Creates a new item with an already existing ID, title, content and status.
+     *
+     * @param id      the ID of the item
+     * @param title   the title of the item
+     * @param content the content of the item
+     * @param status  the status of the item
+     */
+    public BacklogItem(String id, String title, String content, Status status) {
+        this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatus = status;
