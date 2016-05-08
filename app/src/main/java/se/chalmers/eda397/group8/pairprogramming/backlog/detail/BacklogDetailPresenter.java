@@ -8,6 +8,7 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
     private final BacklogItemDataSource mDataSource;
     private final String mBacklogItemId;
 
+
     public BacklogDetailPresenter(BacklogDetailContract.View mDetailView, String backlogItemId,
                                   BacklogItemDataSource dataSource) {
         this.mDetailView = mDetailView;

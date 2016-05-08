@@ -21,11 +21,13 @@ public interface AddEditBacklogContract {
         void showStatus(BacklogItem.Status status);
 
         void showMissingBacklogItem();
+
+        void showPage(String page);
     }
 
     interface Presenter extends BasePresenter {
 
         void onSaveItem(@NonNull String title, @NonNull String content,
-                        @NonNull BacklogItem.Status status);
+                        @NonNull BacklogItem.Status status, @NonNull String page );
     }
 }

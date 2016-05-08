@@ -22,7 +22,7 @@ public class BacklogItemRepository implements BacklogItemDataSource {
         // Populate repository with dummy data:
         for (BacklogItem.Status status : BacklogItem.Status.values()) {
             for (int i = 0; i < 20; i++) {
-                BacklogItem item = new BacklogItem("Item " + (i + 1), "Content", status);
+                BacklogItem item = new BacklogItem("Item " + (i + 1), "Content", status, "1");
                 mBacklog.put(item.getId(), item);
             }
         }

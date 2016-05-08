@@ -27,6 +27,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     private TextView mTitleTv;
     private TextView mStatusTv;
     private TextView mContentTv;
+    private TextView mPageTv;
 
     public BacklogDetailFragment() {
         // Required empty public constructor
@@ -52,6 +53,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         mTitleTv = (TextView) view.findViewById(R.id.backlog_detail_title);
         mStatusTv = (TextView) view.findViewById(R.id.backlog_detail_status);
         mContentTv = (TextView) view.findViewById(R.id.backlog_detail_text);
+        mPageTv = (TextView) view.findViewById(R.id.backlog_detail_page);
 
         // Setup the add FAB
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_backlog_item);
@@ -110,6 +112,9 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         }
         if (mContentTv != null) {
             mContentTv.setText(backlogItem.getContent());
+        }
+        if (mPageTv != null) {
+            mPageTv.setText(backlogItem.getPage());
         }
     }
 

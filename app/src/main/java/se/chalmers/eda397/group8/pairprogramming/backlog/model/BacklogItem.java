@@ -39,6 +39,7 @@ public class BacklogItem {
     private final String mContent;
     private final String mTitle;
     private final Status mStatus;
+    private final String mPage;
 
     /**
      * Creates a new item with the specified title, content and status.
@@ -47,8 +48,8 @@ public class BacklogItem {
      * @param content the content of the item
      * @param status  the status of the item
      */
-    public BacklogItem(String title, String content, Status status) {
-        this(String.valueOf(sIdCounter), title, content, status);
+    public BacklogItem(String title, String content, Status status, String page) {
+        this(String.valueOf(sIdCounter), title, content, status, page);
         sIdCounter++;
     }
 
@@ -60,11 +61,12 @@ public class BacklogItem {
      * @param content the content of the item
      * @param status  the status of the item
      */
-    public BacklogItem(String id, String title, String content, Status status) {
+    public BacklogItem(String id, String title, String content, Status status, String page) {
         this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatus = status;
+        this.mPage = page;
     }
 
     /**
@@ -101,5 +103,9 @@ public class BacklogItem {
      */
     public Status getStatus() {
         return mStatus;
+    }
+
+    public String getPage() {
+        return mPage;
     }
 }

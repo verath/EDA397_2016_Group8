@@ -20,8 +20,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/enter_number"
-        android:hint="page number" />
+        android:id="@+id/page_number_textfield"
+        android:hint="page number"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"/>
 
 
     <EditText
@@ -44,13 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/backlog_status_spinner" />
 
-    <Button
-            android:id="@+id/default_activity_button"
-            android:textAlignment="center"
-            android:text="Press me!"
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:gravity="bottom" />
+
 
 
 </LinearLayout>
