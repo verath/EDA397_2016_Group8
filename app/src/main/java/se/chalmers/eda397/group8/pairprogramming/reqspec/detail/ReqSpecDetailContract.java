@@ -9,7 +9,7 @@ public interface ReqSpecDetailContract {
 
     interface View extends BaseView<Presenter> {
         void showPDF(String assetName);
-
+        void showPDF(String name, int nr);
         void showPDF(File file);
     }
 

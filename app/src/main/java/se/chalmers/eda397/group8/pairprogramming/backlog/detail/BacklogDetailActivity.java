@@ -7,6 +7,7 @@ import android.os.Bundle;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailFragment;
 
 public class BacklogDetailActivity extends BaseActivity {
 

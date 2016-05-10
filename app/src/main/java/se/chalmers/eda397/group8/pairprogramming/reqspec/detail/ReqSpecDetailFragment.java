@@ -72,4 +72,13 @@ public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailCont
                 .load();
     }
 
+    @Override
+    public void showPDF(String file, int nr) {
+        mPdfView.fromAsset(file)
+                .defaultPage(nr)
+                .enableSwipe(true)
+                .showMinimap(true)
+                .load();
+    }
+
 }

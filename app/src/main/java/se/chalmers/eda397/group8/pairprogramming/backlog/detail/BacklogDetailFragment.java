@@ -6,17 +6,20 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailContract;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +31,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     private TextView mStatusTv;
     private TextView mContentTv;
     private TextView mPageTv;
+    private Button pdfButton;
 
     public BacklogDetailFragment() {
         // Required empty public constructor
@@ -60,6 +64,11 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         if (fab != null) {
             fab.setOnClickListener(mFabEditBacklogItemClickListener);
         }
+        //Setup the PDF button
+        pdfButton = (Button) view.findViewById(R.id.backlog_detail_link_button);
+        if(pdfButton != null) {
+            pdfButton.setOnClickListener(goToPdf);
+        }
 
         return view;
     }
@@ -79,6 +88,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_delete_backlog_item, menu);
+
     }
 
     @Override
@@ -123,7 +133,17 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         public void onClick(View v) {
             if (mPresenter != null) {
                 mPresenter.onEditItemClicked();
+           }
+        }
+    };
+
+    private final View.OnClickListener goToPdf = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mPresenter != null) {
+                mPresenter.showPdf();
             }
         }
+
     };
 }
