@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming;
+package se.chalmers.eda397.group8.pairprogramming.data.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +8,7 @@ import android.util.Log;
 /**
  * Class to help creating and updating database for BacklogItems.
  */
-public class BacklogDBHelper extends SQLiteOpenHelper {
+public class BacklogDbHelper extends SQLiteOpenHelper {
 
     // SQL table name and column names
     public static final String TABLE_BACKLOGS = "backlogs";
@@ -29,7 +29,7 @@ public class BacklogDBHelper extends SQLiteOpenHelper {
             + " TEXT NOT NULL"
             + ");";
 
-    public BacklogDBHelper(Context context) {
+    public BacklogDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -40,7 +40,7 @@ public class BacklogDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(BacklogDBHelper.class.getName(),
+        Log.w(BacklogDbHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BACKLOGS);

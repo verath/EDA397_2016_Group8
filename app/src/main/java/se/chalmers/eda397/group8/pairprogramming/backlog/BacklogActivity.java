@@ -7,6 +7,7 @@ import android.os.Bundle;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
+import se.chalmers.eda397.group8.pairprogramming.data.local.BacklogLocalDataSource;
 
 
 public class BacklogActivity extends BaseActivity {
@@ -24,7 +25,7 @@ public class BacklogActivity extends BaseActivity {
             backlogFragment = (BacklogFragment) findFragment(R.id.contentFrame);
         }
         setupToolbar();
-        new BacklogPresenter(backlogFragment, BacklogItemRepository.getInstance());
+        new BacklogPresenter(backlogFragment, BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())));
     }
 
     public static Intent getCallingIntent(Context context) {

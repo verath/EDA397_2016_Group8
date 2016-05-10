@@ -9,6 +9,7 @@ import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
+import se.chalmers.eda397.group8.pairprogramming.data.local.BacklogLocalDataSource;
 
 
 public class AddEditBacklogActivity extends BaseActivity {
@@ -37,7 +38,7 @@ public class AddEditBacklogActivity extends BaseActivity {
 
         setupToolbar();
 
-        new AddEditBacklogPresenter(backlogFragment, mItemId, mStatus, BacklogItemRepository.getInstance());
+        new AddEditBacklogPresenter(backlogFragment, mItemId, mStatus, BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())));
     }
 
     @Override
