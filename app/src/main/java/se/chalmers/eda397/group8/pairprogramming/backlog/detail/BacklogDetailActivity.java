@@ -7,7 +7,8 @@ import android.os.Bundle;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
-import se.chalmers.eda397.group8.pairprogramming.data.local.BacklogLocalDataSource;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
 
 public class BacklogDetailActivity extends BaseActivity {
 
@@ -29,7 +30,9 @@ public class BacklogDetailActivity extends BaseActivity {
             backlogFragment = (BacklogDetailFragment) findFragment(R.id.contentFrame);
         }
         setupToolbar();
-        new BacklogDetailPresenter(backlogFragment, mItemId, BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())));
+        new BacklogDetailPresenter(backlogFragment, mItemId,
+                BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())),
+                BacklogStatusRepository.getInstance());
     }
 
     @Override

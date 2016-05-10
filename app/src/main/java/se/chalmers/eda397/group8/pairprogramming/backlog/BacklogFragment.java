@@ -22,14 +22,16 @@ import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
 
 public class BacklogFragment extends Fragment implements BacklogContract.View, BacklogSwipeFragment.Listener {
 
-    private static final BacklogItem.Status[] TAB_STATUSES = {
-            BacklogItem.Status.BACKLOG,
-            BacklogItem.Status.ONGOING,
-            BacklogItem.Status.READY_FOR_TEST,
-            BacklogItem.Status.DONE
+    private static final BacklogStatus[] TAB_STATUSES = {
+            BacklogStatusRepository.getInstance().get("1"),
+            BacklogStatusRepository.getInstance().get("2"),
+            BacklogStatusRepository.getInstance().get("3"),
+            BacklogStatusRepository.getInstance().get("4")
     };
 
     private final BacklogSwipeFragment[] mTabFragments = new BacklogSwipeFragment[TAB_STATUSES.length];
@@ -110,7 +112,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
     }
 
     @Override
-    public void showBacklogForStatus(BacklogItem.Status status, List<BacklogItem> items) {
+    public void showBacklogForStatus(BacklogStatus status, List<BacklogItem> items) {
         int tabIndex = backlogStatusToTabIndex(status);
         if (tabIndex > -1 && mTabFragments[tabIndex] != null) {
             mTabFragments[tabIndex].showItems(items);
@@ -119,17 +121,18 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
     @Override
     public void showAddBacklogItemView() {
-        Intent intent = AddEditBacklogActivity.getCallingIntent(getContext(), TAB_STATUSES[mSelectedPageIndex]);
+        Intent intent = AddEditBacklogActivity.getCallingIntent(getContext(), null,
+                TAB_STATUSES[mSelectedPageIndex].getId());
         startActivityForResult(intent, 0);
     }
 
     @Override
-    public void onSwipeFragmentResume(BacklogItem.Status status) {
-        mPresenter.onSwipeFragmentResume(status);
+    public void onSwipeFragmentResume(String statusId) {
+        mPresenter.onSwipeFragmentResume(statusId);
     }
 
     @Override
-    public void onSwipeFragmentBacklogItemClicked(BacklogItem.Status status, BacklogItem backlogItem) {
+    public void onSwipeFragmentBacklogItemClicked(String statusId, BacklogItem backlogItem) {
         mPresenter.onBacklogItemClicked(backlogItem);
     }
 
@@ -140,7 +143,7 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
     }
 
-    private int backlogStatusToTabIndex(BacklogItem.Status status) {
+    private int backlogStatusToTabIndex(BacklogStatus status) {
         for (int i = 0; i < TAB_STATUSES.length; i++) {
             if (status == TAB_STATUSES[i]) {
                 return i;
@@ -166,8 +169,8 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
         @Override
         public Fragment getItem(int position) {
-            BacklogItem.Status status = TAB_STATUSES[position];
-            return BacklogSwipeFragment.newInstance(status);
+            BacklogStatus status = TAB_STATUSES[position];
+            return BacklogSwipeFragment.newInstance(status.getId());
         }
 
         @Override
@@ -195,8 +198,8 @@ public class BacklogFragment extends Fragment implements BacklogContract.View, B
 
         @Override
         public CharSequence getPageTitle(int position) {
-            BacklogItem.Status status = TAB_STATUSES[position];
-            return status.getName(getContext());
+            BacklogStatus status = TAB_STATUSES[position];
+            return status.getName();
         }
     }
 

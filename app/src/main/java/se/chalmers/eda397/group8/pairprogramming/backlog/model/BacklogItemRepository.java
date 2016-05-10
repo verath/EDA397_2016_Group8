@@ -2,12 +2,9 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Repository of backlog items from the local database.
@@ -43,7 +40,7 @@ public class BacklogItemRepository implements BacklogItemDataSource {
             return backlogItem;
         }
 
-        // Retrieve it from the local database otherwise
+        // Retrieve it from the local database if it's not in the cache
         return mBacklogLocalDataSource.get(id);
     }
 
@@ -59,37 +56,15 @@ public class BacklogItemRepository implements BacklogItemDataSource {
         return mCachedBacklog.remove(id);
     }
 
+    @NonNull
     @Override
     public List<BacklogItem> getAll() {
-        /**
-        List<BacklogItem> items = new ArrayList<>();
-        Set<String> keys = mCachedBacklog.keySet();
-        Iterator<String> it = keys.iterator();
-        while (it.hasNext()) {
-            BacklogItem item = mCachedBacklog.get(it.next());
-            items.add(item);
-        }
-        return items;
-        // TODO: Might want to retrieve from the cache instead? (Discuss)
-         */
         return mBacklogLocalDataSource.getAll();
     }
 
     @Override
-    public List<BacklogItem> getAll(@NonNull BacklogItem.Status status) {
-        /**
-        List<BacklogItem> items = new ArrayList<>();
-        Set<String> keys = mCachedBacklog.keySet();
-        Iterator<String> it = keys.iterator();
-        while (it.hasNext()) {
-            BacklogItem item = mCachedBacklog.get(it.next());
-            if (status == item.getStatus()) {
-                items.add(item);
-            }
-        }
-        return items;
-        // TODO: Might want to retrieve from the cache instead? (Discuss)
-         */
-        return mBacklogLocalDataSource.getAll(status);
+    public List<BacklogItem> getAllByStatus(String statusId) {
+        return mBacklogLocalDataSource.getAllByStatus(statusId);
     }
+
 }
