@@ -23,7 +23,7 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
     // SQL statement to create database
     private static final String DATABASE_CREATE = "CREATE TABLE "
             + TABLE_BACKLOGS + "(" + COLUMN_ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TITLE
+            + " PRIMARY KEY, " + COLUMN_TITLE
             + " TEXT NOT NULL, " + COLUMN_CONTENT
             + " TEXT NOT NULL, " + COLUMN_STATUS
             + " TEXT NOT NULL"

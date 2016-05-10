@@ -109,11 +109,12 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         open();
 
         ContentValues values = new ContentValues();
+        values.put(BacklogDbHelper.COLUMN_ID, item.getId());
         values.put(BacklogDbHelper.COLUMN_TITLE, item.getTitle());
         values.put(BacklogDbHelper.COLUMN_CONTENT, item.getContent());
         values.put(BacklogDbHelper.COLUMN_STATUS, item.getStatus().name());
 
-        long id = db.insert(BacklogDbHelper.TABLE_BACKLOGS, null, values);
+        long id = db.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
         close();
 

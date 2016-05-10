@@ -2,6 +2,8 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
 import android.content.Context;
 
+import java.util.UUID;
+
 import se.chalmers.eda397.group8.pairprogramming.R;
 
 /**
@@ -34,7 +36,6 @@ public class BacklogItem {
         }
     }
 
-    private static int sIdCounter = 0;
     private final String mId;
     private final String mContent;
     private final String mTitle;
@@ -48,8 +49,7 @@ public class BacklogItem {
      * @param status  the status of the item
      */
     public BacklogItem(String title, String content, Status status) {
-        this(String.valueOf(sIdCounter), title, content, status);
-        sIdCounter++;
+        this(UUID.randomUUID().toString(), title, content, status);
     }
 
     /**
