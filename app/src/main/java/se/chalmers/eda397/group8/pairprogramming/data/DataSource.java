@@ -1,5 +1,7 @@
 package se.chalmers.eda397.group8.pairprogramming.data;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -36,7 +38,8 @@ public interface DataSource<T> {
     /**
      * Gives all elements in the data source.
      *
-     * @return all elements
+     * @return all elements, or an empty list
      */
+    @NonNull
     List<T> getAll();
 }
