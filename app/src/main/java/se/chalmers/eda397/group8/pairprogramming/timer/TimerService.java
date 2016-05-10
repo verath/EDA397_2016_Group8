@@ -179,7 +179,7 @@ public class TimerService extends Service {
         return new NotificationCompat.Builder(this)
                 .setContentTitle("Pair Programming Timer")
                 .setContentText(parsedTime)
-                .setSmallIcon(R.drawable.ic_add_white_24dp)
+                .setSmallIcon(R.drawable.ic_app_24dp)
                 .setContentIntent(contentIntent)
                 .build();
     }
