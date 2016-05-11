@@ -27,6 +27,8 @@ public interface BacklogDetailContract {
          */
         void showBacklogItem(BacklogItem backlogItem);
 
+        void showPdfPage(String page);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -46,6 +48,6 @@ public interface BacklogDetailContract {
         * When show is clicked.
         * */
 
-        void showPdf();
+
     }
 }

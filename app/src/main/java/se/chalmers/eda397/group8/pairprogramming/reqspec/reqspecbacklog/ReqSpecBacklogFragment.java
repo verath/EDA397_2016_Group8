@@ -1,4 +1,4 @@
-package se.chalmers.eda397.group8.pairprogramming.reqspec.detail;
+package se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,19 +13,20 @@ import com.joanzapata.pdfview.PDFView;
 import java.io.File;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailFragment;
 
-public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailContract.View {
+public class ReqSpecBacklogFragment extends Fragment implements ReqSpecBacklogContract.View {
 
-    private ReqSpecDetailContract.Presenter mPresenter;
+    private ReqSpecBacklogContract.Presenter mPresenter;
     private PDFView mPdfView;
 
     @Override
-    public void setPresenter(@NonNull ReqSpecDetailContract.Presenter presenter) {
+    public void setPresenter(@NonNull ReqSpecBacklogContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
-    public static ReqSpecDetailFragment newInstance() {
-        return new ReqSpecDetailFragment();
+    public static ReqSpecBacklogFragment newInstance() {
+        return new ReqSpecBacklogFragment();
     }
 
     @Nullable
@@ -44,33 +45,15 @@ public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailCont
         mPresenter.start();
     }
 
-    /**
-     * Display the PDF given an asset name (i.e. PDF file name in the assets folder).
-     *
-     * @param assetName
-     */
+
+
     @Override
-    public void showPDF(String assetName) {
-        mPdfView.fromAsset(assetName)
-                .defaultPage(1)
+    public void showPDF(String file, String page) {
+        mPdfView.fromAsset(file)
+                .defaultPage(Integer.parseInt(page))
                 .enableSwipe(true)
                 .showMinimap(true)
                 .load();
     }
-
-    /**
-     * Display the PDF given a file.
-     *
-     * @param file
-     */
-    @Override
-    public void showPDF(File file) {
-        mPdfView.fromFile(file)
-                .defaultPage(1)
-                .enableSwipe(true)
-                .showMinimap(true)
-                .load();
-    }
-
 
 }

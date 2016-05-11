@@ -15,11 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailContract;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog.ReqSpecBacklogActivity;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,8 +126,15 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         if (mPageTv != null) {
             mPageTv.setText(backlogItem.getPage());
         }
-    }
 
+    }
+    @Override
+    public void showPdfPage (String page){
+
+
+        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(),page));
+
+    }
     private final View.OnClickListener mFabEditBacklogItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -141,9 +148,12 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         @Override
         public void onClick(View v) {
             if(mPresenter != null) {
-                mPresenter.showPdf();
+                String page = mPageTv.getText().toString();
+
+                showPdfPage(page);
             }
         }
 
     };
+
 }

@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <!-- Main -->
-        <activity android:name="se.chalmers.eda397.group8.pairprogramming.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,41 +20,45 @@
 
         <!-- Requirements -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity"
+            android:name=".reqspec.detail.ReqSpecDetailActivity"
             android:label="@string/title_activity_req_specs" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs.ReqSpecsActivity"
+            android:name=".reqspec.reqspecs.ReqSpecsActivity"
+            android:label="@string/title_activity_req_specs" />
+        <activity
+            android:name=".reqspec.reqspecbacklog.ReqSpecBacklogActivity"
             android:label="@string/title_activity_req_specs" />
 
         <!-- Notes -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.note.notes.NotesActivity"
+            android:name=".note.notes.NotesActivity"
             android:label="@string/title_activity_notes" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.note.detail.NoteDetailActivity"
+            android:name=".note.detail.NoteDetailActivity"
             android:label="@string/title_activity_note_detail" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.note.addedit.AddEditNoteActivity"
+            android:name=".note.addedit.AddEditNoteActivity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
 
         <!-- Backlog -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity"
+            android:name=".backlog.BacklogActivity"
             android:label="@string/title_activity_backlog" />
         <activity
             android:name=".backlog.addedit.AddEditBacklogActivity"
             android:label="@string/title_activity_add_backlog" />
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity"
+            android:name=".backlog.detail.BacklogDetailActivity"
             android:label="@string/title_activity_details_backlog" />
 
         <!-- Timer -->
         <activity
-            android:name="se.chalmers.eda397.group8.pairprogramming.timer.TimerActivity"
+            android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:parentActivityName="se.chalmers.eda397.group8.pairprogramming.MainActivity" />
+            android:parentActivityName=".MainActivity" />
+
         <service
-            android:name="se.chalmers.eda397.group8.pairprogramming.timer.TimerService"
+            android:name=".timer.TimerService"
             android:enabled="true"
             android:exported="false" />
 

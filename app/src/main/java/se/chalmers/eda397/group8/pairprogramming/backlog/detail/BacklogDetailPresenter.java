@@ -1,5 +1,7 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
@@ -10,6 +12,7 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
     private final BacklogDetailContract.View mDetailView;
     private final BacklogItemDataSource mDataSource;
     private final String mBacklogItemId;
+
     public BacklogDetailPresenter(BacklogDetailContract.View mDetailView, String backlogItemId,
                                   BacklogItemDataSource dataSource) {
         this.mDetailView = mDetailView;
@@ -34,11 +37,5 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
         mDetailView.showEditView(mBacklogItemId);
     }
 
-    @Override
-    public void showPdf() {
 
-        Log.d("pdf","more pdf");
-
-
-    }
 }
