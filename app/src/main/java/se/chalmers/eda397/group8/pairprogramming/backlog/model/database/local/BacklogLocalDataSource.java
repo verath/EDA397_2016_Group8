@@ -18,37 +18,37 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSo
  */
 public class BacklogLocalDataSource implements BacklogItemDataSource {
 
-    private static BacklogLocalDataSource INSTANCE;
-    private SQLiteDatabase db;
-    private BacklogDbHelper helper;
-    private String[] allColumns = {
+    private static final String[] ALL_COLUMNS = {
             BacklogDbHelper.COLUMN_ID,
             BacklogDbHelper.COLUMN_TITLE,
             BacklogDbHelper.COLUMN_CONTENT,
             BacklogDbHelper.COLUMN_STATUS
     };
+    private static BacklogLocalDataSource sInstance;
+    private SQLiteDatabase mDb;
+    private BacklogDbHelper mDbHelper;
 
     public BacklogLocalDataSource(Context context) {
-        helper = new BacklogDbHelper(context);
+        mDbHelper = new BacklogDbHelper(context);
     }
 
     public static BacklogLocalDataSource getInstance(@NonNull Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = new BacklogLocalDataSource(context);
+        if (sInstance == null) {
+            sInstance = new BacklogLocalDataSource(context);
         }
-        return INSTANCE;
+        return sInstance;
     }
 
     public void open() {
-        db = helper.getWritableDatabase();
+        mDb = mDbHelper.getWritableDatabase();
     }
 
     public void close() {
-        helper.close();
+        mDbHelper.close();
     }
 
     public void clearTable() {
-        helper.onUpgrade(db, 1, 1);
+        mDbHelper.onUpgrade(mDb, 1, 1);
     }
 
     @Override
@@ -61,14 +61,11 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         values.put(BacklogDbHelper.COLUMN_CONTENT, item.getContent());
         values.put(BacklogDbHelper.COLUMN_STATUS, item.getStatusId());
 
-        long id = db.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        long id = mDb.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
         close();
 
-        if (id != -1) {
-            return true;
-        }
-        return false;
+        return (id != -1);
     }
 
     @Override
@@ -77,7 +74,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
 
         String selection = BacklogDbHelper.COLUMN_ID + " LIKE ?";
         String[] selectionArguments = {id};
-        db.delete(BacklogDbHelper.TABLE_BACKLOGS, selection, selectionArguments);
+        mDb.delete(BacklogDbHelper.TABLE_BACKLOGS, selection, selectionArguments);
 
         close();
         // TODO: Might want to return a bool instead? Unnecessary to return BacklogItem deleted.
@@ -91,7 +88,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         String selection = BacklogDbHelper.COLUMN_ID + " LIKE ?";
         String[] selectionArgs = {id};
 
-        Cursor c = db.query(BacklogDbHelper.TABLE_BACKLOGS, allColumns, selection, selectionArgs, null, null, null);
+        Cursor c = mDb.query(BacklogDbHelper.TABLE_BACKLOGS, ALL_COLUMNS, selection, selectionArgs, null, null, null);
 
         BacklogItem backlogItem = null;
 
@@ -113,12 +110,13 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         return backlogItem;
     }
 
+    @NonNull
     @Override
     public List<BacklogItem> getAll() {
         open();
         List<BacklogItem> backlogItems = new ArrayList<BacklogItem>();
 
-        Cursor c = db.query(BacklogDbHelper.TABLE_BACKLOGS, allColumns, null, null, null, null, null);
+        Cursor c = mDb.query(BacklogDbHelper.TABLE_BACKLOGS, ALL_COLUMNS, null, null, null, null, null);
 
         if (c != null && c.getCount() > 0) {
             while (c.moveToNext()) {
@@ -145,7 +143,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
 
         String selection = BacklogDbHelper.COLUMN_STATUS + " LIKE ?";
         String[] selectionArgs = {statusId};
-        Cursor c = db.query(BacklogDbHelper.TABLE_BACKLOGS, allColumns, selection, selectionArgs, null, null, null);
+        Cursor c = mDb.query(BacklogDbHelper.TABLE_BACKLOGS, ALL_COLUMNS, selection, selectionArgs, null, null, null);
 
         if (c != null && c.getCount() > 0) {
             while (c.moveToNext()) {
