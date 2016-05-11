@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
 
 
@@ -38,7 +39,8 @@ public class AddEditBacklogActivity extends BaseActivity {
         setupToolbar();
 
         new AddEditBacklogPresenter(backlogFragment, mItemId, mStatusId,
-                BacklogItemRepository.getInstance(), BacklogStatusRepository.getInstance());
+                BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())),
+                BacklogStatusRepository.getInstance());
     }
 
     @Override

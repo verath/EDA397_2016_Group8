@@ -1,11 +1,12 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
+import java.util.UUID;
+
 /**
  * Model of a backlog item.
  */
 public class BacklogItem {
 
-    private static int sIdCounter = 0;
     private final String mId;
     private final String mContent;
     private final String mTitle;
@@ -19,8 +20,7 @@ public class BacklogItem {
      * @param statusId the status of the item
      */
     public BacklogItem(String title, String content, String statusId) {
-        this(String.valueOf(sIdCounter), title, content, statusId);
-        sIdCounter++;
+        this(UUID.randomUUID().toString(), title, content, statusId);
     }
 
     /**

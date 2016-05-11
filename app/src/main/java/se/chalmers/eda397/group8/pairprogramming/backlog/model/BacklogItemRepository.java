@@ -2,79 +2,69 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.model;
 
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Repository of backlog items.
+ * Repository of backlog items from the local database.
  */
 public class BacklogItemRepository implements BacklogItemDataSource {
 
     private static BacklogItemRepository sInstance;
-    private final Map<String, BacklogItem> mBacklog = new HashMap<>();
+    private final Map<String, BacklogItem> mCachedBacklog = new HashMap<>();
+    private final BacklogItemDataSource mBacklogLocalDataSource;
 
-    private BacklogItemRepository() {
-        mBacklog.clear();
+    private BacklogItemRepository(BacklogItemDataSource backlogLocalDataSource) {
+        mCachedBacklog.clear();
+        mBacklogLocalDataSource = backlogLocalDataSource;
 
-        // TODO: populate with real data
-        // Populate repository with dummy data:
-        List<BacklogStatus> statuses = BacklogStatusRepository.getInstance().getAll();
-        for (BacklogStatus status : statuses) {
-            for (int i = 0; i < 20; i++) {
-                BacklogItem item = new BacklogItem("Item " + (i + 1), "Content", status.getId());
-                mBacklog.put(item.getId(), item);
-            }
+        // Populate cache with data from local database
+        List<BacklogItem> backlogItems = mBacklogLocalDataSource.getAll();
+        for (BacklogItem backlogItem : backlogItems) {
+            mCachedBacklog.put(backlogItem.getId(), backlogItem);
         }
     }
 
-    public static BacklogItemRepository getInstance() {
+    public static BacklogItemRepository getInstance(@NonNull BacklogItemDataSource mBacklogLocalDataSource) {
         if (sInstance == null) {
-            sInstance = new BacklogItemRepository();
+            sInstance = new BacklogItemRepository(mBacklogLocalDataSource);
         }
         return sInstance;
     }
 
     @Override
-    public BacklogItem get(String id) {
-        return mBacklog.get(id);
+    public BacklogItem get(@NonNull String id) {
+        BacklogItem backlogItem = mCachedBacklog.get(id);
+        if (backlogItem != null) {
+            return backlogItem;
+        }
+
+        // Retrieve it from the local database if it's not in the cache
+        return mBacklogLocalDataSource.get(id);
     }
 
     @Override
-    public boolean save(BacklogItem item) {
-        mBacklog.put(item.getId(), item);
-        return true;
+    public boolean save(@NonNull BacklogItem item) {
+        mBacklogLocalDataSource.save(item);
+        return mCachedBacklog.put(item.getId(), item) != null;
     }
 
     @Override
-    public BacklogItem delete(String id) {
-        return mBacklog.remove(id);
+    public BacklogItem delete(@NonNull String id) {
+        mBacklogLocalDataSource.delete(id);
+        return mCachedBacklog.remove(id);
     }
 
     @NonNull
     @Override
     public List<BacklogItem> getAll() {
-        List<BacklogItem> items = new ArrayList<>();
-        Set<String> keys = mBacklog.keySet();
-        for (String key : keys) {
-            BacklogItem item = mBacklog.get(key);
-            items.add(item);
-        }
-        return items;
+        return mBacklogLocalDataSource.getAll();
     }
 
     @Override
     public List<BacklogItem> getAllByStatus(String statusId) {
-        List<BacklogItem> items = new ArrayList<>();
-        Set<String> keys = mBacklog.keySet();
-        for (String key : keys) {
-            BacklogItem item = mBacklog.get(key);
-            if (statusId.equals(item.getStatusId())) {
-                items.add(item);
-            }
-        }
-        return items;
+        return mBacklogLocalDataSource.getAllByStatus(statusId);
     }
+
 }
