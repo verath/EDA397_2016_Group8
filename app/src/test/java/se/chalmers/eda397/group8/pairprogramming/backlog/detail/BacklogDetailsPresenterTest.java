@@ -60,7 +60,6 @@ public class BacklogDetailsPresenterTest {
     }
 
     @Test
-    @Ignore
     public void clickEdit_displayEditItemView() {
         // When the edit button is clicked:
         mBacklogDetailPresenter.onEditItemClicked();
