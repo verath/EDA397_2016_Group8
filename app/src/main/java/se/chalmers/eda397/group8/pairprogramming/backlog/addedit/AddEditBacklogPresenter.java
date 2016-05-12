@@ -56,7 +56,7 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
         } else {
             item = new BacklogItem(title, content, status, page);
         }
-        if (page.isEmpty()){
+        if (page.isEmpty()) {
             item = new BacklogItem(title, content, status, "1");
 
         }

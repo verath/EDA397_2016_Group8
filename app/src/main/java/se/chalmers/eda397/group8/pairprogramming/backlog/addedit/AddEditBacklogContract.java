@@ -28,6 +28,6 @@ public interface AddEditBacklogContract {
     interface Presenter extends BasePresenter {
 
         void onSaveItem(@NonNull String title, @NonNull String content,
-                        @NonNull BacklogItem.Status status, @NonNull String page );
+                        @NonNull BacklogItem.Status status, @NonNull String page);
     }
 }

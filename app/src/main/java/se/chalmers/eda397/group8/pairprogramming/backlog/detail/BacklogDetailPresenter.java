@@ -1,8 +1,5 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 

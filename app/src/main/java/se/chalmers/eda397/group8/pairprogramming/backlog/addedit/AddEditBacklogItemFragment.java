@@ -133,7 +133,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         String title = mTitleEt.getText().toString();
         String desc = mDescEt.getText().toString();
         String page = mPageEt.getText().toString();
-        mPresenter.onSaveItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem(),page);
+        mPresenter.onSaveItem(title, desc, (BacklogItem.Status) mStatusSp.getSelectedItem(), page);
         return true;
     }
 

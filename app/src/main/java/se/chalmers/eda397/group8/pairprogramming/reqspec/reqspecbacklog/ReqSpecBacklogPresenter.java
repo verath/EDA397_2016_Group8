@@ -1,6 +1,5 @@
 package se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog;
 
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 
 public class ReqSpecBacklogPresenter implements ReqSpecBacklogContract.Presenter {
 
@@ -16,7 +15,7 @@ public class ReqSpecBacklogPresenter implements ReqSpecBacklogContract.Presenter
     @Override
     public void start() {
         // Only testing for PDF files in assets folder for now.
-        mView.showPDF("sample.pdf",mPage);
+        mView.showPDF("sample.pdf", mPage);
     }
 
 }

@@ -7,13 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.joanzapata.pdfview.PDFView;
-
-import java.io.File;
-
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailFragment;
+
 
 public class ReqSpecBacklogFragment extends Fragment implements ReqSpecBacklogContract.View {
 

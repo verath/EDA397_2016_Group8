@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +30,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     private TextView mStatusTv;
     private TextView mContentTv;
     private TextView mPageTv;
-    private Button pdfButton;
+    private Button mPdfButton;
 
     public BacklogDetailFragment() {
         // Required empty public constructor
@@ -65,9 +64,9 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
             fab.setOnClickListener(mFabEditBacklogItemClickListener);
         }
         //Setup the PDF button
-        pdfButton = (Button) view.findViewById(R.id.backlog_detail_link_button);
-        if(pdfButton != null) {
-            pdfButton.setOnClickListener(goToPdf);
+        mPdfButton = (Button) view.findViewById(R.id.backlog_detail_link_button);
+        if(mPdfButton != null) {
+            mPdfButton.setOnClickListener(mGoToPdf);
         }
 
         return view;
@@ -129,12 +128,10 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
 
     }
     @Override
-    public void showPdfPage (String page){
-
-
+    public void showPdfPage (String page) {
         startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(),page));
-
     }
+
     private final View.OnClickListener mFabEditBacklogItemClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -144,12 +141,11 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         }
     };
 
-    private final View.OnClickListener goToPdf = new View.OnClickListener() {
+    private final View.OnClickListener mGoToPdf = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mPresenter != null) {
+            if (mPresenter != null) {
                 String page = mPageTv.getText().toString();
-
                 showPdfPage(page);
             }
         }
