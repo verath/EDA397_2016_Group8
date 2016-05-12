@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog.ReqSpecBacklogActivity;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,7 +103,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
 
     @Override
     public void showEditView(String backlogItemId) {
-        startActivity(AddEditBacklogActivity.getCallingIntent(getContext(), backlogItemId));
+        startActivity(AddEditBacklogActivity.getCallingIntent(getContext(), backlogItemId, null));
     }
 
     @Override
@@ -112,24 +112,43 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     }
 
     @Override
-    public void showBacklogItem(BacklogItem backlogItem) {
+    public void showTitle(String title) {
         if (mTitleTv != null) {
-            mTitleTv.setText(backlogItem.getTitle());
+            mTitleTv.setText(title);
         }
-        if (mStatusTv != null) {
-            mStatusTv.setText(backlogItem.getStatus().getName(getContext()));
-        }
+    }
+
+    @Override
+    public void showContent(String content) {
         if (mContentTv != null) {
-            mContentTv.setText(backlogItem.getContent());
+            mContentTv.setText(content);
         }
-        if (mPageTv != null) {
-            mPageTv.setText(backlogItem.getPage());
+    }
+
+    @Override
+    public void showStatus(BacklogStatus status) {
+        if (mStatusTv != null) {
+            mStatusTv.setText(status.getName());
         }
 
     }
+
+    @Override
+    public void showPage(String page) {
+        if (mPageTv != null) {
+            mPageTv.setText(page);
+        }
+    }
+
     @Override
     public void showPdfPage(String page) {
         startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), page));
+    }
+
+    @Override
+    public void showMissingItemView() {
+        // TODO: handle better!
+        getActivity().finish();
     }
 
     private final View.OnClickListener mFabEditBacklogItemClickListener = new View.OnClickListener() {
@@ -137,7 +156,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         public void onClick(View v) {
             if (mPresenter != null) {
                 mPresenter.onEditItemClicked();
-           }
+            }
         }
     };
 

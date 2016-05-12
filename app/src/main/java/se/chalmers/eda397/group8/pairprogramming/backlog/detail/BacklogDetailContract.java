@@ -2,7 +2,7 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
 import se.chalmers.eda397.group8.pairprogramming.BasePresenter;
 import se.chalmers.eda397.group8.pairprogramming.BaseView;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 
 public interface BacklogDetailContract {
 
@@ -20,15 +20,17 @@ public interface BacklogDetailContract {
          */
         void showBacklog();
 
-        /**
-         * Shows the specified item
-         *
-         * @param backlogItem the backlog item to be displayed
-         */
-        void showBacklogItem(BacklogItem backlogItem);
-
         void showPdfPage(String page);
 
+        void showTitle(String title);
+
+        void showContent(String content);
+
+        void showStatus(BacklogStatus status);
+
+        void showPage(String page);
+
+        void showMissingItemView();
     }
 
     interface Presenter extends BasePresenter {

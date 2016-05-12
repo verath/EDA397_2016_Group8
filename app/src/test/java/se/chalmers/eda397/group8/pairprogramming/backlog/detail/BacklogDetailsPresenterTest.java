@@ -1,7 +1,6 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,6 +9,7 @@ import org.mockito.junit.MockitoRule;
 
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -23,15 +23,19 @@ public class BacklogDetailsPresenterTest {
     private BacklogItemDataSource mBacklogDataSource;
 
     @Mock
+    private BacklogStatusDataSource mStatusDataSource;
+
+    @Mock
     private BacklogDetailContract.View mBacklogDetailView;
 
     private BacklogDetailPresenter mBacklogDetailPresenter;
 
-    private final BacklogItem ITEM = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG, "1");
+    private final BacklogItem ITEM = new BacklogItem("Title", "Content", "2", "1");
 
     @Before
     public void setUpData() {
-        mBacklogDetailPresenter = new BacklogDetailPresenter(mBacklogDetailView, ITEM.getId(), mBacklogDataSource);
+        mBacklogDetailPresenter = new BacklogDetailPresenter(mBacklogDetailView, ITEM.getId(),
+                mBacklogDataSource, mStatusDataSource);
         given(mBacklogDataSource.get(ITEM.getId())).willReturn(ITEM);
     }
 
@@ -55,7 +59,6 @@ public class BacklogDetailsPresenterTest {
     }
 
     @Test
-    @Ignore
     public void clickEdit_displayEditItemView() {
         // When the edit button is clicked:
         mBacklogDetailPresenter.onEditItemClicked();

@@ -25,10 +25,9 @@ public class BacklogSwipeFragment extends Fragment {
 
     public interface Listener {
 
-        void onSwipeFragmentResume(BacklogItem.Status status);
+        void onSwipeFragmentResume(String statusId);
 
-        void onSwipeFragmentBacklogItemClicked(BacklogItem.Status status, BacklogItem backlogItem);
-
+        void onSwipeFragmentBacklogItemClicked(String statusId, BacklogItem backlogItem);
     }
 
     private Listener mListener;
@@ -38,10 +37,10 @@ public class BacklogSwipeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static BacklogSwipeFragment newInstance(BacklogItem.Status status) {
+    public static BacklogSwipeFragment newInstance(String statusId) {
         BacklogSwipeFragment fragment = new BacklogSwipeFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARGS_BACKLOG_STATUS, status);
+        args.putString(ARGS_BACKLOG_STATUS, statusId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,8 +84,8 @@ public class BacklogSwipeFragment extends Fragment {
         mAdapter.replaceData(items);
     }
 
-    private BacklogItem.Status getStatus() {
-        return (BacklogItem.Status) getArguments().getSerializable(ARGS_BACKLOG_STATUS);
+    private String getStatus() {
+        return getArguments().getString(ARGS_BACKLOG_STATUS);
     }
 
     private final BacklogItemAdapter.BacklogItemListener mBacklogItemListener = new BacklogItemAdapter.BacklogItemListener() {

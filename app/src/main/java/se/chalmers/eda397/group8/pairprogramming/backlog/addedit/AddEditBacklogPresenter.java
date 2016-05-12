@@ -2,49 +2,64 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
 
 public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter {
 
     private final AddEditBacklogContract.View mBacklogView;
-    private final BacklogItemDataSource mDataSource;
+    private final BacklogItemDataSource mItemDataSource;
+    private final BacklogStatusDataSource mStatusDataSource;
     private final String mItemId;
-    private final BacklogItem.Status mDefaultStatus;
+    private final String mDefaultStatusId;
 
     public AddEditBacklogPresenter(AddEditBacklogContract.View backlogView, String itemId,
-                                   BacklogItem.Status defaultStatus, BacklogItemDataSource dataSource) {
+                                   String defaultStatusId, BacklogItemDataSource itemDataSource,
+                                   BacklogStatusDataSource statusDataSource) {
         this.mBacklogView = backlogView;
-        this.mDataSource = dataSource;
+        this.mItemDataSource = itemDataSource;
+        this.mStatusDataSource = statusDataSource;
         this.mItemId = itemId;
-        this.mDefaultStatus = defaultStatus;
+        this.mDefaultStatusId = defaultStatusId;
         mBacklogView.setPresenter(this);
     }
 
     @Override
     public void start() {
+        List<BacklogStatus> statuses = mStatusDataSource.getAll();
+        mBacklogView.showStatuses(statuses);
         if (mItemId != null) {
-            BacklogItem item = mDataSource.get(mItemId);
+            BacklogItem item = mItemDataSource.get(mItemId);
             if (item == null) {
                 mBacklogView.showMissingBacklogItem();
             } else {
                 populateFields(item);
             }
-        } else if (mDefaultStatus != null) {
-            mBacklogView.showStatus(mDefaultStatus);
+        } else if (mDefaultStatusId != null) {
+            BacklogStatus status = mStatusDataSource.get(mDefaultStatusId);
+            if (status != null) {
+                mBacklogView.showSelectedStatus(status);
+            }
         }
     }
 
     private void populateFields(BacklogItem item) {
         mBacklogView.showTitle(item.getTitle());
         mBacklogView.showContent(item.getContent());
-        mBacklogView.showStatus(item.getStatus());
         mBacklogView.showPage(item.getPage());
+        BacklogStatus status = mStatusDataSource.get(item.getStatusId());
+        if (status != null) {
+            mBacklogView.showSelectedStatus(status);
+        }
     }
 
     @Override
     public void onSaveItem(@NonNull String title, @NonNull String content,
-                           @NonNull BacklogItem.Status status, @NonNull String page) {
+                           @NonNull String statusId, @NonNull String page) {
         if (title.isEmpty()) {
             mBacklogView.showTitleEmptyError();
             return;
@@ -52,15 +67,11 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
         BacklogItem item;
         if (mItemId != null) {
-            item = new BacklogItem(mItemId, title, content, status, page);
+            item = new BacklogItem(mItemId, title, content, statusId, page);
         } else {
-            item = new BacklogItem(title, content, status, page);
+            item = new BacklogItem(title, content, statusId, page);
         }
-        if (page.isEmpty()) {
-            item = new BacklogItem(title, content, status, "1");
-
-        }
-        mDataSource.save(item);
+        mItemDataSource.save(item);
         mBacklogView.showBacklog();
     }
 }
