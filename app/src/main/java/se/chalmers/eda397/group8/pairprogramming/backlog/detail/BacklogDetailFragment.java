@@ -65,7 +65,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         }
         //Setup the PDF button
         mPdfButton = (Button) view.findViewById(R.id.backlog_detail_link_button);
-        if(mPdfButton != null) {
+        if (mPdfButton != null) {
             mPdfButton.setOnClickListener(mGoToPdf);
         }
 
@@ -128,8 +128,8 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
 
     }
     @Override
-    public void showPdfPage (String page) {
-        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(),page));
+    public void showPdfPage(String page) {
+        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), page));
     }
 
     private final View.OnClickListener mFabEditBacklogItemClickListener = new View.OnClickListener() {
