@@ -19,12 +19,13 @@ public class AddEditBacklogPresenterTest {
 
     private static final String TEST_ITEM_TITLE = "Title";
     private static final String TEST_ITEM_CONTENT = "Content";
+    private static final String TEST_ITEM_PAGE = "1";
     private static final BacklogItem.Status TEST_ITEM_STATUS = BacklogItem.Status.READY_FOR_TEST;
     private static final BacklogItem.Status TEST_ITEM_STATUS_OTHER = BacklogItem.Status.DONE;
     private static final String INVALID_ITEM_ID = "";
 
     private static final BacklogItem ITEM = new BacklogItem(TEST_ITEM_TITLE,
-            TEST_ITEM_CONTENT, TEST_ITEM_STATUS);
+            TEST_ITEM_CONTENT, TEST_ITEM_STATUS, TEST_ITEM_PAGE);
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -101,7 +102,7 @@ public class AddEditBacklogPresenterTest {
         mPresenter = new AddEditBacklogPresenter(mView, null, null, mDataSource);
 
         // When the save button is clicked
-        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS);
+        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS, TEST_ITEM_PAGE);
 
         // Then the item is saved and the view is notified
         verify(mDataSource).save(any(BacklogItem.class));
@@ -114,7 +115,7 @@ public class AddEditBacklogPresenterTest {
         mPresenter = new AddEditBacklogPresenter(mView, ITEM.getId(), null, mDataSource);
 
         // When the save button is clicked
-        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS);
+        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS, TEST_ITEM_PAGE);
 
         // Then the item is saved and the view is notified
         verify(mDataSource).save(any(BacklogItem.class));
@@ -127,7 +128,7 @@ public class AddEditBacklogPresenterTest {
         mPresenter = new AddEditBacklogPresenter(mView, null, null, mDataSource);
 
         // When the save button is clicked for an empty item
-        mPresenter.onSaveItem("", "", TEST_ITEM_STATUS);
+        mPresenter.onSaveItem("", "", TEST_ITEM_STATUS, "");
 
         // Then the view is notified and the item is not saved
         verify(mView).showTitleEmptyError();

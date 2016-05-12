@@ -54,7 +54,7 @@ public class BacklogPresenterTest {
     @Test
     public void clickItem_showItemDetails() {
         // Given an item:
-        BacklogItem item = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG);
+        BacklogItem item = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG, "1");
 
         // When item is clicked:
         mBacklogPresenter.onBacklogItemClicked(item);

@@ -27,7 +27,7 @@ public class BacklogDetailsPresenterTest {
 
     private BacklogDetailPresenter mBacklogDetailPresenter;
 
-    private final BacklogItem ITEM = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG);
+    private final BacklogItem ITEM = new BacklogItem("Title", "Content", BacklogItem.Status.BACKLOG, "1");
 
     @Before
     public void setUpData() {
