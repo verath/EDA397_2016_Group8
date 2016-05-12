@@ -72,4 +72,5 @@ public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailCont
                 .load();
     }
 
+
 }

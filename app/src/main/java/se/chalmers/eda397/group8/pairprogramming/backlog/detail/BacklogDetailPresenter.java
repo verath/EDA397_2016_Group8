@@ -5,12 +5,14 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSo
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
 
+
 public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
 
     private final BacklogDetailContract.View mDetailView;
     private final BacklogItemDataSource mItemDataSource;
     private final BacklogStatusDataSource mStatusDataSource;
     private final String mBacklogItemId;
+    private BacklogItem mBacklogItem;
 
     public BacklogDetailPresenter(BacklogDetailContract.View mDetailView, String backlogItemId,
                                   BacklogItemDataSource itemDataSource,
@@ -24,15 +26,16 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
 
     @Override
     public void start() {
+        mBacklogItem = mItemDataSource.get(mBacklogItemId);
         populateFields();
     }
 
     private void populateFields() {
-        BacklogItem item = mItemDataSource.get(mBacklogItemId);
-        if (item != null) {
-            mDetailView.showTitle(item.getTitle());
-            mDetailView.showContent(item.getContent());
-            BacklogStatus status = mStatusDataSource.get(item.getStatusId());
+        if (mBacklogItem != null) {
+            mDetailView.showTitle(mBacklogItem.getTitle());
+            mDetailView.showContent(mBacklogItem.getContent());
+            mDetailView.showPage(mBacklogItem.getPage());
+            BacklogStatus status = mStatusDataSource.get(mBacklogItem.getStatusId());
             if (status != null) {
                 mDetailView.showStatus(status);
             }
@@ -51,4 +54,11 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
     public void onEditItemClicked() {
         mDetailView.showEditView(mBacklogItemId);
     }
+
+    @Override
+    public void onGoToPdfClicked() {
+        mDetailView.showPdfPage(mBacklogItem.getPage());
+    }
+
+
 }

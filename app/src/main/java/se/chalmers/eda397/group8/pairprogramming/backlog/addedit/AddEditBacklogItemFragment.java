@@ -30,6 +30,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private EditText mTitleEt;
     private EditText mDescEt;
     private Spinner mStatusSp;
+    private EditText mPageEt;
     private ArrayAdapter<BacklogStatus> mStatusAdapter;
 
     public AddEditBacklogItemFragment() {
@@ -63,6 +64,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
 
         mTitleEt = (EditText) view.findViewById(R.id.backlog_title_textfield);
         mDescEt = (EditText) view.findViewById(R.id.backlog_description_text_field);
+        mPageEt = (EditText) view.findViewById(R.id.page_number_textfield);
 
         return view;
     }
@@ -131,12 +133,17 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         Toast.makeText(getContext(), R.string.backlog_item_does_not_exist, Toast.LENGTH_LONG).show();
         getActivity().finish();
     }
+    @Override
+    public void showPage(String page) {
+        mPageEt.setText(page);
+    }
 
     private boolean addBacklogItem() {
         String title = mTitleEt.getText().toString();
         String desc = mDescEt.getText().toString();
+        String page = mPageEt.getText().toString();
         String statusId = ((BacklogStatus) mStatusSp.getSelectedItem()).getId();
-        mPresenter.onSaveItem(title, desc, statusId);
+        mPresenter.onSaveItem(title, desc, statusId, page);
         return true;
     }
 

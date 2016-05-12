@@ -25,6 +25,9 @@
         <activity
             android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs.ReqSpecsActivity"
             android:label="@string/title_activity_req_specs" />
+        <activity
+            android:name="se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog.ReqSpecBacklogActivity"
+            android:label="@string/title_activity_req_specs" />
 
         <!-- Notes -->
         <activity
@@ -42,7 +45,7 @@
             android:name="se.chalmers.eda397.group8.pairprogramming.backlog.BacklogActivity"
             android:label="@string/title_activity_backlog" />
         <activity
-            android:name=".backlog.addedit.AddEditBacklogActivity"
+            android:name="se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity"
             android:label="@string/title_activity_add_backlog" />
         <activity
             android:name="se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity"
@@ -52,7 +55,8 @@
         <activity
             android:name="se.chalmers.eda397.group8.pairprogramming.timer.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:parentActivityName="se.chalmers.eda397.group8.pairprogramming.MainActivity" />
+            android:parentActivityName=".MainActivity" />
+
         <service
             android:name="se.chalmers.eda397.group8.pairprogramming.timer.TimerService"
             android:enabled="true"

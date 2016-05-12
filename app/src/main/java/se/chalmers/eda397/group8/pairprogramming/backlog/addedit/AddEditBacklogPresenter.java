@@ -50,6 +50,7 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
     private void populateFields(BacklogItem item) {
         mBacklogView.showTitle(item.getTitle());
         mBacklogView.showContent(item.getContent());
+        mBacklogView.showPage(item.getPage());
         BacklogStatus status = mStatusDataSource.get(item.getStatusId());
         if (status != null) {
             mBacklogView.showSelectedStatus(status);
@@ -58,7 +59,7 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void onSaveItem(@NonNull String title, @NonNull String content,
-                           @NonNull String statusId) {
+                           @NonNull String statusId, @NonNull String page) {
         if (title.isEmpty()) {
             mBacklogView.showTitleEmptyError();
             return;
@@ -66,9 +67,9 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
         BacklogItem item;
         if (mItemId != null) {
-            item = new BacklogItem(mItemId, title, content, statusId);
+            item = new BacklogItem(mItemId, title, content, statusId, page);
         } else {
-            item = new BacklogItem(title, content, statusId);
+            item = new BacklogItem(title, content, statusId, page);
         }
         mItemDataSource.save(item);
         mBacklogView.showBacklog();

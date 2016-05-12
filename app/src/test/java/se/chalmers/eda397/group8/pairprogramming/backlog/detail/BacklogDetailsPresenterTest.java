@@ -1,7 +1,6 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.detail;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,7 +30,7 @@ public class BacklogDetailsPresenterTest {
 
     private BacklogDetailPresenter mBacklogDetailPresenter;
 
-    private final BacklogItem ITEM = new BacklogItem("Title", "Content", "2");
+    private final BacklogItem ITEM = new BacklogItem("Title", "Content", "2", "1");
 
     @Before
     public void setUpData() {

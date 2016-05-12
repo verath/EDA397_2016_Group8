@@ -12,11 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.addedit.AddEditBacklogActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog.ReqSpecBacklogActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +29,8 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     private TextView mTitleTv;
     private TextView mStatusTv;
     private TextView mContentTv;
+    private TextView mPageTv;
+    private Button mPdfButton;
 
     public BacklogDetailFragment() {
         // Required empty public constructor
@@ -52,11 +56,17 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         mTitleTv = (TextView) view.findViewById(R.id.backlog_detail_title);
         mStatusTv = (TextView) view.findViewById(R.id.backlog_detail_status);
         mContentTv = (TextView) view.findViewById(R.id.backlog_detail_text);
+        mPageTv = (TextView) view.findViewById(R.id.backlog_detail_page);
 
         // Setup the add FAB
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_backlog_item);
         if (fab != null) {
             fab.setOnClickListener(mFabEditBacklogItemClickListener);
+        }
+        //Setup the PDF button
+        mPdfButton = (Button) view.findViewById(R.id.backlog_detail_link_button);
+        if (mPdfButton != null) {
+            mPdfButton.setOnClickListener(mGoToPdf);
         }
 
         return view;
@@ -77,6 +87,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_delete_backlog_item, menu);
+
     }
 
     @Override
@@ -119,6 +130,19 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         if (mStatusTv != null) {
             mStatusTv.setText(status.getName());
         }
+
+    }
+
+    @Override
+    public void showPage(String page) {
+        if (mPageTv != null) {
+            mPageTv.setText(page);
+        }
+    }
+
+    @Override
+    public void showPdfPage(String page) {
+        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), page));
     }
 
     @Override
@@ -135,4 +159,15 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
             }
         }
     };
+
+    private final View.OnClickListener mGoToPdf = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mPresenter != null) {
+                mPresenter.onGoToPdfClicked();
+            }
+        }
+
+    };
+
 }

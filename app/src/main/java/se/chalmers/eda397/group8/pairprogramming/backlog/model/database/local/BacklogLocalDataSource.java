@@ -22,7 +22,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             BacklogDbHelper.COLUMN_ID,
             BacklogDbHelper.COLUMN_TITLE,
             BacklogDbHelper.COLUMN_CONTENT,
-            BacklogDbHelper.COLUMN_STATUS
+            BacklogDbHelper.COLUMN_STATUS_ID,
+            BacklogDbHelper.COLUMN_PAGE
     };
     private static BacklogLocalDataSource sInstance;
     private SQLiteDatabase mDb;
@@ -59,7 +60,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         values.put(BacklogDbHelper.COLUMN_ID, item.getId());
         values.put(BacklogDbHelper.COLUMN_TITLE, item.getTitle());
         values.put(BacklogDbHelper.COLUMN_CONTENT, item.getContent());
-        values.put(BacklogDbHelper.COLUMN_STATUS, item.getStatusId());
+        values.put(BacklogDbHelper.COLUMN_STATUS_ID, item.getStatusId());
+        values.put(BacklogDbHelper.COLUMN_PAGE, item.getPage());
 
         long id = mDb.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
@@ -98,8 +100,9 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
             String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
             String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-            String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS));
-            backlogItem = new BacklogItem(itemId, title, content, status);
+            String statusId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
+            String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+            backlogItem = new BacklogItem(itemId, title, content, statusId, page);
         }
         if (c != null) {
             c.close();
@@ -123,8 +126,9 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
                 String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS));
-                backlogItems.add(new BacklogItem(itemId, title, content, status));
+                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
+                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
             }
         }
         if (c != null) {
@@ -141,7 +145,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         open();
         List<BacklogItem> backlogItems = new ArrayList<BacklogItem>();
 
-        String selection = BacklogDbHelper.COLUMN_STATUS + " LIKE ?";
+        String selection = BacklogDbHelper.COLUMN_STATUS_ID + " LIKE ?";
         String[] selectionArgs = {statusId};
         Cursor c = mDb.query(BacklogDbHelper.TABLE_BACKLOGS, ALL_COLUMNS, selection, selectionArgs, null, null, null);
 
@@ -150,8 +154,9 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
                 String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS));
-                backlogItems.add(new BacklogItem(itemId, title, content, status));
+                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
+                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
             }
         }
         if (c != null) {

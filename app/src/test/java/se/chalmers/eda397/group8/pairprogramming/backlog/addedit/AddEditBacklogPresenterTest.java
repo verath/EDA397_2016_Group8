@@ -21,12 +21,13 @@ public class AddEditBacklogPresenterTest {
 
     private static final String TEST_ITEM_TITLE = "Title";
     private static final String TEST_ITEM_CONTENT = "Content";
+    private static final String TEST_ITEM_PAGE = "1";
     private static final String TEST_ITEM_STATUS_ID = "1";
     private static final String TEST_ITEM_STATUS_OTHER_ID = "2";
     private static final String INVALID_ITEM_ID = "";
 
     private static final BacklogItem ITEM = new BacklogItem(TEST_ITEM_TITLE,
-            TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID);
+            TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID, TEST_ITEM_PAGE);
     private static final BacklogStatus STATUS = new BacklogStatus(TEST_ITEM_STATUS_ID, "Backlog");
     private static final BacklogStatus OTHER_STATUS = new BacklogStatus(TEST_ITEM_STATUS_OTHER_ID, "Invalid");
 
@@ -115,7 +116,7 @@ public class AddEditBacklogPresenterTest {
                 mStatusDataSource);
 
         // When the save button is clicked
-        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID);
+        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID, TEST_ITEM_PAGE);
 
         // Then the item is saved and the view is notified
         verify(mItemDataSource).save(any(BacklogItem.class));
@@ -129,7 +130,7 @@ public class AddEditBacklogPresenterTest {
                 mStatusDataSource);
 
         // When the save button is clicked
-        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID);
+        mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID, TEST_ITEM_PAGE);
 
         // Then the item is saved and the view is notified
         verify(mItemDataSource).save(any(BacklogItem.class));
@@ -143,7 +144,7 @@ public class AddEditBacklogPresenterTest {
                 mStatusDataSource);
 
         // When the save button is clicked for an empty item
-        mPresenter.onSaveItem("", "", TEST_ITEM_STATUS_ID);
+        mPresenter.onSaveItem("", "", TEST_ITEM_STATUS_ID, "");
 
         // Then the view is notified and the item is not saved
         verify(mView).showTitleEmptyError();

@@ -20,11 +20,15 @@ public interface BacklogDetailContract {
          */
         void showBacklog();
 
+        void showPdfPage(String page);
+
         void showTitle(String title);
 
         void showContent(String content);
 
         void showStatus(BacklogStatus status);
+
+        void showPage(String page);
 
         void showMissingItemView();
     }
@@ -40,5 +44,7 @@ public interface BacklogDetailContract {
          * When edit is clicked.
          */
         void onEditItemClicked();
+
+        void onGoToPdfClicked();
     }
 }

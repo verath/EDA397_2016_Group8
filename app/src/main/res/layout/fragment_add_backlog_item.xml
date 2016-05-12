@@ -20,6 +20,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/page_number_textfield"
+        android:hint="page number"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/backlog_description_text_field"
         android:hint="@string/description" />
 
@@ -36,5 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backlog_status_spinner" />
+
+
+
 
 </LinearLayout>
