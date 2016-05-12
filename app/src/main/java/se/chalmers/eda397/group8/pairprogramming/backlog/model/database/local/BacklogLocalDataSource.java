@@ -127,7 +127,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
                 String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-                backlogItems.add(new BacklogItem(itemId, title, content, status));
+                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
             }
         }
         if (c != null) {
@@ -154,7 +155,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
                 String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-                backlogItems.add(new BacklogItem(itemId, title, content, status));
+                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
             }
         }
         if (c != null) {
