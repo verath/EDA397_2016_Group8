@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.joanzapata.pdfview.PDFView;
+
 import se.chalmers.eda397.group8.pairprogramming.R;
 
 
@@ -42,14 +44,15 @@ public class ReqSpecBacklogFragment extends Fragment implements ReqSpecBacklogCo
     }
 
 
-
     @Override
     public void showPDF(String file, String page) {
-        mPdfView.fromAsset(file)
-                .defaultPage(Integer.parseInt(page))
+        PDFView.Configurator configurator = mPdfView.fromAsset(file)
                 .enableSwipe(true)
-                .showMinimap(true)
-                .load();
+                .showMinimap(true);
+        if (page != null && !page.isEmpty()) {
+            configurator.defaultPage(Integer.parseInt(page));
+        }
+        configurator.load();
     }
 
 }

@@ -14,7 +14,6 @@ import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificatio
 public class ReqSpecBacklogActivity extends BaseActivity {
 
     private final static String INTENT_EXTRA_PARAM_PAGE_NUMBER = "group8.eda397.chalmers.se.pairprogramming.INTENT_EXTRA_PARAM_PAGE_NUMBER";
-    private RequirementSpecification mRequirementSpecification;
     private String mPage;
 
     @Override
@@ -36,8 +35,6 @@ public class ReqSpecBacklogActivity extends BaseActivity {
 
     public static Intent getCallingIntent(Context context, String page) {
         Intent intent = new Intent(context, ReqSpecBacklogActivity.class);
-
-
         intent.putExtra(INTENT_EXTRA_PARAM_PAGE_NUMBER, page);
         return intent;
     }

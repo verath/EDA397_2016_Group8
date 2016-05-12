@@ -45,11 +45,6 @@ public interface BacklogDetailContract {
          */
         void onEditItemClicked();
 
-         /*
-        *
-        * When show is clicked.
-        * */
-
-
+        void onGoToPdfClicked();
     }
 }

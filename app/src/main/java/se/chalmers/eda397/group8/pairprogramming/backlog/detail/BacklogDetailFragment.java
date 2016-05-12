@@ -164,8 +164,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         @Override
         public void onClick(View v) {
             if (mPresenter != null) {
-                String page = mPageTv.getText().toString();
-                showPdfPage(page);
+                mPresenter.onGoToPdfClicked();
             }
         }
 
