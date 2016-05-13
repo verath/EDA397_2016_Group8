@@ -21,7 +21,7 @@ class BacklogStatusPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         BacklogStatus status = mBacklogStatuses.get(position);
-        return BacklogSwipeFragment.newInstance(status.getId());
+        return BacklogStatusFragment.newInstance(status.getId());
     }
 
     /**

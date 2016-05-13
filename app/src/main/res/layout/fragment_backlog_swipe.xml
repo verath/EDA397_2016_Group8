@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:listitem="@layout/item_backlog"
-    tools:context="se.chalmers.eda397.group8.pairprogramming.backlog.BacklogSwipeFragment">
+    tools:context=".backlog.BacklogStatusFragment">
 
 </android.support.v7.widget.RecyclerView>

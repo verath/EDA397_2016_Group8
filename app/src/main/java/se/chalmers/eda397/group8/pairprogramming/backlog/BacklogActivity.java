@@ -6,7 +6,10 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogItemLocalDataSource;
 
 
 public class BacklogActivity extends BaseActivity {
@@ -29,5 +32,12 @@ public class BacklogActivity extends BaseActivity {
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, BacklogActivity.class);
+    }
+
+    public void createBacklogStatusPresenter(BacklogStatusFragment backlogStatusFragment, String statusId) {
+        BacklogItemLocalDataSource localDataSource = BacklogItemLocalDataSource.getInstance(getApplicationContext());
+        BacklogItemDataSource dataSource = BacklogItemRepository.getInstance(localDataSource);
+
+        new BacklogStatusPresenter(backlogStatusFragment, dataSource, statusId);
     }
 }

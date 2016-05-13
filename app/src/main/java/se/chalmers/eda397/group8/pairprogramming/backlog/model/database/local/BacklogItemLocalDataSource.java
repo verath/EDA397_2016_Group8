@@ -16,7 +16,7 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSo
  * A data source implemented as a database for BacklogItem,
  * with the basic functions for persistent storage (CRUD).
  */
-public class BacklogLocalDataSource implements BacklogItemDataSource {
+public class BacklogItemLocalDataSource implements BacklogItemDataSource {
 
     private static final String[] ALL_COLUMNS = {
             BacklogDbHelper.COLUMN_ID,
@@ -25,17 +25,17 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             BacklogDbHelper.COLUMN_STATUS_ID,
             BacklogDbHelper.COLUMN_PAGE
     };
-    private static BacklogLocalDataSource sInstance;
+    private static BacklogItemLocalDataSource sInstance;
     private SQLiteDatabase mDb;
     private BacklogDbHelper mDbHelper;
 
-    public BacklogLocalDataSource(Context context) {
+    public BacklogItemLocalDataSource(Context context) {
         mDbHelper = new BacklogDbHelper(context);
     }
 
-    public static BacklogLocalDataSource getInstance(@NonNull Context context) {
+    public static BacklogItemLocalDataSource getInstance(@NonNull Context context) {
         if (sInstance == null) {
-            sInstance = new BacklogLocalDataSource(context);
+            sInstance = new BacklogItemLocalDataSource(context);
         }
         return sInstance;
     }

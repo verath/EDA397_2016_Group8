@@ -121,5 +121,4 @@ public class BacklogFragment extends Fragment implements BacklogContract.View {
         }
     };
 
-
 }

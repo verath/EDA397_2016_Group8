@@ -1,7 +1,8 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog;
 
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,41 +15,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.backlog.detail.BacklogDetailActivity;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class BacklogSwipeFragment extends Fragment {
+public class BacklogStatusFragment extends Fragment implements BacklogStatusContract.View {
 
-    private static final String ARGS_BACKLOG_STATUS = "group8.eda397.chalmers.se.pairprogramming.ARGS_BACKLOG_STATUS";
+    private static final String ARG_STATUS_ID = "status_id";
 
-    public interface Listener {
-
-        void onSwipeFragmentResume(String statusId);
-
-        void onSwipeFragmentBacklogItemClicked(String statusId, BacklogItem backlogItem);
-    }
-
-    private Listener mListener;
     private BacklogItemAdapter mAdapter;
+    private BacklogStatusContract.Presenter mPresenter;
 
-    public BacklogSwipeFragment() {
+    public BacklogStatusFragment() {
         // Required empty public constructor
     }
 
-    public static BacklogSwipeFragment newInstance(String statusId) {
-        BacklogSwipeFragment fragment = new BacklogSwipeFragment();
+    public static BacklogStatusFragment newInstance(String statusId) {
+        BacklogStatusFragment fragment = new BacklogStatusFragment();
         Bundle args = new Bundle();
-        args.putString(ARGS_BACKLOG_STATUS, statusId);
+        args.putString(ARG_STATUS_ID, statusId);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void setPresenter(@NonNull BacklogStatusContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new BacklogItemAdapter(new ArrayList<BacklogItem>(), mBacklogItemListener);
+
+        Bundle args = getArguments();
+        if (args == null || !args.containsKey(ARG_STATUS_ID)) {
+            throw new IllegalArgumentException("Invalid Fragment arguments");
+        }
+        String statusId = args.getString(ARG_STATUS_ID);
+
+        // TODO: solve some other way? This is kind of ugly...
+        ((BacklogActivity) getActivity()).createBacklogStatusPresenter(this, statusId);
     }
 
     @Override
@@ -68,31 +74,25 @@ public class BacklogSwipeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mListener != null) {
-            mListener.onSwipeFragmentResume(getStatus());
-        }
+        mPresenter.start();
     }
 
-    public void setListener(@Nullable Listener listener) {
-        mListener = listener;
-        if (mListener != null && isResumed()) {
-            mListener.onSwipeFragmentResume(getStatus());
-        }
-    }
-
+    @Override
     public void showItems(List<BacklogItem> items) {
         mAdapter.replaceData(items);
     }
 
-    private String getStatus() {
-        return getArguments().getString(ARGS_BACKLOG_STATUS);
+    @Override
+    public void showBacklogItemDetails(String backlogItemId) {
+        Intent intent = BacklogDetailActivity.getCallingIntent(getContext(), backlogItemId);
+        startActivity(intent);
     }
 
     private final BacklogItemAdapter.BacklogItemListener mBacklogItemListener = new BacklogItemAdapter.BacklogItemListener() {
         @Override
         public void onBacklogItemClick(BacklogItem item) {
-            if (mListener != null && item != null) {
-                mListener.onSwipeFragmentBacklogItemClicked(getStatus(), item);
+            if (mPresenter != null && item != null) {
+                mPresenter.onBacklogItemClicked(item);
             }
         }
     };

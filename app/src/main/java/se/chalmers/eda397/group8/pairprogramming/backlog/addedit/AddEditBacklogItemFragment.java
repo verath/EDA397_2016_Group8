@@ -133,6 +133,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         Toast.makeText(getContext(), R.string.backlog_item_does_not_exist, Toast.LENGTH_LONG).show();
         getActivity().finish();
     }
+
     @Override
     public void showPage(String page) {
         mPageEt.setText(page);
