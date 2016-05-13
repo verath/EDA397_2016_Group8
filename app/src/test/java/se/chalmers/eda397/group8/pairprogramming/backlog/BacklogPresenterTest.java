@@ -7,12 +7,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.verify;
 
@@ -20,9 +17,6 @@ public class BacklogPresenterTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
-
-    @Mock
-    private BacklogItemDataSource mBacklogDataSource;
 
     @Mock
     private BacklogStatusDataSource mStatusDataSource;
@@ -34,37 +28,26 @@ public class BacklogPresenterTest {
 
     @Before
     public void setupDetailPresenter() {
-        mBacklogPresenter = new BacklogPresenter(mBacklogView, mBacklogDataSource, mStatusDataSource);
+        mBacklogPresenter = new BacklogPresenter(mBacklogView, mStatusDataSource);
     }
 
     @Test
     public void resume_displayBacklog() {
-        // When we resume:
-        mBacklogPresenter.onSwipeFragmentResume(any(String.class));
+        // When the presenter is resumed
+        mBacklogPresenter.start();
 
-        // Then view should display backlog and fetch the items to display:
-        verify(mBacklogView).showBacklogForStatus(any(BacklogStatus.class), anyListOf(BacklogItem.class));
-        verify(mBacklogDataSource).getAllByStatus(any(String.class));
+        // Then statuses should be fetched from the data source and view notified
+        verify(mStatusDataSource).getAll();
+        verify(mBacklogView).showBacklogStatuses(anyListOf(BacklogStatus.class));
     }
 
     @Test
     public void clickAdd_showAddView() {
-        // When add new item is clicked:
-        mBacklogPresenter.onAddClicked();
+        // When the add button is clicked for a specific BacklogStatus
+        BacklogStatus status = new BacklogStatus("test");
+        mBacklogPresenter.onAddClicked(status);
 
-        // Then view for adding items should be displayed:
-        verify(mBacklogView).showAddBacklogItemView();
-    }
-
-    @Test
-    public void clickItem_showItemDetails() {
-        // Given an item:
-        BacklogItem item = new BacklogItem("Title", "Content", "2", "1");
-
-        // When item is clicked:
-        mBacklogPresenter.onBacklogItemClicked(item);
-
-        // Then view for item details should be displayed:
-        verify(mBacklogView).showBacklogItemDetails(item.getId());
+        // Then view for adding items should be displayed, including the status id
+        verify(mBacklogView).showAddBacklogItemView(status.getId());
     }
 }
