@@ -17,6 +17,9 @@ public class BacklogStatusRepository implements BacklogStatusDataSource {
         save(new BacklogStatus("2", "Ongoing"));
         save(new BacklogStatus("3", "Ready for testing"));
         save(new BacklogStatus("4", "Done"));
+        save(new BacklogStatus("5", "More done!"));
+        save(new BacklogStatus("6", "So done!"));
+        save(new BacklogStatus("7", "Donest"));
     }
 
     public static BacklogStatusDataSource getInstance() {
