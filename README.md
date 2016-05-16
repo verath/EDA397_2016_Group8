@@ -26,19 +26,11 @@ The application has a couple of features, as visualized below:
 
 | Image          | Description
 | -------------- | --------------
-| ![Main Screen][main-screen] | Main screen!
-| ![Notes Screen][notes-screen] | Notes screen!
-| ![Backlog Screen][backlog-screen] | Backlog screen!
-| ![Backlog Add Screen][backlog-add-screen] | Backlog add screen!
-| ![Requirements Screen][requirements-screen] | Requirements screen!
-| ![Timer Screen][timer-screen] | Timer screen!
+| <img src="/docs/screenshot-main-2016-05-16.png" height="500"> |  Main screen!
+| <img src="/docs/screenshot-notes-2016-05-16.png" height="500"> | Notes screen!
+| <img src="/docs/screenshot-backlog-2016-05-16.png" height="500"> | Backlog screen!
+| <img src="/docs/screenshot-backlog-add-2016-05-16.png" height="500"> | Backlog add screen!
+| <img src="/docs/screenshot-requirements-2016-05-16.png" height="500"> | Requirements screen!
+| <img src="/docs/screenshot-timer-2016-05-16.png" height="500"> | Timer screen!
 
-
-
-[main-screen]: docs/screenshot-main-2016-05-16.png
-[notes-screen]: docs/screenshot-notes-2016-05-16.png
-[backlog-screen]: docs/screenshot-backlog-2016-05-16.png
-[backlog-add-screen]: docs/screenshot-backlog-add-2016-05-16.png
-[requirements-screen]: docs/screenshot-requirements-2016-05-16.png
-[timer-screen]: docs/screenshot-timer-2016-05-16.png
 
