@@ -8,6 +8,7 @@ import android.os.Bundle;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.note.NoteRepository;
+import se.chalmers.eda397.group8.pairprogramming.note.database.local.NoteLocalDataSource;
 
 /**
  * The note detail activity. The activity is to be started with
@@ -46,7 +47,8 @@ public class NoteDetailActivity extends BaseActivity {
         setupToolbar();
 
         // Create the presenter
-        new NoteDetailPresenter(NoteRepository.getInstance(), mNoteId, noteDetailFragment);
+        new NoteDetailPresenter(NoteRepository.getInstance(NoteLocalDataSource.getInstance(getApplicationContext())),
+                mNoteId, noteDetailFragment);
     }
 
     @Override
