@@ -19,7 +19,7 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PAGE = "page";
 
     private static final String DATABASE_NAME = "backlogs.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // SQL statement to create database
     private static final String DATABASE_CREATE = "CREATE TABLE "
