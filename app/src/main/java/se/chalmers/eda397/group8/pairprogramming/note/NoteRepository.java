@@ -8,62 +8,70 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import se.chalmers.eda397.group8.pairprogramming.note.database.local.NoteLocalDataSource;
+
 /**
  * The NoteRepository is an implementation of the NoteDataSource,
  * providing access to Note data. Following the google sample, this
  * class should likely delegate to other sources, depending on the
  * operation and state of the cache.
- * <p/>
+ * <p>
  * However, for now the NoteRepository uses only an in-memory cache.
  */
 public class NoteRepository implements NoteDataSource {
 
-    // This is (apparently) how one "should" do singletons now,
-    // see https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
-    private static class NoteRepositoryHolder {
-        public static final NoteRepository instance = new NoteRepository();
-    }
-
-    private NoteRepository() {
-        // Singleton, use #getInstance
-    }
-
-    public static NoteRepository getInstance() {
-        return NoteRepositoryHolder.instance;
-    }
-
+    private static NoteRepository sInstance;
     private final static Map<String, Note> mDummyNotes = new HashMap<>();
+    private final NoteDataSource mNoteDataSource;
 
-    static {
-        for (int i = 1; i <= 10; i++) {
-            Note note = new Note("Note " + i, "Lorem ipsum dolor sit amet, consectetur "
-                    + "adipiscing elit. Maecenas velit lectus, convallis non lectus id, "
-                    + "aliquet auctor turpis. Quisque luctus.");
+    /**
+     * // This is (apparently) how one "should" do singletons now,
+     * // see https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
+     * private static class NoteRepositoryHolder {
+     * public static final NoteRepository instance = new NoteRepository();
+     * }
+     */
 
-            mDummyNotes.put(note.getId(), note);
+    private NoteRepository(NoteDataSource noteDataSource) {
+        mNoteDataSource = noteDataSource;
+        List<Note> notes = mNoteDataSource.getAll();
+        for (Note n : notes) {
+            mDummyNotes.put(n.getId(), n);
         }
+    }
+
+    public static NoteRepository getInstance(@NonNull NoteDataSource mNoteDataSource) {
+        if (sInstance == null) {
+            sInstance = new NoteRepository(mNoteDataSource);
+        }
+        return sInstance;
     }
 
     @NonNull
     @Override
     public List<Note> getAll() {
-        return new ArrayList<>(mDummyNotes.values());
+        return mNoteDataSource.getAll();
     }
 
     @Nullable
     @Override
     public Note get(@NonNull String noteId) {
-        return mDummyNotes.get(noteId);
+        Note note = mDummyNotes.get(noteId);
+        if (note != null) {
+            return note;
+        }
+
+        // Retrieve it from the local database if it's not in the cache
+        return mNoteDataSource.get(noteId);
     }
 
     @Override
     public boolean save(@NonNull Note note) {
-        mDummyNotes.put(note.getId(), note);
-        return true;
+        return mNoteDataSource.save(note);
     }
 
     @Override
     public Note delete(@NonNull String noteId) {
-        return mDummyNotes.remove(noteId);
+        return mNoteDataSource.delete(noteId);
     }
 }

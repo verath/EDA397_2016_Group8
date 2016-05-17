@@ -33,7 +33,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         mDbHelper = new BacklogDbHelper(context);
     }
 
-    public static BacklogLocalDataSource getInstance(@NonNull Context context) {
+    public static BacklogItemDataSource getInstance(@NonNull Context context) {
         if (sInstance == null) {
             sInstance = new BacklogLocalDataSource(context);
         }
