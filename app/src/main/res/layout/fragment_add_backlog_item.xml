@@ -17,6 +17,20 @@
         android:layout_alignParentEnd="true"
         android:hint="@string/title" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/add_backlog_requirement_label"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:id="@+id/reqTextView" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backlog_requirements_spinner" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,12 +2,14 @@ package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 
 public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter {
 
@@ -30,6 +32,12 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void start() {
+        List<RequirementSpecification> requirements = new ArrayList<>();
+        String[] fileNames = mBacklogView.getFileNames();
+        for (int i = 0; i < fileNames.length; i++) {
+            requirements.add(new RequirementSpecification(fileNames[i]));
+        }
+        mBacklogView.showRequirements(requirements);
         List<BacklogStatus> statuses = mStatusDataSource.getAll();
         mBacklogView.showStatuses(statuses);
         if (mItemId != null) {

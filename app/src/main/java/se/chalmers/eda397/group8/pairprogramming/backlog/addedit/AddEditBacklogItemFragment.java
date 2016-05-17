@@ -18,11 +18,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
 
 public class AddEditBacklogItemFragment extends Fragment implements AddEditBacklogContract.View {
 
@@ -30,8 +32,10 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private EditText mTitleEt;
     private EditText mDescEt;
     private Spinner mStatusSp;
+    private Spinner mRequirementSp;
     private EditText mPageEt;
     private ArrayAdapter<BacklogStatus> mStatusAdapter;
+    private ArrayAdapter<RequirementSpecification> mRequirementAdapter;
 
     public AddEditBacklogItemFragment() {
         // Required empty public constructor
@@ -50,6 +54,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         setHasOptionsMenu(true);
 
         mStatusAdapter = new StatusArrayAdapter(getContext(), new ArrayList<BacklogStatus>());
+        mRequirementAdapter = new RequirementArrayAdapter(getContext(), new ArrayList<RequirementSpecification>());
     }
 
     @Override
@@ -61,6 +66,10 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         mStatusSp = (Spinner) view.findViewById(R.id.backlog_status_spinner);
         mStatusAdapter.setDropDownViewResource(R.layout.backlog_status_spinner_item);
         mStatusSp.setAdapter(mStatusAdapter);
+
+        mRequirementSp = (Spinner) view.findViewById(R.id.backlog_requirements_spinner);
+        mRequirementAdapter.setDropDownViewResource(R.layout.backlog_requirement_spinner_item);
+        mRequirementSp.setAdapter(mRequirementAdapter);
 
         mTitleEt = (EditText) view.findViewById(R.id.backlog_title_textfield);
         mDescEt = (EditText) view.findViewById(R.id.backlog_description_text_field);
@@ -128,11 +137,34 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     }
 
     @Override
+    public void showRequirements(List<RequirementSpecification> requirements) {
+        mRequirementAdapter.clear();
+        mRequirementAdapter.addAll(requirements);
+    }
+
+    @Override
+    public void showSelectedRequirement(RequirementSpecification requirementSpecification) {
+        mRequirementSp.setSelection(mRequirementAdapter.getPosition(requirementSpecification));
+    }
+
+    //Get all the files from the assets folder.
+    @Override
+    public String[] getFileNames() {
+        try {
+            return getContext().getAssets().list("");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new String[]{};
+        }
+    }
+
+    @Override
     public void showMissingBacklogItem() {
         // TODO: Show some view here instead?
         Toast.makeText(getContext(), R.string.backlog_item_does_not_exist, Toast.LENGTH_LONG).show();
         getActivity().finish();
     }
+
     @Override
     public void showPage(String page) {
         mPageEt.setText(page);
@@ -170,6 +202,33 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
                 tw = (TextView) convertView;
             }
             tw.setText(getItem(position).getName());
+            return tw;
+        }
+    }
+
+    private class RequirementArrayAdapter extends ArrayAdapter<RequirementSpecification> {
+
+        private final LayoutInflater mInflater;
+
+        public RequirementArrayAdapter(Context context, List<RequirementSpecification> requirements) {
+            super(context, 0, requirements);
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView tw;
+            if (convertView == null || !(convertView instanceof TextView)) {
+                tw = (TextView) mInflater.inflate(R.layout.backlog_requirement_spinner_item, parent, false);
+            } else {
+                tw = (TextView) convertView;
+            }
+            tw.setText(getItem(position).getFilePath());
             return tw;
         }
     }

@@ -42,6 +42,7 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="add_backlog_status_label">Status</string>
+    <string name="add_backlog_requirement_label">Requirements File</string>
     <!-- Backlog item detail -->
     <string name="title_activity_details_backlog">Item Details</string>
 
