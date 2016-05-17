@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.note.NoteRepository;
+import se.chalmers.eda397.group8.pairprogramming.note.database.local.NoteLocalDataSource;
 
 /**
  * The activity for adding a new note or editing an
@@ -50,7 +51,8 @@ public class AddEditNoteActivity extends BaseActivity {
         setupToolbar();
 
         // Setup presenter
-        new AddEditNotePresenter(NoteRepository.getInstance(), mNoteId, addEditNoteFragment);
+        new AddEditNotePresenter(NoteRepository.getInstance(NoteLocalDataSource.getInstance(getApplicationContext())),
+                mNoteId, addEditNoteFragment);
     }
 
     @Override
