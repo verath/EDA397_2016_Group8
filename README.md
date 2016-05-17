@@ -26,11 +26,9 @@ The application has a couple of features, as visualized below:
 
 | Image          | Description
 | -------------- | --------------
-| <img src="/docs/screenshot-main-2016-05-16.png" height="500"> |  Main screen!
-| <img src="/docs/screenshot-notes-2016-05-16.png" height="500"> | Notes screen!
-| <img src="/docs/screenshot-backlog-2016-05-16.png" height="500"> | Backlog screen!
-| <img src="/docs/screenshot-backlog-add-2016-05-16.png" height="500"> | Backlog add screen!
-| <img src="/docs/screenshot-requirements-2016-05-16.png" height="500"> | Requirements screen!
-| <img src="/docs/screenshot-timer-2016-05-16.png" height="500"> | Timer screen!
-
-
+| <img src="/docs/screenshot-main-2016-05-16.png" height="500"> |  **Main Screen**. The entry point to all other parts of the application.
+| <img src="/docs/screenshot-notes-2016-05-16.png" height="500"> | **Notes**. A list of notes that the user can add to.
+| <img src="/docs/screenshot-backlog-2016-05-16.png" height="500"> | **Backlog**. A backlog of items, with different tabs for different statuses.
+| <img src="/docs/screenshot-backlog-add-2016-05-16.png" height="500"> | **Add Backlog Item**. Screen for adding a new item to the backlog.
+| <img src="/docs/screenshot-requirements-2016-05-16.png" height="500"> | **Requirements**. It is possible to show requirement specifications, as .pdf files.
+| <img src="/docs/screenshot-timer-2016-05-16.png" height="500"> | **Timer**. A timer that can be used for pair programming.
