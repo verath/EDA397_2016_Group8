@@ -97,12 +97,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         // Found row in database
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
-            String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
-            String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
-            String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-            String statusId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-            String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-            backlogItem = new BacklogItem(itemId, title, content, statusId, page);
+            backlogItem = createBacklogItemFromCursor(c);
         }
         if (c != null) {
             c.close();
@@ -117,18 +112,14 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
     @Override
     public List<BacklogItem> getAll() {
         open();
-        List<BacklogItem> backlogItems = new ArrayList<BacklogItem>();
+        List<BacklogItem> backlogItems = new ArrayList<>();
 
         Cursor c = mDb.query(BacklogDbHelper.TABLE_BACKLOGS, ALL_COLUMNS, null, null, null, null, null);
 
         if (c != null && c.getCount() > 0) {
             while (c.moveToNext()) {
-                String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
-                String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
-                String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
+                BacklogItem item = createBacklogItemFromCursor(c);
+                backlogItems.add(item);
             }
         }
         if (c != null) {
@@ -143,7 +134,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
     @Override
     public List<BacklogItem> getAllByStatus(String statusId) {
         open();
-        List<BacklogItem> backlogItems = new ArrayList<BacklogItem>();
+        List<BacklogItem> backlogItems = new ArrayList<>();
 
         String selection = BacklogDbHelper.COLUMN_STATUS_ID + " LIKE ?";
         String[] selectionArgs = {statusId};
@@ -151,12 +142,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
 
         if (c != null && c.getCount() > 0) {
             while (c.moveToNext()) {
-                String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
-                String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
-                String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-                String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-                String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-                backlogItems.add(new BacklogItem(itemId, title, content, status, page));
+                BacklogItem item = createBacklogItemFromCursor(c);
+                backlogItems.add(item);
             }
         }
         if (c != null) {
@@ -166,6 +153,16 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         close();
 
         return backlogItems;
+    }
+
+    @NonNull
+    private BacklogItem createBacklogItemFromCursor(Cursor c) {
+        String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
+        String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
+        String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
+        String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
+        String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
+        return new BacklogItem(itemId, title, content, status, page);
     }
 
 }

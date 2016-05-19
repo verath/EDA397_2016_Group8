@@ -49,4 +49,12 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.w(BacklogDbHelper.class.getName(),
+                "Downgrading database from version " + oldVersion + " to "
+                        + newVersion + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BACKLOGS);
+        onCreate(db);
+    }
 }
