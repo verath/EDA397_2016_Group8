@@ -17,6 +17,7 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CONTENT = "content";
     public static final String COLUMN_STATUS_ID = "status";
     public static final String COLUMN_PAGE = "page";
+    public static final String COLUMN_PDFName = "PDFName";
 
     private static final String DATABASE_NAME = "backlogs.db";
     private static final int DATABASE_VERSION = 2;
@@ -28,7 +29,8 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
             + COLUMN_TITLE + " TEXT NOT NULL, "
             + COLUMN_CONTENT + " TEXT NOT NULL, "
             + COLUMN_STATUS_ID + " TEXT NOT NULL, "
-            + COLUMN_PAGE + " TEXT NOT NULL"
+            + COLUMN_PAGE + " TEXT NOT NULL, "
+            + COLUMN_PDFName + " TEXT NOT NULL"
             + ");";
 
     public BacklogDbHelper(Context context) {

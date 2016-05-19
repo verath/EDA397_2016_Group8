@@ -12,6 +12,7 @@ public class BacklogItem {
     private final String mTitle;
     private final String mStatusId;
     private final String mPage;
+    private final String mPDFName;
 
     /**
      * Creates a new item with the specified title, content and status.
@@ -20,9 +21,10 @@ public class BacklogItem {
      * @param content  the content of the item
      * @param statusId the status of the item
      * @param page     The page to reference
+     * @param PDFName  The page to reference
      */
-    public BacklogItem(String title, String content, String statusId, String page) {
-        this(UUID.randomUUID().toString(), title, content, statusId, page);
+    public BacklogItem(String title, String content, String statusId, String page, String PDFName) {
+        this(UUID.randomUUID().toString(), title, content, statusId, page, PDFName);
     }
 
     /**
@@ -33,13 +35,15 @@ public class BacklogItem {
      * @param content  the content of the item
      * @param statusId the status of the item
      * @param page     The page referenced
+     * @param PDFName  The page to reference
      */
-    public BacklogItem(String id, String title, String content, String statusId, String page) {
+    public BacklogItem(String id, String title, String content, String statusId, String page, String PDFName) {
         this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatusId = statusId;
         this.mPage = page;
+        this.mPDFName = PDFName;
     }
 
     /**
@@ -80,5 +84,9 @@ public class BacklogItem {
 
     public String getPage() {
         return mPage;
+    }
+
+    public String getmPDFName() {
+        return mPDFName;
     }
 }

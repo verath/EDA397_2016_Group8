@@ -39,6 +39,6 @@ public interface AddEditBacklogContract {
     interface Presenter extends BasePresenter {
 
         void onSaveItem(@NonNull String title, @NonNull String content,
-                        @NonNull String statusId, @NonNull String page);
+                        @NonNull String statusId, @NonNull String page, @NonNull String PDFName);
     }
 }

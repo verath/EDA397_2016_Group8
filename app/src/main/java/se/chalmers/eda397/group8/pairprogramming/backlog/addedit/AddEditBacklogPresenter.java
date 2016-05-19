@@ -1,6 +1,7 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,10 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
     public void start() {
         List<RequirementSpecification> requirements = new ArrayList<>();
         String[] fileNames = mBacklogView.getFileNames();
-        for (int i = 0; i < fileNames.length; i++) {
-            requirements.add(new RequirementSpecification(fileNames[i]));
+        for (String fileName : fileNames) {
+            if (fileName.endsWith(".pdf")) {
+                requirements.add(new RequirementSpecification(fileName));
+            }
         }
         mBacklogView.showRequirements(requirements);
         List<BacklogStatus> statuses = mStatusDataSource.getAll();
@@ -59,6 +62,8 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
         mBacklogView.showTitle(item.getTitle());
         mBacklogView.showContent(item.getContent());
         mBacklogView.showPage(item.getPage());
+
+
         BacklogStatus status = mStatusDataSource.get(item.getStatusId());
         if (status != null) {
             mBacklogView.showSelectedStatus(status);
@@ -67,17 +72,16 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void onSaveItem(@NonNull String title, @NonNull String content,
-                           @NonNull String statusId, @NonNull String page) {
+                           @NonNull String statusId, @NonNull String page, @NonNull String PDFName) {
         if (title.isEmpty()) {
             mBacklogView.showTitleEmptyError();
             return;
         }
-
         BacklogItem item;
         if (mItemId != null) {
-            item = new BacklogItem(mItemId, title, content, statusId, page);
+            item = new BacklogItem(mItemId, title, content, statusId, page, PDFName);
         } else {
-            item = new BacklogItem(title, content, statusId, page);
+            item = new BacklogItem(title, content, statusId, page, PDFName);
         }
         mItemDataSource.save(item);
         mBacklogView.showBacklog();

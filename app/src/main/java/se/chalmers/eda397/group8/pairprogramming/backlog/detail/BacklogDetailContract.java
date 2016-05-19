@@ -20,7 +20,7 @@ public interface BacklogDetailContract {
          */
         void showBacklog();
 
-        void showPdfPage(String page);
+        void showPdfPage(String pdfName, String page);
 
         void showTitle(String title);
 
@@ -29,6 +29,8 @@ public interface BacklogDetailContract {
         void showStatus(BacklogStatus status);
 
         void showPage(String page);
+
+        void showPDFName(String PDFName);
 
         void showMissingItemView();
     }
