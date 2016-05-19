@@ -13,9 +13,8 @@ public interface ReqSpecsContract {
     interface View extends BaseView<Presenter> {
         void showRequirements(List<RequirementSpecification> requirementSpecifications);
 
-        void displayRequirement(RequirementSpecification requirementSpecification);
+        void displayRequirement(String reqSpecId);
 
-        String[] getFileNames();
     }
 
     interface Presenter extends BasePresenter {

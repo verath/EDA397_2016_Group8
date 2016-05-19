@@ -8,8 +8,7 @@ import se.chalmers.eda397.group8.pairprogramming.BaseView;
 public interface ReqSpecDetailContract {
 
     interface View extends BaseView<Presenter> {
-        void showPDF(String assetName);
-        void showPDF(File file);
+        void showPDF(String fileName);
     }
 
     interface Presenter extends BasePresenter {

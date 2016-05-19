@@ -7,37 +7,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import se.chalmers.eda397.group8.pairprogramming.note.database.local.NoteLocalDataSource;
+
 /**
  * The NoteRepository is an implementation of the NoteDataSource,
  * providing access to Note data. Following the google sample, this
  * class should likely delegate to other sources, depending on the
  * operation and state of the cache.
- * <p>
+ * <p/>
  * However, for now the NoteRepository uses only an in-memory cache.
  */
 public class NoteRepository implements NoteDataSource {
 
     private static NoteRepository sInstance;
     private final static Map<String, Note> mDummyNotes = new HashMap<>();
-    private final NoteDataSource mNoteDataSource;
+    private final NoteLocalDataSource mLocalDataSource;
 
-    /**
-     * // This is (apparently) how one "should" do singletons now,
-     * // see https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
-     * private static class NoteRepositoryHolder {
-     * public static final NoteRepository instance = new NoteRepository();
-     * }
-     */
-
-    private NoteRepository(NoteDataSource noteDataSource) {
-        mNoteDataSource = noteDataSource;
-        List<Note> notes = mNoteDataSource.getAll();
+    private NoteRepository(NoteLocalDataSource noteLocalDataSource) {
+        mLocalDataSource = noteLocalDataSource;
+        List<Note> notes = mLocalDataSource.getAll();
         for (Note n : notes) {
             mDummyNotes.put(n.getId(), n);
         }
     }
 
-    public static NoteRepository getInstance(@NonNull NoteDataSource mNoteDataSource) {
+    public static NoteRepository getInstance(@NonNull NoteLocalDataSource mNoteDataSource) {
         if (sInstance == null) {
             sInstance = new NoteRepository(mNoteDataSource);
         }
@@ -47,7 +41,7 @@ public class NoteRepository implements NoteDataSource {
     @NonNull
     @Override
     public List<Note> getAll() {
-        return mNoteDataSource.getAll();
+        return mLocalDataSource.getAll();
     }
 
     @Nullable
@@ -59,16 +53,16 @@ public class NoteRepository implements NoteDataSource {
         }
 
         // Retrieve it from the local database if it's not in the cache
-        return mNoteDataSource.get(noteId);
+        return mLocalDataSource.get(noteId);
     }
 
     @Override
     public boolean save(@NonNull Note note) {
-        return mNoteDataSource.save(note);
+        return mLocalDataSource.save(note);
     }
 
     @Override
     public Note delete(@NonNull String noteId) {
-        return mNoteDataSource.delete(noteId);
+        return mLocalDataSource.delete(noteId);
     }
 }

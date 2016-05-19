@@ -6,17 +6,16 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationRepository;
 
 /**
  * The activity for viewing requirements.
  */
 public class ReqSpecBacklogActivity extends BaseActivity {
+    private final static String PARAM_REQUIREMENT_ID = "group8.eda397.chalmers.se.pairprogramming.PARAM_REQUIREMENT_ID";
 
-    private final static String INTENT_EXTRA_PARAM_PDF_NAME = "group8.eda397.chalmers.se.pairprogramming.INTENT_EXTRA_PARAM_PDF_NAME";
-    private final static String INTENT_EXTRA_PARAM_PAGE_NUMBER = "group8.eda397.chalmers.se.pairprogramming.INTENT_EXTRA_PARAM_PAGE_NUMBER";
-
-    private String mPage;
-    private String mPDFName;
+    private String mRequirementId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +24,29 @@ public class ReqSpecBacklogActivity extends BaseActivity {
 
         ReqSpecBacklogFragment detailFragment;
         if (savedInstanceState == null) {
-            mPDFName = getIntent().getStringExtra(INTENT_EXTRA_PARAM_PDF_NAME);
-            mPage = getIntent().getStringExtra(INTENT_EXTRA_PARAM_PAGE_NUMBER);
+            mRequirementId = getIntent().getStringExtra(PARAM_REQUIREMENT_ID);
             detailFragment = ReqSpecBacklogFragment.newInstance();
             addFragment(R.id.frameContainer, detailFragment);
         } else {
-            mPDFName = savedInstanceState.getString(INTENT_EXTRA_PARAM_PDF_NAME);
-            mPage = savedInstanceState.getString(INTENT_EXTRA_PARAM_PAGE_NUMBER);
+            mRequirementId = savedInstanceState.getString(PARAM_REQUIREMENT_ID);
             detailFragment = (ReqSpecBacklogFragment) findFragment(R.id.frameContainer);
         }
-        new ReqSpecBacklogPresenter(detailFragment, mPDFName, mPage);
+        new ReqSpecBacklogPresenter(detailFragment,
+                RequirementRepository.getInstance(),
+                RequirementSpecificationRepository.getInstance(getApplicationContext()),
+                mRequirementId);
     }
 
-    public static Intent getCallingIntent(Context context, String page, String pdfName) {
+    public static Intent getCallingIntent(Context context, String requirementId) {
         Intent intent = new Intent(context, ReqSpecBacklogActivity.class);
-        intent.putExtra(INTENT_EXTRA_PARAM_PDF_NAME, pdfName);
-        intent.putExtra(INTENT_EXTRA_PARAM_PAGE_NUMBER, page);
+        intent.putExtra(PARAM_REQUIREMENT_ID, requirementId);
         return intent;
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putString(INTENT_EXTRA_PARAM_PDF_NAME, mPDFName);
-            outState.putString(INTENT_EXTRA_PARAM_PAGE_NUMBER, mPage);
-
-
+            outState.putString(PARAM_REQUIREMENT_ID, mRequirementId);
         }
         super.onSaveInstanceState(outState);
     }

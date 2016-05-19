@@ -25,20 +25,18 @@ public interface AddEditBacklogContract {
 
         void showSelectedStatus(BacklogStatus status);
 
-        void showRequirements(List<RequirementSpecification> requirements);
+        void showReqSpecs(List<RequirementSpecification> requirements);
 
         void showSelectedRequirement(RequirementSpecification requirementSpecification);
 
         void showMissingBacklogItem();
 
         void showPage(String page);
-
-        String[] getFileNames();
     }
 
     interface Presenter extends BasePresenter {
 
-        void onSaveItem(@NonNull String title, @NonNull String content,
-                        @NonNull String statusId, @NonNull String page, @NonNull String pdfName);
+        void onSaveItem(@NonNull String title, @NonNull String content, @NonNull String statusId,
+                        @NonNull String reqSpecId, @NonNull String pageNumber);
     }
 }

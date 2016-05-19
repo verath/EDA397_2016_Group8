@@ -8,8 +8,10 @@ import android.support.annotation.Nullable;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationRepository;
 
 
 public class AddEditBacklogActivity extends BaseActivity {
@@ -40,7 +42,9 @@ public class AddEditBacklogActivity extends BaseActivity {
 
         new AddEditBacklogPresenter(backlogFragment, mItemId, mStatusId,
                 BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())),
-                BacklogStatusRepository.getInstance());
+                BacklogStatusRepository.getInstance(),
+                RequirementRepository.getInstance(),
+                RequirementSpecificationRepository.getInstance(getApplicationContext()));
     }
 
     @Override

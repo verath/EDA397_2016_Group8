@@ -23,8 +23,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             BacklogDbHelper.COLUMN_TITLE,
             BacklogDbHelper.COLUMN_CONTENT,
             BacklogDbHelper.COLUMN_STATUS_ID,
-            BacklogDbHelper.COLUMN_PAGE,
-            BacklogDbHelper.COLUMN_PDF_NAME
+            BacklogDbHelper.COLUMN_REQUIREMENT_ID
     };
     private static BacklogLocalDataSource sInstance;
     private SQLiteDatabase mDb;
@@ -62,8 +61,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         values.put(BacklogDbHelper.COLUMN_TITLE, item.getTitle());
         values.put(BacklogDbHelper.COLUMN_CONTENT, item.getContent());
         values.put(BacklogDbHelper.COLUMN_STATUS_ID, item.getStatusId());
-        values.put(BacklogDbHelper.COLUMN_PAGE, item.getPage());
-        values.put(BacklogDbHelper.COLUMN_PDF_NAME, item.getPdfName());
+        values.put(BacklogDbHelper.COLUMN_REQUIREMENT_ID, item.getRequirementId());
 
         long id = mDb.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
@@ -162,10 +160,9 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         String itemId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_ID));
         String title = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_TITLE));
         String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
-        String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
-        String pdfName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDF_NAME));
-        String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-        return new BacklogItem(itemId, title, content, status, pdfName, page);
+        String statusId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
+        String requirementId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_REQUIREMENT_ID));
+        return new BacklogItem(itemId, title, content, statusId, requirementId);
     }
 
 }

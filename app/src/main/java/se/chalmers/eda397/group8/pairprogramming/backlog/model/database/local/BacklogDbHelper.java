@@ -15,12 +15,11 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_CONTENT = "content";
-    public static final String COLUMN_STATUS_ID = "status";
-    public static final String COLUMN_PAGE = "page";
-    public static final String COLUMN_PDF_NAME = "pdf_name";
+    public static final String COLUMN_STATUS_ID = "status_id";
+    public static final String COLUMN_REQUIREMENT_ID = "requirement_id";
 
     private static final String DATABASE_NAME = "backlogs.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // SQL statement to create database
     private static final String DATABASE_CREATE = "CREATE TABLE "
@@ -29,8 +28,7 @@ public class BacklogDbHelper extends SQLiteOpenHelper {
             + COLUMN_TITLE + " TEXT NOT NULL, "
             + COLUMN_CONTENT + " TEXT NOT NULL, "
             + COLUMN_STATUS_ID + " TEXT NOT NULL, "
-            + COLUMN_PAGE + " TEXT NOT NULL, "
-            + COLUMN_PDF_NAME + " TEXT NOT NULL"
+            + COLUMN_REQUIREMENT_ID + " TEXT NOT NULL "
             + ");";
 
     public BacklogDbHelper(Context context) {

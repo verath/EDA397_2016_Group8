@@ -150,8 +150,8 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     }
 
     @Override
-    public void showPdfPage(String pdfName, String page) {
-        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), pdfName, page));
+    public void showRequirement(String requirementId) {
+        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), requirementId));
     }
 
     @Override

@@ -45,8 +45,8 @@ public class ReqSpecBacklogFragment extends Fragment implements ReqSpecBacklogCo
 
 
     @Override
-    public void showPDF(String name, String page) {
-        PDFView.Configurator configurator = mPdfView.fromAsset(name)
+    public void showPDF(String fileName, String page) {
+        PDFView.Configurator configurator = mPdfView.fromAsset(fileName)
                 .enableSwipe(true)
                 .showMinimap(true);
         if (page != null && !page.isEmpty()) {

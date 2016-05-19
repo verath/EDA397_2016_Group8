@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,20 +61,9 @@ public class ReqSpecsFragment extends Fragment implements ReqSpecsContract.View 
     }
 
     @Override
-    public void displayRequirement(RequirementSpecification requirementSpecification) {
-        Intent intent = ReqSpecDetailActivity.getCallingIntent(getContext(), requirementSpecification);
+    public void displayRequirement(String reqSpecId) {
+        Intent intent = ReqSpecDetailActivity.getCallingIntent(getContext(), reqSpecId);
         startActivity(intent);
-    }
-
-    //Get all the files from the assets folder.
-    @Override
-    public String[] getFileNames() {
-        try {
-            return getContext().getAssets().list("");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new String[]{};
-        }
     }
 
     @Override

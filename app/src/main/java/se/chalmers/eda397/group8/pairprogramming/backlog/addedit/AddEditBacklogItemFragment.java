@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,7 +136,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     }
 
     @Override
-    public void showRequirements(List<RequirementSpecification> requirements) {
+    public void showReqSpecs(List<RequirementSpecification> requirements) {
         mRequirementAdapter.clear();
         mRequirementAdapter.addAll(requirements);
     }
@@ -145,17 +144,6 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     @Override
     public void showSelectedRequirement(RequirementSpecification requirementSpecification) {
         mRequirementSp.setSelection(mRequirementAdapter.getPosition(requirementSpecification));
-    }
-
-    //Get all the files from the assets folder.
-    @Override
-    public String[] getFileNames() {
-        try {
-            return getContext().getAssets().list("");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new String[]{};
-        }
     }
 
     @Override
@@ -175,9 +163,9 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         String desc = mDescEt.getText().toString();
         String page = mPageEt.getText().toString();
         String statusId = ((BacklogStatus) mStatusSp.getSelectedItem()).getId();
-        String pdfName = ((RequirementSpecification) mRequirementSp.getSelectedItem()).getFilePath();
+        String reqSpecId = ((RequirementSpecification) mRequirementSp.getSelectedItem()).getId();
 
-        mPresenter.onSaveItem(title, desc, statusId, page, pdfName);
+        mPresenter.onSaveItem(title, desc, statusId, reqSpecId, page);
         return true;
     }
 

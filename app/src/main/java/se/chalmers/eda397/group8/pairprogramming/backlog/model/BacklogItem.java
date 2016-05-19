@@ -11,39 +11,36 @@ public class BacklogItem {
     private final String mContent;
     private final String mTitle;
     private final String mStatusId;
-    private final String mPage;
-    private final String mPdfName;
+    private final String mRequirementId;
 
     /**
      * Creates a new item with the specified title, content and status.
      *
-     * @param title    the title of the item
-     * @param content  the content of the item
-     * @param statusId the status of the item
-     * @param pdfName  The pdf to reference
-     * @param page     The page of the pdf to reference
+     * @param title         the title of the item
+     * @param content       the content of the item
+     * @param statusId      the status of the item
+     * @param requirementId the requirement associated with this item.
      */
-    public BacklogItem(String title, String content, String statusId, String pdfName, String page) {
-        this(UUID.randomUUID().toString(), title, content, statusId, pdfName, page);
+    public BacklogItem(String title, String content, String statusId, String requirementId) {
+        this(UUID.randomUUID().toString(), title, content, statusId, requirementId);
     }
 
     /**
      * Creates a new item with an already existing ID, title, content and status.
      *
-     * @param id       the ID of the item
-     * @param title    the title of the item
-     * @param content  the content of the item
-     * @param statusId the status of the item
-     * @param pdfName  The pdf to reference
-     * @param page     The page of the pdf to reference
+     * @param id            the ID of the item
+     * @param title         the title of the item
+     * @param content       the content of the item
+     * @param statusId      the status of the item
+     * @param requirementId the requirement associated with this item.
      */
-    public BacklogItem(String id, String title, String content, String statusId, String pdfName, String page) {
+    public BacklogItem(String id, String title, String content, String statusId,
+                       String requirementId) {
         this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatusId = statusId;
-        this.mPage = page;
-        this.mPdfName = pdfName;
+        this.mRequirementId = requirementId;
     }
 
     /**
@@ -82,11 +79,7 @@ public class BacklogItem {
         return mStatusId;
     }
 
-    public String getPage() {
-        return mPage;
-    }
-
-    public String getPdfName() {
-        return mPdfName;
+    public String getRequirementId() {
+        return mRequirementId;
     }
 }

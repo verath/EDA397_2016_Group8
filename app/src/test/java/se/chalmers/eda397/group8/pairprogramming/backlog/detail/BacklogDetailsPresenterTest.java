@@ -30,7 +30,7 @@ public class BacklogDetailsPresenterTest {
 
     private BacklogDetailPresenter mBacklogDetailPresenter;
 
-    private final BacklogItem ITEM = new BacklogItem("Title", "Content", "2", "1");
+    private final BacklogItem ITEM = new BacklogItem("Title", "Content", "2", "test.pdf", "1");
 
     @Before
     public void setUpData() {
