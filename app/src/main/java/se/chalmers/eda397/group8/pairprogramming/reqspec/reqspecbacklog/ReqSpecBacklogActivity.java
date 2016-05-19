@@ -8,6 +8,7 @@ import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementRepository;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.local.RequirementLocalDataSource;
 
 /**
  * The activity for viewing requirements.
@@ -32,7 +33,7 @@ public class ReqSpecBacklogActivity extends BaseActivity {
             detailFragment = (ReqSpecBacklogFragment) findFragment(R.id.frameContainer);
         }
         new ReqSpecBacklogPresenter(detailFragment,
-                RequirementRepository.getInstance(),
+                RequirementRepository.getInstance(RequirementLocalDataSource.getInstance(getApplicationContext())),
                 RequirementSpecificationRepository.getInstance(getApplicationContext()),
                 mRequirementId);
     }

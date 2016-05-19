@@ -18,15 +18,6 @@ public class BacklogItemRepository implements BacklogItemDataSource {
     private BacklogItemRepository(BacklogItemDataSource backlogLocalDataSource) {
         mCachedBacklog.clear();
         mBacklogLocalDataSource = backlogLocalDataSource;
-
-        // HACK: Clear the database, as items reference Requirements that are not
-        // stored in the database currently. This breaks things, removing all items
-        // is currently the easiest way to work around this.
-        // TODO: Don't do this once Requirement (and RequirementSpecification?) is also stored in db
-        List<BacklogItem> backlogItems = mBacklogLocalDataSource.getAll();
-        for (BacklogItem backlogItem : backlogItems) {
-            delete(backlogItem.getId());
-        }
     }
 
     public static BacklogItemRepository getInstance(@NonNull BacklogItemDataSource mBacklogLocalDataSource) {

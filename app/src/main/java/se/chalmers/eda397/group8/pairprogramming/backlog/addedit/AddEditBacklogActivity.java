@@ -12,6 +12,7 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepo
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementRepository;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.local.RequirementLocalDataSource;
 
 
 public class AddEditBacklogActivity extends BaseActivity {
@@ -43,7 +44,7 @@ public class AddEditBacklogActivity extends BaseActivity {
         new AddEditBacklogPresenter(backlogFragment, mItemId, mStatusId,
                 BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())),
                 BacklogStatusRepository.getInstance(),
-                RequirementRepository.getInstance(),
+                RequirementRepository.getInstance(RequirementLocalDataSource.getInstance(getApplicationContext())),
                 RequirementSpecificationRepository.getInstance(getApplicationContext()));
     }
 
