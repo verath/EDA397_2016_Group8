@@ -10,6 +10,8 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -21,14 +23,14 @@ public class AddEditBacklogPresenterTest {
 
     private static final String TEST_ITEM_TITLE = "Title";
     private static final String TEST_ITEM_CONTENT = "Content";
-    private static final String TEST_ITEM_PDF_NAME = "test.pdf";
-    private static final String TEST_ITEM_PAGE = "1";
     private static final String TEST_ITEM_STATUS_ID = "1";
     private static final String TEST_ITEM_STATUS_OTHER_ID = "2";
+    private static final String TEST_ITEM_REQ_SPEC_ID = "1";
     private static final String INVALID_ITEM_ID = "";
 
     private static final BacklogItem ITEM = new BacklogItem(TEST_ITEM_TITLE,
-            TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID, TEST_ITEM_PDF_NAME, TEST_ITEM_PAGE);
+            TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID, TEST_ITEM_REQ_SPEC_ID);
+
     private static final BacklogStatus STATUS = new BacklogStatus(TEST_ITEM_STATUS_ID, "Backlog");
     private static final BacklogStatus OTHER_STATUS = new BacklogStatus(TEST_ITEM_STATUS_OTHER_ID, "Invalid");
 
@@ -44,6 +46,12 @@ public class AddEditBacklogPresenterTest {
     @Mock
     private BacklogStatusDataSource mStatusDataSource;
 
+    @Mock
+    private RequirementDataSource mRequirementDataSource;
+
+    @Mock
+    private RequirementSpecificationDataSource mReqSpecDataSource;
+
     private AddEditBacklogPresenter mPresenter;
 
     @Test
@@ -52,7 +60,7 @@ public class AddEditBacklogPresenterTest {
         given(mItemDataSource.get(ITEM.getId())).willReturn(ITEM);
         given(mStatusDataSource.get(STATUS.getId())).willReturn(STATUS);
         mPresenter = new AddEditBacklogPresenter(mView, ITEM.getId(), null, mItemDataSource,
-                mStatusDataSource);
+                mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the presenter is started
         mPresenter.start();
@@ -61,7 +69,6 @@ public class AddEditBacklogPresenterTest {
         verify(mView).showTitle(TEST_ITEM_TITLE);
         verify(mView).showContent(TEST_ITEM_CONTENT);
         verify(mView).showSelectedStatus(STATUS);
-        verify(mView).showPage(TEST_ITEM_PAGE);
     }
 
     @Test
@@ -70,7 +77,7 @@ public class AddEditBacklogPresenterTest {
         given(mStatusDataSource.get(STATUS.getId())).willReturn(STATUS);
 
         mPresenter = new AddEditBacklogPresenter(mView, null, STATUS.getId(),
-                mItemDataSource, mStatusDataSource);
+                mItemDataSource, mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the presenter is started
         mPresenter.start();
@@ -86,7 +93,8 @@ public class AddEditBacklogPresenterTest {
         given(mStatusDataSource.get(STATUS.getId())).willReturn(STATUS);
         given(mStatusDataSource.get(OTHER_STATUS.getId())).willReturn(OTHER_STATUS);
         mPresenter = new AddEditBacklogPresenter(mView, ITEM.getId(),
-                TEST_ITEM_STATUS_OTHER_ID, mItemDataSource, mStatusDataSource);
+                TEST_ITEM_STATUS_OTHER_ID, mItemDataSource, mStatusDataSource,
+                mRequirementDataSource, mReqSpecDataSource);
 
         // When the presenter is started
         mPresenter.start();
@@ -103,7 +111,7 @@ public class AddEditBacklogPresenterTest {
     public void showMissingBacklogItemErrorForMissingItem() {
         // Given a presenter for a non-existing backlog item id
         mPresenter = new AddEditBacklogPresenter(mView, INVALID_ITEM_ID, null, mItemDataSource,
-                mStatusDataSource);
+                mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the presenter is started
         mPresenter.start();
@@ -116,11 +124,11 @@ public class AddEditBacklogPresenterTest {
     public void saveNewItem_showsSuccessView() {
         // Given a presenter for a null item
         mPresenter = new AddEditBacklogPresenter(mView, null, null, mItemDataSource,
-                mStatusDataSource);
+                mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the save button is clicked
         mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID,
-                TEST_ITEM_PDF_NAME, TEST_ITEM_PAGE);
+                "reqSpecId", "pageNumber");
 
         // Then the item is saved and the view is notified
         verify(mItemDataSource).save(any(BacklogItem.class));
@@ -131,11 +139,11 @@ public class AddEditBacklogPresenterTest {
     public void saveExistingItem_showsSuccessView() {
         // Given a presenter for an already existing item
         mPresenter = new AddEditBacklogPresenter(mView, ITEM.getId(), null, mItemDataSource,
-                mStatusDataSource);
+                mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the save button is clicked
         mPresenter.onSaveItem(TEST_ITEM_TITLE, TEST_ITEM_CONTENT, TEST_ITEM_STATUS_ID,
-                TEST_ITEM_PDF_NAME, TEST_ITEM_PAGE);
+                "reqSpecId", "pageNumber");
 
         // Then the item is saved and the view is notified
         verify(mItemDataSource).save(any(BacklogItem.class));
@@ -146,7 +154,7 @@ public class AddEditBacklogPresenterTest {
     public void saveEmptyItem_showsEmptyFieldsErrors() {
         // Given a presenter for a new item
         mPresenter = new AddEditBacklogPresenter(mView, null, null, mItemDataSource,
-                mStatusDataSource);
+                mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
 
         // When the save button is clicked for an empty item
         mPresenter.onSaveItem("", "", TEST_ITEM_STATUS_ID, "", "");

@@ -10,6 +10,8 @@ import org.mockito.junit.MockitoRule;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -26,6 +28,12 @@ public class BacklogDetailsPresenterTest {
     private BacklogStatusDataSource mStatusDataSource;
 
     @Mock
+    private RequirementDataSource mRequirementDataSource;
+
+    @Mock
+    private RequirementSpecificationDataSource mReqSpecDataSource;
+
+    @Mock
     private BacklogDetailContract.View mBacklogDetailView;
 
     private BacklogDetailPresenter mBacklogDetailPresenter;
@@ -35,7 +43,7 @@ public class BacklogDetailsPresenterTest {
     @Before
     public void setUpData() {
         mBacklogDetailPresenter = new BacklogDetailPresenter(mBacklogDetailView, ITEM.getId(),
-                mBacklogDataSource, mStatusDataSource);
+                mBacklogDataSource, mStatusDataSource, mRequirementDataSource, mReqSpecDataSource);
         given(mBacklogDataSource.get(ITEM.getId())).willReturn(ITEM);
     }
 

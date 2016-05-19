@@ -1,7 +1,7 @@
 package se.chalmers.eda397.group8.pairprogramming.reqspec.detail;
 
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 public class ReqSpecDetailPresenter implements ReqSpecDetailContract.Presenter {
 

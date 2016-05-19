@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
 import se.chalmers.eda397.group8.pairprogramming.reqspec.detail.ReqSpecDetailActivity;
 
 /**

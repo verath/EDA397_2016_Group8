@@ -6,8 +6,8 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementRepository;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
 
 /**
  * The activity for viewing requirements.

@@ -1,10 +1,10 @@
 package se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecbacklog;
 
 
-import se.chalmers.eda397.group8.pairprogramming.reqspec.Requirement;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementDataSource;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.Requirement;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 public class ReqSpecBacklogPresenter implements ReqSpecBacklogContract.Presenter {
 

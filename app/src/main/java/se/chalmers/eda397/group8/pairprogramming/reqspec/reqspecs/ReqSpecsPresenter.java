@@ -2,8 +2,8 @@ package se.chalmers.eda397.group8.pairprogramming.reqspec.reqspecs;
 
 import java.util.List;
 
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 /**
  * Created by mysko1 on 2016-04-21.

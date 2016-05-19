@@ -7,7 +7,7 @@ import java.util.List;
 import se.chalmers.eda397.group8.pairprogramming.BasePresenter;
 import se.chalmers.eda397.group8.pairprogramming.BaseView;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
 
 public interface AddEditBacklogContract {
 

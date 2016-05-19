@@ -23,7 +23,7 @@ import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
 
 public class AddEditBacklogItemFragment extends Fragment implements AddEditBacklogContract.View {
 

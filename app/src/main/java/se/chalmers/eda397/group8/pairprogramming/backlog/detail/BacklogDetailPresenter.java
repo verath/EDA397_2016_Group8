@@ -4,11 +4,10 @@ import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItem;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatus;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusDataSource;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.Requirement;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementDataSource;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecificationDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.Requirement;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 
 public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
