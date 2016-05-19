@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,7 +34,6 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
     private Spinner mStatusSp;
     private Spinner mRequirementSp;
     private EditText mPageEt;
-    private String mFileName;
     private ArrayAdapter<BacklogStatus> mStatusAdapter;
     private ArrayAdapter<RequirementSpecification> mRequirementAdapter;
 
@@ -177,14 +174,14 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         String title = mTitleEt.getText().toString();
         String desc = mDescEt.getText().toString();
         String page = mPageEt.getText().toString();
-        String PDFName = mFileName;
-        Log.d("PDF", PDFName);
         String statusId = ((BacklogStatus) mStatusSp.getSelectedItem()).getId();
-        mPresenter.onSaveItem(title, desc, statusId, page, PDFName);
+        String pdfName = ((RequirementSpecification) mRequirementSp.getSelectedItem()).getFilePath();
+
+        mPresenter.onSaveItem(title, desc, statusId, page, pdfName);
         return true;
     }
 
-    private class StatusArrayAdapter extends ArrayAdapter<BacklogStatus> {
+    private static class StatusArrayAdapter extends ArrayAdapter<BacklogStatus> {
 
         private final LayoutInflater mInflater;
 
@@ -211,7 +208,7 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
         }
     }
 
-    private class RequirementArrayAdapter extends ArrayAdapter<RequirementSpecification> {
+    private static class RequirementArrayAdapter extends ArrayAdapter<RequirementSpecification> {
 
         private final LayoutInflater mInflater;
 
@@ -234,8 +231,6 @@ public class AddEditBacklogItemFragment extends Fragment implements AddEditBackl
                 tw = (TextView) convertView;
             }
             tw.setText(getItem(position).getFilePath());
-            String name = getItem(position).getFilePath();
-            mFileName = name;
             return tw;
         }
     }
