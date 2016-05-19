@@ -24,7 +24,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             BacklogDbHelper.COLUMN_CONTENT,
             BacklogDbHelper.COLUMN_STATUS_ID,
             BacklogDbHelper.COLUMN_PAGE,
-            BacklogDbHelper.COLUMN_PDFName
+            BacklogDbHelper.COLUMN_PDF_NAME
     };
     private static BacklogLocalDataSource sInstance;
     private SQLiteDatabase mDb;
@@ -63,7 +63,7 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
         values.put(BacklogDbHelper.COLUMN_CONTENT, item.getContent());
         values.put(BacklogDbHelper.COLUMN_STATUS_ID, item.getStatusId());
         values.put(BacklogDbHelper.COLUMN_PAGE, item.getPage());
-        values.put(BacklogDbHelper.COLUMN_PDFName, item.getmPDFName());
+        values.put(BacklogDbHelper.COLUMN_PDF_NAME, item.getPdfName());
 
         long id = mDb.insertWithOnConflict(BacklogDbHelper.TABLE_BACKLOGS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
@@ -104,8 +104,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
             String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
             String statusId = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
             String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-            String PDFName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDFName));
-            backlogItem = new BacklogItem(itemId, title, content, statusId, page, PDFName);
+            String pdfName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDF_NAME));
+            backlogItem = new BacklogItem(itemId, title, content, statusId, pdfName, page);
         }
         if (c != null) {
             c.close();
@@ -131,8 +131,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
                 String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
                 String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-                String PDFName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDFName));
-                backlogItems.add(new BacklogItem(itemId, title, content, status, page, PDFName));
+                String pdfName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDF_NAME));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, pdfName, page));
             }
         }
         if (c != null) {
@@ -160,8 +160,8 @@ public class BacklogLocalDataSource implements BacklogItemDataSource {
                 String content = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_CONTENT));
                 String status = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_STATUS_ID));
                 String page = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PAGE));
-                String PDFName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDFName));
-                backlogItems.add(new BacklogItem(itemId, title, content, status, page, PDFName));
+                String pdfName = c.getString(c.getColumnIndexOrThrow(BacklogDbHelper.COLUMN_PDF_NAME));
+                backlogItems.add(new BacklogItem(itemId, title, content, status, pdfName, page));
             }
         }
         if (c != null) {

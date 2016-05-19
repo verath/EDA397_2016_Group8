@@ -12,7 +12,7 @@ public class BacklogItem {
     private final String mTitle;
     private final String mStatusId;
     private final String mPage;
-    private final String mPDFName;
+    private final String mPdfName;
 
     /**
      * Creates a new item with the specified title, content and status.
@@ -20,11 +20,11 @@ public class BacklogItem {
      * @param title    the title of the item
      * @param content  the content of the item
      * @param statusId the status of the item
-     * @param page     The page to reference
-     * @param PDFName  The page to reference
+     * @param pdfName  The pdf to reference
+     * @param page     The page of the pdf to reference
      */
-    public BacklogItem(String title, String content, String statusId, String page, String PDFName) {
-        this(UUID.randomUUID().toString(), title, content, statusId, page, PDFName);
+    public BacklogItem(String title, String content, String statusId, String pdfName, String page) {
+        this(UUID.randomUUID().toString(), title, content, statusId, pdfName, page);
     }
 
     /**
@@ -34,16 +34,16 @@ public class BacklogItem {
      * @param title    the title of the item
      * @param content  the content of the item
      * @param statusId the status of the item
-     * @param page     The page referenced
-     * @param PDFName  The page to reference
+     * @param pdfName  The pdf to reference
+     * @param page     The page of the pdf to reference
      */
-    public BacklogItem(String id, String title, String content, String statusId, String page, String PDFName) {
+    public BacklogItem(String id, String title, String content, String statusId, String pdfName, String page) {
         this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatusId = statusId;
         this.mPage = page;
-        this.mPDFName = PDFName;
+        this.mPdfName = pdfName;
     }
 
     /**
@@ -86,7 +86,7 @@ public class BacklogItem {
         return mPage;
     }
 
-    public String getmPDFName() {
-        return mPDFName;
+    public String getPdfName() {
+        return mPdfName;
     }
 }

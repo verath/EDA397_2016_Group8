@@ -35,7 +35,7 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
             mDetailView.showTitle(mBacklogItem.getTitle());
             mDetailView.showContent(mBacklogItem.getContent());
             mDetailView.showPage(mBacklogItem.getPage());
-            mDetailView.showPDFName(mBacklogItem.getmPDFName());
+            mDetailView.showPdfName(mBacklogItem.getPdfName());
             BacklogStatus status = mStatusDataSource.get(mBacklogItem.getStatusId());
             if (status != null) {
                 mDetailView.showStatus(status);
@@ -58,7 +58,7 @@ public class BacklogDetailPresenter implements BacklogDetailContract.Presenter {
 
     @Override
     public void onGoToPdfClicked() {
-        mDetailView.showPdfPage(mBacklogItem.getmPDFName(), mBacklogItem.getPage());
+        mDetailView.showPdfPage(mBacklogItem.getPdfName(), mBacklogItem.getPage());
     }
 
 

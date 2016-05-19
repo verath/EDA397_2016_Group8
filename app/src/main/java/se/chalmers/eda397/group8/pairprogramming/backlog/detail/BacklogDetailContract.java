@@ -30,7 +30,7 @@ public interface BacklogDetailContract {
 
         void showPage(String page);
 
-        void showPDFName(String PDFName);
+        void showPdfName(String pdfName);
 
         void showMissingItemView();
     }

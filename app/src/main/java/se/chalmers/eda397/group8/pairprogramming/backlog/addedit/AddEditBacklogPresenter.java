@@ -1,7 +1,6 @@
 package se.chalmers.eda397.group8.pairprogramming.backlog.addedit;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,16 +71,16 @@ public class AddEditBacklogPresenter implements AddEditBacklogContract.Presenter
 
     @Override
     public void onSaveItem(@NonNull String title, @NonNull String content,
-                           @NonNull String statusId, @NonNull String page, @NonNull String PDFName) {
+                           @NonNull String statusId, @NonNull String page, @NonNull String pdfName) {
         if (title.isEmpty()) {
             mBacklogView.showTitleEmptyError();
             return;
         }
         BacklogItem item;
         if (mItemId != null) {
-            item = new BacklogItem(mItemId, title, content, statusId, page, PDFName);
+            item = new BacklogItem(mItemId, title, content, statusId, pdfName, page);
         } else {
-            item = new BacklogItem(title, content, statusId, page, PDFName);
+            item = new BacklogItem(title, content, statusId, pdfName, page);
         }
         mItemDataSource.save(item);
         mBacklogView.showBacklog();
