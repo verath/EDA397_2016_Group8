@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.joanzapata.pdfview.PDFView;
 
-import java.io.File;
-
 import se.chalmers.eda397.group8.pairprogramming.R;
 
 public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailContract.View {
