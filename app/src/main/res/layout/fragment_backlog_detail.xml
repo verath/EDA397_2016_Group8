@@ -29,6 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+        android:id="@+id/backlog_detail_pdf_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     <Button
         android:id="@+id/backlog_detail_link_button"
         android:layout_width="wrap_content"

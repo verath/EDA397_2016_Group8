@@ -30,6 +30,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     private TextView mStatusTv;
     private TextView mContentTv;
     private TextView mPageTv;
+    private TextView mPdfNameTv;
     private Button mPdfButton;
 
     public BacklogDetailFragment() {
@@ -57,6 +58,7 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
         mStatusTv = (TextView) view.findViewById(R.id.backlog_detail_status);
         mContentTv = (TextView) view.findViewById(R.id.backlog_detail_text);
         mPageTv = (TextView) view.findViewById(R.id.backlog_detail_page);
+        mPdfNameTv = (TextView) view.findViewById(R.id.backlog_detail_pdf_name);
 
         // Setup the add FAB
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_backlog_item);
@@ -141,8 +143,15 @@ public class BacklogDetailFragment extends Fragment implements BacklogDetailCont
     }
 
     @Override
-    public void showPdfPage(String page) {
-        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), page));
+    public void showPdfName(String pdfName) {
+        if (mPdfNameTv != null) {
+            mPdfNameTv.setText(pdfName);
+        }
+    }
+
+    @Override
+    public void showRequirement(String requirementId) {
+        startActivity(ReqSpecBacklogActivity.getCallingIntent(getContext(), requirementId));
     }
 
     @Override

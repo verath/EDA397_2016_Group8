@@ -23,11 +23,11 @@ public class NoteLocalDataSource implements NoteDataSource {
     private SQLiteDatabase mDb;
     private NoteDbHelper mDbHelper;
 
-    public NoteLocalDataSource(Context context) {
+    private NoteLocalDataSource(Context context) {
         mDbHelper = new NoteDbHelper(context);
     }
 
-    public static NoteDataSource getInstance(@NonNull Context context) {
+    public static NoteLocalDataSource getInstance(@NonNull Context context) {
         if (sInstance == null) {
             sInstance = new NoteLocalDataSource(context);
         }

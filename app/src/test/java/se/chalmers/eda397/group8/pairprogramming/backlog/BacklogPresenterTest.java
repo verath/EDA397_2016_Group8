@@ -59,7 +59,7 @@ public class BacklogPresenterTest {
     @Test
     public void clickItem_showItemDetails() {
         // Given an item:
-        BacklogItem item = new BacklogItem("Title", "Content", "2", "1");
+        BacklogItem item = new BacklogItem("Title", "Content", "2", "test.pdf", "1");
 
         // When item is clicked:
         mBacklogPresenter.onBacklogItemClicked(item);

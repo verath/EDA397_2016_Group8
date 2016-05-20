@@ -18,12 +18,6 @@ public class BacklogItemRepository implements BacklogItemDataSource {
     private BacklogItemRepository(BacklogItemDataSource backlogLocalDataSource) {
         mCachedBacklog.clear();
         mBacklogLocalDataSource = backlogLocalDataSource;
-
-        // Populate cache with data from local database
-        List<BacklogItem> backlogItems = mBacklogLocalDataSource.getAll();
-        for (BacklogItem backlogItem : backlogItems) {
-            mCachedBacklog.put(backlogItem.getId(), backlogItem);
-        }
     }
 
     public static BacklogItemRepository getInstance(@NonNull BacklogItemDataSource mBacklogLocalDataSource) {

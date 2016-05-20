@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import com.joanzapata.pdfview.PDFView;
 
-import java.io.File;
-
 import se.chalmers.eda397.group8.pairprogramming.R;
 
 public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailContract.View {
@@ -47,30 +45,15 @@ public class ReqSpecDetailFragment extends Fragment implements ReqSpecDetailCont
     /**
      * Display the PDF given an asset name (i.e. PDF file name in the assets folder).
      *
-     * @param assetName
+     * @param fileName
      */
     @Override
-    public void showPDF(String assetName) {
-        mPdfView.fromAsset(assetName)
+    public void showPDF(String fileName) {
+        mPdfView.fromAsset(fileName)
                 .defaultPage(1)
                 .enableSwipe(true)
                 .showMinimap(true)
                 .load();
     }
-
-    /**
-     * Display the PDF given a file.
-     *
-     * @param file
-     */
-    @Override
-    public void showPDF(File file) {
-        mPdfView.fromFile(file)
-                .defaultPage(1)
-                .enableSwipe(true)
-                .showMinimap(true)
-                .load();
-    }
-
 
 }

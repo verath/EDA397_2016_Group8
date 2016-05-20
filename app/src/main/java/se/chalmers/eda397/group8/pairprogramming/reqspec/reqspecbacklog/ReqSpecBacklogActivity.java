@@ -6,14 +6,17 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.local.RequirementLocalDataSource;
 
 /**
  * The activity for viewing requirements.
  */
 public class ReqSpecBacklogActivity extends BaseActivity {
+    private final static String PARAM_REQUIREMENT_ID = "group8.eda397.chalmers.se.pairprogramming.PARAM_REQUIREMENT_ID";
 
-    private final static String INTENT_EXTRA_PARAM_PAGE_NUMBER = "group8.eda397.chalmers.se.pairprogramming.INTENT_EXTRA_PARAM_PAGE_NUMBER";
-    private String mPage;
+    private String mRequirementId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +25,29 @@ public class ReqSpecBacklogActivity extends BaseActivity {
 
         ReqSpecBacklogFragment detailFragment;
         if (savedInstanceState == null) {
-            mPage = getIntent().getStringExtra(INTENT_EXTRA_PARAM_PAGE_NUMBER);
+            mRequirementId = getIntent().getStringExtra(PARAM_REQUIREMENT_ID);
             detailFragment = ReqSpecBacklogFragment.newInstance();
             addFragment(R.id.frameContainer, detailFragment);
         } else {
-            mPage = savedInstanceState.getString(INTENT_EXTRA_PARAM_PAGE_NUMBER);
+            mRequirementId = savedInstanceState.getString(PARAM_REQUIREMENT_ID);
             detailFragment = (ReqSpecBacklogFragment) findFragment(R.id.frameContainer);
         }
-        new ReqSpecBacklogPresenter(detailFragment, mPage);
+        new ReqSpecBacklogPresenter(detailFragment,
+                RequirementRepository.getInstance(RequirementLocalDataSource.getInstance(getApplicationContext())),
+                RequirementSpecificationRepository.getInstance(getApplicationContext()),
+                mRequirementId);
     }
 
-    public static Intent getCallingIntent(Context context, String page) {
+    public static Intent getCallingIntent(Context context, String requirementId) {
         Intent intent = new Intent(context, ReqSpecBacklogActivity.class);
-        intent.putExtra(INTENT_EXTRA_PARAM_PAGE_NUMBER, page);
+        intent.putExtra(PARAM_REQUIREMENT_ID, requirementId);
         return intent;
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putString(INTENT_EXTRA_PARAM_PAGE_NUMBER, mPage);
+            outState.putString(PARAM_REQUIREMENT_ID, mRequirementId);
         }
         super.onSaveInstanceState(outState);
     }

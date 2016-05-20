@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
 
 /**
  * A RecyclerView adapter for requirements, showing each note as a custom

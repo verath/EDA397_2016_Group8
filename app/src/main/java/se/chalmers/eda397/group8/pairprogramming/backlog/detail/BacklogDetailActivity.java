@@ -7,8 +7,11 @@ import android.os.Bundle;
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogItemRepository;
-import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
 import se.chalmers.eda397.group8.pairprogramming.backlog.model.BacklogStatusRepository;
+import se.chalmers.eda397.group8.pairprogramming.backlog.model.database.local.BacklogLocalDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.local.RequirementLocalDataSource;
 
 public class BacklogDetailActivity extends BaseActivity {
 
@@ -32,7 +35,9 @@ public class BacklogDetailActivity extends BaseActivity {
         setupToolbar();
         new BacklogDetailPresenter(backlogFragment, mItemId,
                 BacklogItemRepository.getInstance(BacklogLocalDataSource.getInstance(getApplicationContext())),
-                BacklogStatusRepository.getInstance());
+                BacklogStatusRepository.getInstance(),
+                RequirementRepository.getInstance(RequirementLocalDataSource.getInstance(getApplicationContext())),
+                RequirementSpecificationRepository.getInstance(getApplicationContext()));
     }
 
     @Override

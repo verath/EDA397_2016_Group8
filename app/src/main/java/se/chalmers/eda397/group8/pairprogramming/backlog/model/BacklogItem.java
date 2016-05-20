@@ -11,35 +11,36 @@ public class BacklogItem {
     private final String mContent;
     private final String mTitle;
     private final String mStatusId;
-    private final String mPage;
+    private final String mRequirementId;
 
     /**
      * Creates a new item with the specified title, content and status.
      *
-     * @param title    the title of the item
-     * @param content  the content of the item
-     * @param statusId the status of the item
-     * @param page     The page to reference
+     * @param title         the title of the item
+     * @param content       the content of the item
+     * @param statusId      the status of the item
+     * @param requirementId the requirement associated with this item.
      */
-    public BacklogItem(String title, String content, String statusId, String page) {
-        this(UUID.randomUUID().toString(), title, content, statusId, page);
+    public BacklogItem(String title, String content, String statusId, String requirementId) {
+        this(UUID.randomUUID().toString(), title, content, statusId, requirementId);
     }
 
     /**
      * Creates a new item with an already existing ID, title, content and status.
      *
-     * @param id       the ID of the item
-     * @param title    the title of the item
-     * @param content  the content of the item
-     * @param statusId the status of the item
-     * @param page     The page referenced
+     * @param id            the ID of the item
+     * @param title         the title of the item
+     * @param content       the content of the item
+     * @param statusId      the status of the item
+     * @param requirementId the requirement associated with this item.
      */
-    public BacklogItem(String id, String title, String content, String statusId, String page) {
+    public BacklogItem(String id, String title, String content, String statusId,
+                       String requirementId) {
         this.mId = id;
         this.mContent = content;
         this.mTitle = title;
         this.mStatusId = statusId;
-        this.mPage = page;
+        this.mRequirementId = requirementId;
     }
 
     /**
@@ -78,7 +79,7 @@ public class BacklogItem {
         return mStatusId;
     }
 
-    public String getPage() {
-        return mPage;
+    public String getRequirementId() {
+        return mRequirementId;
     }
 }

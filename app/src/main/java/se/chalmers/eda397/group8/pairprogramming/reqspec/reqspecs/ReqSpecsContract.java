@@ -4,7 +4,7 @@ import java.util.List;
 
 import se.chalmers.eda397.group8.pairprogramming.BasePresenter;
 import se.chalmers.eda397.group8.pairprogramming.BaseView;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
 
 /**
  * Created by mysko1 on 2016-04-21.
@@ -13,9 +13,8 @@ public interface ReqSpecsContract {
     interface View extends BaseView<Presenter> {
         void showRequirements(List<RequirementSpecification> requirementSpecifications);
 
-        void displayRequirement(RequirementSpecification requirementSpecification);
+        void displayRequirement(String reqSpecId);
 
-        String[] getFileNames();
     }
 
     interface Presenter extends BasePresenter {

@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
 
 /**
  * Activity for selecting Requirements.
@@ -27,7 +29,9 @@ public class ReqSpecsActivity extends BaseActivity {
             reqSpecsFragment = (ReqSpecsFragment) findFragment(R.id.selectorContentFrame);
         }
 
-        new ReqSpecsPresenter(reqSpecsFragment);
+        RequirementSpecificationDataSource reqSpecDataSource =
+                RequirementSpecificationRepository.getInstance(getApplicationContext());
+        new ReqSpecsPresenter(reqSpecsFragment, reqSpecDataSource);
     }
 
     public static Intent getCallingIntent(Context context) {

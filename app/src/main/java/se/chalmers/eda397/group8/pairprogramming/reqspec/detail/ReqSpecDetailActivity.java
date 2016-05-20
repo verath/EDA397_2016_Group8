@@ -6,15 +6,22 @@ import android.os.Bundle;
 
 import se.chalmers.eda397.group8.pairprogramming.BaseActivity;
 import se.chalmers.eda397.group8.pairprogramming.R;
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationRepository;
 
 /**
  * The activity for viewing requirements.
  */
 public class ReqSpecDetailActivity extends BaseActivity {
 
-    private final static String INTENT_EXTRA_PARAM_FILE_NAME = "group8.eda397.chalmers.se.pairprogramming.INTENT_PARAM_FILE_NAME";
-    private RequirementSpecification mRequirementSpecification;
+    private final static String PARAM_REQ_SPEC_ID = "group8.eda397.chalmers.se.pairprogramming.PARAM_REQ_SPEC_ID";
+
+    private String mReqSpecId;
+
+    public static Intent getCallingIntent(Context context, String reqSpecId) {
+        Intent intent = new Intent(context, ReqSpecDetailActivity.class);
+        intent.putExtra(PARAM_REQ_SPEC_ID, reqSpecId);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,26 +30,23 @@ public class ReqSpecDetailActivity extends BaseActivity {
 
         ReqSpecDetailFragment detailFragment;
         if (savedInstanceState == null) {
-            mRequirementSpecification = new RequirementSpecification(getIntent().getStringExtra(INTENT_EXTRA_PARAM_FILE_NAME));
+            mReqSpecId = getIntent().getStringExtra(PARAM_REQ_SPEC_ID);
             detailFragment = ReqSpecDetailFragment.newInstance();
             addFragment(R.id.frameContainer, detailFragment);
         } else {
-            mRequirementSpecification = new RequirementSpecification(savedInstanceState.getString(INTENT_EXTRA_PARAM_FILE_NAME));
+            mReqSpecId = savedInstanceState.getString(PARAM_REQ_SPEC_ID);
             detailFragment = (ReqSpecDetailFragment) findFragment(R.id.frameContainer);
         }
-        new ReqSpecDetailPresenter(detailFragment, mRequirementSpecification);
-    }
 
-    public static Intent getCallingIntent(Context context, RequirementSpecification requirementSpecification) {
-        Intent intent = new Intent(context, ReqSpecDetailActivity.class);
-        intent.putExtra(INTENT_EXTRA_PARAM_FILE_NAME, requirementSpecification.getFilePath());
-        return intent;
+        new ReqSpecDetailPresenter(detailFragment,
+                RequirementSpecificationRepository.getInstance(getApplicationContext()),
+                mReqSpecId);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putString(INTENT_EXTRA_PARAM_FILE_NAME, mRequirementSpecification.getFilePath());
+            outState.putString(PARAM_REQ_SPEC_ID, mReqSpecId);
         }
         super.onSaveInstanceState(outState);
     }

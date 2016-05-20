@@ -1,22 +1,27 @@
 package se.chalmers.eda397.group8.pairprogramming.reqspec.detail;
 
-import se.chalmers.eda397.group8.pairprogramming.reqspec.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecification;
+import se.chalmers.eda397.group8.pairprogramming.reqspec.data.RequirementSpecificationDataSource;
 
 public class ReqSpecDetailPresenter implements ReqSpecDetailContract.Presenter {
 
     private final ReqSpecDetailContract.View mView;
-    private final RequirementSpecification mRequirementSpecification;
+    private final RequirementSpecificationDataSource mReqSpecDataSource;
+    private final String mReqSpecId;
 
-    public ReqSpecDetailPresenter(ReqSpecDetailContract.View view, RequirementSpecification requirementSpecification) {
+    public ReqSpecDetailPresenter(ReqSpecDetailContract.View view,
+                                  RequirementSpecificationDataSource reqSpecDataSource,
+                                  String reqSpecId) {
         mView = view;
-        mRequirementSpecification = requirementSpecification;
+        mReqSpecDataSource = reqSpecDataSource;
+        mReqSpecId = reqSpecId;
         view.setPresenter(this);
     }
 
     @Override
     public void start() {
-        // Only testing for PDF files in assets folder for now.
-        mView.showPDF(mRequirementSpecification.getFilePath());
+        RequirementSpecification reqSpec = mReqSpecDataSource.get(mReqSpecId);
+        mView.showPDF(reqSpec.getFilePath());
     }
 
 }
