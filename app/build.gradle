@@ -10,8 +10,8 @@ android {
         applicationId "se.chalmers.eda397.group8.pairprogramming"
         minSdkVersion 18
         targetSdkVersion 23
-        versionCode 201
-        versionName "2.0.1"
+        versionCode 300
+        versionName "3.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
